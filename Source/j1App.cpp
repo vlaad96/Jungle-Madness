@@ -9,7 +9,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
-//#include "j1Scene.h"
+#include "j1Scene.h"
 #include "j1Map.h"
 #include "j1App.h"
 
@@ -24,7 +24,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	render = new j1Render();
 	tex = new j1Textures();
 	audio = new j1Audio();
-	//scene = new j1Scene();
+	scene = new j1Scene();
 	map = new j1Map();
 
 	// Ordered for awake / Start / Update
@@ -34,7 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	//AddModule(scene);
+	AddModule(scene);
 
 	// render last to swap buffer
 	AddModule(render);
@@ -89,7 +89,7 @@ bool j1App::Awake()
 
 		while (item != NULL && ret == true)
 		{
-			//ret = item->data->Awake(&config.child(item->data->name.GetString()));
+			ret = item->data->Awake(config.child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}
@@ -319,7 +319,7 @@ bool j1App::LoadGameNow()
 
 		while (item != NULL && ret == true)
 		{
-			//ret = item->data->Load(root.child(item->data->name.GetString()));
+			ret = item->data->Load(root.child(item->data->name.GetString()));
 			item = item->next;
 		}
 
@@ -354,7 +354,7 @@ bool j1App::SavegameNow() const
 
 	while (item != NULL && ret == true)
 	{
-		//ret = item->data->Save(root.append_child(item->data->name.GetString()));
+		ret = item->data->Save(root.append_child(item->data->name.GetString()));
 		item = item->next;
 	}
 

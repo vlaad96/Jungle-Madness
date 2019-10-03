@@ -128,6 +128,7 @@
     <ClInclude Include="j1Map.h" />
     <ClInclude Include="j1Module.h" />
     <ClInclude Include="j1Render.h" />
+    <ClInclude Include="j1Scene.h" />
     <ClInclude Include="j1Textures.h" />
     <ClInclude Include="j1Window.h" />
     <ClInclude Include="p2Defs.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1Map.cpp" />
     <ClCompile Include="j1Render.cpp" />
+    <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="p2Log.cpp" />
