@@ -25,7 +25,7 @@ public:
 	}
 
 	// Called before render is available
-	virtual bool Awake(const pugi::xml_node&)
+	virtual bool Awake(pugi::xml_node&)
 	{
 		return true;
 	}
@@ -60,12 +60,12 @@ public:
 		return true;
 	}
 
-	virtual bool Load(const pugi::xml_node&)
+	virtual bool Load(pugi::xml_node&)
 	{
 		return true;
 	}
 
-	virtual bool Save(const pugi::xml_node&) const
+	virtual bool Save(pugi::xml_node&) const
 	{
 		return true;
 	}
@@ -83,4 +83,3 @@ public:
 };
 
 #endif // __j1MODULE_H__
-

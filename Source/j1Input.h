@@ -79,4 +79,3 @@ private:
 };
 
 #endif // __j1INPUT_H__
-

@@ -117,4 +117,3 @@ private:
 };
 
 #endif // __j1MAP_H__
-

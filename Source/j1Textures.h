@@ -38,4 +38,3 @@ public:
 
 
 #endif // __j1TEXTURES_H__
-

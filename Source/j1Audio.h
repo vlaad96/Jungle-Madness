@@ -55,4 +55,3 @@ private:
 };
 
 #endif // __j1AUDIO_H__
-

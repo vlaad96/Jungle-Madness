@@ -52,4 +52,3 @@ public:
 };
 
 #endif // __j1RENDER_H__
-
