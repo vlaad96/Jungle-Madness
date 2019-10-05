@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Collision.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -46,7 +47,7 @@ bool j1Scene::Start()
 
 	//Loading music sample
 	
-
+	
 	if (!ret)
 	{
 		ret = false;
@@ -74,6 +75,12 @@ bool j1Scene::Update(float dt)
 	{
 		App->audio->ChangeVolume_music(-10);
 		LOG("volume down");
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	{
+		App->col->DebugDraw();
+		LOG("USING DEBUG MODE");
 	}
 
 
