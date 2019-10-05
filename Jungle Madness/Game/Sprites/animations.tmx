@@ -1,13 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="9" nextobjectid="37">
- <objectgroup color="#00aa00" id="8" name="Slide_Sword_Sheathed">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="37" nextobjectid="192">
+ <objectgroup color="#55557f" id="34" name="Dash_Attack">
+  <object id="187" x="1200" y="814" width="100" height="74" rotation="180"/>
+  <object id="188" x="100" y="888" width="100" height="74" rotation="180"/>
+  <object id="189" x="200" y="888" width="100" height="74" rotation="180"/>
+  <object id="190" x="300" y="888" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff007f" id="36" name="Dash_Dash">
+  <object id="184" x="1000" y="814" width="100" height="74" rotation="180"/>
+  <object id="186" x="1100" y="814" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55007f" id="35" name="Dash_Prep">
+  <object id="182" x="900" y="814" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="33" name="Fist_Attack_3">
+  <object id="173" x="400" y="814" width="100" height="74" rotation="180"/>
+  <object id="174" x="500" y="814" width="100" height="74" rotation="180"/>
+  <object id="175" x="600" y="814" width="100" height="74" rotation="180"/>
+  <object id="180" x="700" y="814" width="100" height="74" rotation="180"/>
+  <object id="181" x="800" y="814" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55ff00" id="32" name="Fist_Attack_2">
+  <object id="166" x="1200" y="740" width="100" height="74" rotation="180"/>
+  <object id="167" x="100" y="814" width="100" height="74" rotation="180"/>
+  <object id="168" x="200" y="814" width="100" height="74" rotation="180"/>
+  <object id="169" x="300" y="814" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffaa00" id="31" name="Fist_Attack_1">
+  <object id="162" x="800" y="740" width="100" height="74" rotation="180"/>
+  <object id="163" x="900" y="740" width="100" height="74" rotation="180"/>
+  <object id="164" x="1000" y="740" width="100" height="74" rotation="180"/>
+  <object id="165" x="1100" y="740" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55aa00" id="30" name="Run_Sword_Out">
+  <object id="156" x="200" y="740" width="100" height="74" rotation="180"/>
+  <object id="157" x="300" y="740" width="100" height="74" rotation="180"/>
+  <object id="158" x="400" y="740" width="100" height="74" rotation="180"/>
+  <object id="159" x="500" y="740" width="100" height="74" rotation="180"/>
+  <object id="160" x="600" y="740" width="100" height="74" rotation="180"/>
+  <object id="161" x="700" y="740" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff5500" id="29" name="Aerial_Sword_Smash_Smash">
+  <object id="152" x="1100" y="666" width="100" height="74" rotation="180"/>
+  <object id="153" x="1200" y="666" width="100" height="74" rotation="180"/>
+  <object id="155" x="100" y="740" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#555500" id="28" name="Aerial_Sword_Smash_Drop">
+  <object id="150" x="900" y="666" width="100" height="74" rotation="180"/>
+  <object id="151" x="1000" y="666" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" id="27" name="Aerial_Sword_Smash_Prep">
+  <object id="145" x="700" y="666" width="100" height="74" rotation="180"/>
+  <object id="146" x="800" y="666" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#550000" id="26" name="Aerial_Sword_Attack_2">
+  <object id="142" x="400" y="666" width="100" height="74" rotation="180"/>
+  <object id="143" x="500" y="666" width="100" height="74" rotation="180"/>
+  <object id="144" x="600" y="666" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaffff" id="25" name="Aerial_Sword_Attack_1">
+  <object id="136" x="100" y="666" width="100" height="74" rotation="180"/>
+  <object id="137" x="200" y="666" width="100" height="74" rotation="180"/>
+  <object id="138" x="300" y="666" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00ffff" id="24" name="Spell_Shot">
+  <object id="133" x="1000" y="592" width="100" height="74" rotation="180"/>
+  <object id="134" x="1100" y="592" width="100" height="74" rotation="180"/>
+  <object id="135" x="1200" y="592" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaaaff" id="23" name="Spell_Charge">
+  <object id="129" x="600" y="592" width="100" height="74" rotation="180"/>
+  <object id="130" x="700" y="592" width="100" height="74" rotation="180"/>
+  <object id="131" x="800" y="592" width="100" height="74" rotation="180"/>
+  <object id="132" x="900" y="592" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00aaff" id="22" name="Spell_Prep">
+  <object id="116" x="200" y="592" width="100" height="74" rotation="180"/>
+  <object id="117" x="300" y="592" width="100" height="74" rotation="180"/>
+  <object id="118" x="400" y="592" width="100" height="74" rotation="180"/>
+  <object id="119" x="500" y="592" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aa00ff" id="21" name="Stair_Climb">
+  <object id="112" x="1000" y="518" width="100" height="74" rotation="180"/>
+  <object id="113" x="1100" y="518" width="100" height="74" rotation="180"/>
+  <object id="114" x="1200" y="518" width="100" height="74" rotation="180"/>
+  <object id="115" x="100" y="592" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#0000ff" id="18" name="Wall_Grab">
+  <object id="88" x="800" y="518" width="100" height="74" rotation="180"/>
+  <object id="89" x="900" y="518" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaff7f" id="19" name="Wall_Jump">
+  <object id="90" x="600" y="518" width="100" height="74" rotation="180"/>
+  <object id="91" x="700" y="518" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00ff7f" id="17" name="Sheathe_Sword">
+  <object id="84" x="200" y="518" width="100" height="74" rotation="180"/>
+  <object id="85" x="300" y="518" width="100" height="74" rotation="180"/>
+  <object id="86" x="400" y="518" width="100" height="74" rotation="180"/>
+  <object id="87" x="500" y="518" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaaa7f" id="16" name="Unsheathe_Sword">
+  <object id="79" x="1000" y="444" width="100" height="74" rotation="180"/>
+  <object id="80" x="1100" y="444" width="100" height="74" rotation="180"/>
+  <object id="81" x="1200" y="444" width="100" height="74" rotation="180"/>
+  <object id="83" x="100" y="518" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00aa7f" id="20" name="Faint_Sword_out">
+  <object id="93" x="1200" y="370" width="100" height="74" rotation="180"/>
+  <object id="102" x="100" y="444" width="100" height="74" rotation="180"/>
+  <object id="103" x="200" y="444" width="100" height="74" rotation="180"/>
+  <object id="104" x="300" y="444" width="100" height="74" rotation="180"/>
+  <object id="105" x="400" y="444" width="100" height="74" rotation="180"/>
+  <object id="106" x="500" y="444" width="100" height="74" rotation="180"/>
+  <object id="107" x="600" y="444" width="100" height="74" rotation="180"/>
+  <object id="108" x="700" y="444" width="100" height="74" rotation="180"/>
+  <object id="109" x="800" y="444" width="100" height="74" rotation="180"/>
+  <object id="111" x="900" y="444" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aa557f" id="15" name="Sword_Attack_3">
+  <object id="73" x="600" y="370" width="100" height="74" rotation="180"/>
+  <object id="74" x="700" y="370" width="100" height="74" rotation="180"/>
+  <object id="75" x="800" y="370" width="100" height="74" rotation="180"/>
+  <object id="76" x="900" y="370" width="100" height="74" rotation="180"/>
+  <object id="77" x="1000" y="370" width="100" height="74" rotation="180"/>
+  <object id="78" x="1100" y="370" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00557f" id="14" name="Sword_Attack_2">
+  <object id="68" x="100" y="370" width="100" height="74" rotation="180"/>
+  <object id="69" x="200" y="370" width="100" height="74" rotation="180"/>
+  <object id="70" x="300" y="370" width="100" height="74" rotation="180"/>
+  <object id="71" x="400" y="370" width="100" height="74" rotation="180"/>
+  <object id="72" x="500" y="370" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aa007f" id="13" name="Sword_Attack_1">
+  <object id="62" x="700" y="296" width="100" height="74" rotation="180"/>
+  <object id="63" x="800" y="296" width="100" height="74" rotation="180"/>
+  <object id="64" x="900" y="296" width="100" height="74" rotation="180"/>
+  <object id="65" x="1000" y="296" width="100" height="74" rotation="180"/>
+  <object id="66" x="1100" y="296" width="100" height="74" rotation="180"/>
+  <object id="67" x="1200" y="296" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00007f" id="12" name="Idle_Sword_Out">
+  <object id="58" x="300" y="296" width="100" height="74" rotation="180"/>
+  <object id="59" x="400" y="296" width="100" height="74" rotation="180"/>
+  <object id="60" x="500" y="296" width="100" height="74" rotation="180"/>
+  <object id="61" x="600" y="296" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaff00" id="11" name="Hang_Recover">
+  <object id="43" x="1000" y="222" width="100" height="74" rotation="180"/>
+  <object id="44" x="1100" y="222" width="100" height="74" rotation="180"/>
+  <object id="45" x="1200" y="222" width="100" height="74" rotation="180"/>
+  <object id="48" x="100" y="296" width="100" height="74" rotation="180"/>
+  <object id="49" x="200" y="296" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" id="10" name="Hang_Idle">
+  <object id="39" x="600" y="222" width="100" height="74" rotation="180"/>
+  <object id="40" x="700" y="222" width="100" height="74" rotation="180"/>
+  <object id="41" x="800" y="222" width="100" height="74" rotation="180"/>
+  <object id="42" x="900" y="222" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aaaa00" id="8" name="Slide">
   <object id="32" x="100" y="222" width="100" height="74" rotation="180"/>
   <object id="33" x="200" y="222" width="100" height="74" rotation="180"/>
   <object id="34" x="300" y="222" width="100" height="74" rotation="180"/>
   <object id="35" x="400" y="222" width="100" height="74" rotation="180"/>
   <object id="36" x="500" y="222" width="100" height="74" rotation="180"/>
  </objectgroup>
- <objectgroup color="#aa5500" id="7" name="Jump_Sword_Sheathed">
+ <objectgroup color="#00aa00" id="9" name="Fall">
+  <object id="37" x="1100" y="148" width="100" height="74" rotation="180"/>
+  <object id="38" x="1200" y="148" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aa5500" id="7" name="Jump">
   <object id="18" x="300" y="148" width="100" height="74" rotation="180"/>
   <object id="19" x="400" y="148" width="100" height="74" rotation="180"/>
   <object id="23" x="500" y="148" width="100" height="74" rotation="180"/>
@@ -16,8 +180,6 @@
   <object id="26" x="800" y="148" width="100" height="74" rotation="180"/>
   <object id="27" x="900" y="148" width="100" height="74" rotation="180"/>
   <object id="28" x="1000" y="148" width="100" height="74" rotation="180"/>
-  <object id="29" x="1100" y="148" width="100" height="74" rotation="180"/>
-  <object id="30" x="1200" y="148" width="100" height="74" rotation="180"/>
  </objectgroup>
  <objectgroup color="#005500" id="5" name="Run_Sword_Sheathed">
   <object id="12" x="900" y="74" width="100" height="74" rotation="180"/>
