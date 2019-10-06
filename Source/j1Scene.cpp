@@ -47,7 +47,12 @@ bool j1Scene::Start()
 
 	//Loading music sample
 	
-	
+	if (colliderfloor == nullptr)
+		colliderfloor = App->col->AddCollider({ 0, 300, 1024, 40 }, COLLIDER_FLOOR, this);
+	else
+		colliderfloor->SetPos(0, 0);
+
+
 	if (!ret)
 	{
 		ret = false;
@@ -77,11 +82,7 @@ bool j1Scene::Update(float dt)
 		LOG("volume down");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-	{
-		App->col->DebugDraw();
-		LOG("USING DEBUG MODE");
-	}
+	
 
 
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)

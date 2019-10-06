@@ -35,7 +35,7 @@ public:
 
 private:
 	p2SString map_name;
-	Collider* colliderfloor;
+	Collider* colliderfloor = nullptr;
 };
 
 #endif // __j1SCENE_H__
