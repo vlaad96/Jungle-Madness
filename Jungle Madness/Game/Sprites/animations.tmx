@@ -1,5 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="37" nextobjectid="192">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="55" nextobjectid="282">
+ <objectgroup color="#aa5500" id="53" name="God_Mode">
+  <object id="275" x="900" y="1258" width="100" height="74" rotation="180"/>
+  <object id="276" x="1000" y="1258" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#005500" id="52" name="Aerial_Bow_Shot">
+  <object id="273" x="700" y="1258" width="100" height="74" rotation="180"/>
+  <object id="274" x="800" y="1258" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="51" name="Aerial_Bow_Hold">
+  <object id="272" x="600" y="1258" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#000000" id="50" name="Aerial_Bow_Prep">
+  <object id="269" x="300" y="1258" width="100" height="74" rotation="180"/>
+  <object id="270" x="400" y="1258" width="100" height="74" rotation="180"/>
+  <object id="271" x="500" y="1258" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" id="49" name="Bow_Attack_Shot">
+  <object id="267" x="100" y="1258" width="100" height="74" rotation="180"/>
+  <object id="268" x="200" y="1258" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55ffff" id="48" name="Bow_Attack_Hold">
+  <object id="265" x="1100" y="1184" width="100" height="74" rotation="180"/>
+  <object id="266" x="1200" y="1184" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffaaff" id="47" name="Bow_Attack_Prep">
+  <object id="260" x="600" y="1184" width="100" height="74" rotation="180"/>
+  <object id="261" x="700" y="1184" width="100" height="74" rotation="180"/>
+  <object id="262" x="800" y="1184" width="100" height="74" rotation="180"/>
+  <object id="263" x="900" y="1184" width="100" height="74" rotation="180"/>
+  <object id="264" x="1000" y="1184" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="46" name="Wall_Run">
+  <object id="254" x="1200" y="1110" width="100" height="74" rotation="180"/>
+  <object id="255" x="100" y="1184" width="100" height="74" rotation="180"/>
+  <object id="256" x="200" y="1184" width="100" height="74" rotation="180"/>
+  <object id="257" x="300" y="1184" width="100" height="74" rotation="180"/>
+  <object id="258" x="400" y="1184" width="100" height="74" rotation="180"/>
+  <object id="259" x="500" y="1184" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="45" name="Run_Sword_Sheathed_2">
+  <object id="248" x="600" y="1110" width="100" height="74" rotation="180"/>
+  <object id="249" x="700" y="1110" width="100" height="74" rotation="180"/>
+  <object id="250" x="800" y="1110" width="100" height="74" rotation="180"/>
+  <object id="251" x="900" y="1110" width="100" height="74" rotation="180"/>
+  <object id="252" x="1000" y="1110" width="100" height="74" rotation="180"/>
+  <object id="253" x="1100" y="1110" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#5555ff" id="44" name="Crouch_Walk_Sword_Sheathed">
+  <object id="242" x="1200" y="1036" width="100" height="74" rotation="180"/>
+  <object id="243" x="100" y="1110" width="100" height="74" rotation="180"/>
+  <object id="244" x="200" y="1110" width="100" height="74" rotation="180"/>
+  <object id="245" x="300" y="1110" width="100" height="74" rotation="180"/>
+  <object id="246" x="400" y="1110" width="100" height="74" rotation="180"/>
+  <object id="247" x="500" y="1110" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="43" name="Walk_Sword_Sheathed">
+  <object id="236" x="600" y="1036" width="100" height="74" rotation="180"/>
+  <object id="237" x="700" y="1036" width="100" height="74" rotation="180"/>
+  <object id="238" x="800" y="1036" width="100" height="74" rotation="180"/>
+  <object id="239" x="900" y="1036" width="100" height="74" rotation="180"/>
+  <object id="240" x="1000" y="1036" width="100" height="74" rotation="180"/>
+  <object id="241" x="1100" y="1036" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="42" name="Knockout_Recover">
+  <object id="223" x="1100" y="962" width="100" height="74" rotation="180"/>
+  <object id="224" x="1200" y="962" width="100" height="74" rotation="180"/>
+  <object id="225" x="100" y="1036" width="100" height="74" rotation="180"/>
+  <object id="226" x="200" y="1036" width="100" height="74" rotation="180"/>
+  <object id="227" x="300" y="1036" width="100" height="74" rotation="180"/>
+  <object id="228" x="400" y="1036" width="100" height="74" rotation="180"/>
+  <object id="229" x="500" y="1036" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="41" name="Knockout">
+  <object id="212" x="400" y="962" width="100" height="74" rotation="180"/>
+  <object id="213" x="500" y="962" width="100" height="74" rotation="180"/>
+  <object id="214" x="600" y="962" width="100" height="74" rotation="180"/>
+  <object id="215" x="700" y="962" width="100" height="74" rotation="180"/>
+  <object id="216" x="800" y="962" width="100" height="74" rotation="180"/>
+  <object id="217" x="900" y="962" width="100" height="74" rotation="180"/>
+  <object id="218" x="1000" y="962" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="40" name="Aerial_Kick_Attack_Drop">
+  <object id="202" x="200" y="962" width="100" height="74" rotation="180"/>
+  <object id="204" x="300" y="962" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="39" name="Aerial_Kick_Attack_Prep">
+  <object id="200" x="1200" y="888" width="100" height="74" rotation="180"/>
+  <object id="201" x="100" y="962" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#55aa7f" id="38" name="Kick_Attack_2">
+  <object id="196" x="800" y="888" width="100" height="74" rotation="180"/>
+  <object id="197" x="900" y="888" width="100" height="74" rotation="180"/>
+  <object id="198" x="1000" y="888" width="100" height="74" rotation="180"/>
+  <object id="199" x="1100" y="888" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ff557f" id="37" name="Kick_Attack_1">
+  <object id="192" x="400" y="888" width="100" height="74" rotation="180"/>
+  <object id="193" x="500" y="888" width="100" height="74" rotation="180"/>
+  <object id="194" x="600" y="888" width="100" height="74" rotation="180"/>
+  <object id="195" x="700" y="888" width="100" height="74" rotation="180"/>
+ </objectgroup>
  <objectgroup color="#55557f" id="34" name="Dash_Attack">
   <object id="187" x="1200" y="814" width="100" height="74" rotation="180"/>
   <object id="188" x="100" y="888" width="100" height="74" rotation="180"/>
@@ -170,6 +271,13 @@
  <objectgroup color="#00aa00" id="9" name="Fall">
   <object id="37" x="1100" y="148" width="100" height="74" rotation="180"/>
   <object id="38" x="1200" y="148" width="100" height="74" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" id="54" name="Jump_Spin">
+  <object id="277" x="600" y="148" width="100" height="74" rotation="180"/>
+  <object id="278" x="700" y="148" width="100" height="74" rotation="180"/>
+  <object id="279" x="800" y="148" width="100" height="74" rotation="180"/>
+  <object id="280" x="900" y="148" width="100" height="74" rotation="180"/>
+  <object id="281" x="1000" y="148" width="100" height="74" rotation="180"/>
  </objectgroup>
  <objectgroup color="#aa5500" id="7" name="Jump">
   <object id="18" x="300" y="148" width="100" height="74" rotation="180"/>
