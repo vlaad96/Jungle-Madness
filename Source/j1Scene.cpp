@@ -102,7 +102,9 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10;
-
+	//check utility of this when doing player
+	camera_displacement.x = App->render->camera_initial_pos.x - App->render->camera.x;
+	
 	App->map->Draw();
 
 	int x, y;
