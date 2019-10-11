@@ -37,8 +37,6 @@ void j1Map::Draw()
 	for (int x = 0; x < data.images.count(); ++x)
 	{
 		image = data.images.At(x)->data;
-		
-		image->speed = image->property_img.GetPropertyf("Speed", 0); //Gets the parallax speed value for every image layer
 
 		App->render->Blit(data.images[x]->texture,
 			data.images[x]->image_offset_x,
@@ -490,12 +488,8 @@ bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)
 	{
 		imagelayer->image_offset_y = node.attribute("offsety").as_float();
 	}
-	//we should get the speed aswell
 
-	/*if (imagelayer->property_img.GetProperty("Speed", 0) != 0)
-	{
-		imagelayer->property_img.GetProperty("Speed", 0);
-	}*/
+	imagelayer->speed = imagelayer->property_img.GetPropertyf("Speed", 0); //Gets the parallax speed value for every image layer
 
 	return ret;
 }
