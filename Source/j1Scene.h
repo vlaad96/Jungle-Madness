@@ -33,8 +33,16 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool SceneChange(const char* scene);
+
 	fPoint camera_displacement;
 private:
+	p2List<p2SString*> scenes;
+	p2SString firstscene;
+	bool scene1 = true;
+	bool scene2 = false;
+	bool scene1Loaded = false;
+	bool scene2Loaded = false;
 	p2SString map_name;
 	Collider* colliderfloor = nullptr;
 };

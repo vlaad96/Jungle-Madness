@@ -25,9 +25,15 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	map_name = config.child("currentmap").attribute("name").as_string();
+	for (pugi::xml_node stage = config.child("scene_name"); stage; stage = stage.next_sibling("scene_name"))
+	{
+		p2SString* SceneName = new p2SString;
 
-	if (map_name == NULL)
+		SceneName->create(stage.attribute("name").as_string());
+		scenes.add(SceneName);
+	}
+
+	if (scenes.start->data->GetString() == NULL)
 	{
 		ret = false;
 	}
@@ -40,15 +46,23 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 
-	//Loading map
-	ret = App->map->Load(map_name.GetString());
+	//Loading scenes
+	ret = App->map->Load(scenes.start->data->GetString());
+	firstscene = scenes.start->data->GetString();
 
-	
+	if (firstscene == "Map_Beta.tmx")
+	{
+		//load different music samples
+	}
+	else
+	{
+		//
+	}
 
-	//Loading music sample
+	//collider test
 	
 	if (colliderfloor == nullptr)
-		colliderfloor = App->col->AddCollider({ 0, 300, 1024, 40 }, COLLIDER_FLOOR, this);
+		colliderfloor = App->col->AddCollider({ 0, 730, 1024, 40 }, COLLIDER_FLOOR, this);
 	else
 		colliderfloor->SetPos(0, 0);
 
@@ -82,7 +96,13 @@ bool j1Scene::Update(float dt)
 		LOG("volume down");
 	}
 
-	
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		SceneChange(scenes.start->data->GetString());
+
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		SceneChange(scenes.start->next->data->GetString());
+
 
 
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
@@ -136,5 +156,27 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	if (colliderfloor != nullptr)
+		colliderfloor = nullptr;
+
+	//cleaning scenes list
+	p2List_item<p2SString*>* item;
+	item = scenes.start;
+
+	while (item != NULL)
+	{
+		RELEASE(item->data);
+		item = item->next;
+	}
+	scenes.clear();
+
 	return true;
+}
+
+bool j1Scene::SceneChange(const char* scene) {
+	bool ret = true;
+	App->map->CleanUp();
+	App->map->Load(scene);
+
+	return ret;
 }

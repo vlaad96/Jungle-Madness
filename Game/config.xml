@@ -27,7 +27,8 @@
   </map>
 
   <scene>
-    <currentmap name="Map_Beta.tmx"></currentmap>
+    <scene_name name="Map_Beta.tmx"/>
+    <scene_name name="Map_alpha.tmx"/>
   </scene>
 
   <audio>
