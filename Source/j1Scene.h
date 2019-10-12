@@ -33,6 +33,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	fPoint camera_displacement;
 private:
 	p2SString map_name;
 	Collider* colliderfloor = nullptr;

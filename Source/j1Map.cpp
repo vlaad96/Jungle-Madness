@@ -22,6 +22,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
+	
 
 	return ret;
 }
@@ -31,14 +32,34 @@ void j1Map::Draw()
 	if (map_loaded == false)
 		return;
 
+	ImageLayer* image;
+
+	for (int x = 0; x < data.images.count(); ++x)
+	{
+		image = data.images.At(x)->data;
+
+		App->render->Blit(data.images[x]->texture,
+			data.images[x]->image_offset_x,
+			data.images[x]->image_offset_y, 
+			&data.images[x]->GetImageRect());
+	}
+
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	//MapLayer* layer = data.layers.start->data; // for now we just use the first layer and tileset
+	MapLayer* layer; 
 	//TileSet* tileset = data.tilesets.start->data;
 
 	for (int x = 0; x < data.tilesets.count(); x++)
 	{
 		for (uint l = 0; l < data.layers.count(); l++)
 		{
+			//Cheking if layer has to be drawn
+			layer = data.layers.At(l)->data;
+
+			if (layer->properties.GetPropertyi("Draw", 0) == 0)
+			{
+				continue;
+			}
+
 			for (uint row = 0; row < data.height; row++)
 			{
 				for (uint column = 0; column < data.width; column++)
@@ -125,6 +146,19 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	return rect;
 }
 
+SDL_Rect ImageLayer::GetImageRect() const
+{
+	SDL_Rect rect;
+
+	rect.w = width;
+	rect.h = height;
+
+	rect.x = 0;
+	rect.y = 0;
+
+	return rect;
+}
+
 // Called before quitting
 bool j1Map::CleanUp()
 {
@@ -151,6 +185,17 @@ bool j1Map::CleanUp()
 		item2 = item2->next;
 	}
 	data.layers.clear();
+
+	// Remove all image layers
+	p2List_item<ImageLayer*>* item3;
+	item3 = data.images.start;
+
+	while (item3 != NULL)
+	{
+		RELEASE(item3->data);
+		item3 = item3->next;
+	}
+	data.images.clear();
 
 	// Clean up the pugui tree
 	map_file.reset();
@@ -209,6 +254,18 @@ bool j1Map::Load(const char* file_name)
 			data.layers.add(lay);
 	}
 
+	// Load Image Layer info----------------------------------------------
+		pugi::xml_node imagelayer;
+	for (imagelayer = map_file.child("map").child("imagelayer"); imagelayer && ret; imagelayer = imagelayer.next_sibling("imagelayer"))
+	{
+		ImageLayer* imageList = new ImageLayer();
+
+		ret = LoadImageLayer(imagelayer, imageList);
+
+		if (ret == true)
+			data.images.add(imageList);
+	}
+
 	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
@@ -234,6 +291,16 @@ bool j1Map::Load(const char* file_name)
 			LOG("name: %s", l->name.GetString());
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
+		}
+
+		p2List_item<ImageLayer*>* item_image = data.images.start;
+		while (item_image != NULL)
+		{
+			ImageLayer* I = item_image->data;
+			LOG("Image ---");
+			LOG("name: %s", I->name.GetString());
+			LOG("image width: %d image height: %d", I->width, I->height);
+			item_image = item_image->next;
 		}
 	}
 
@@ -378,6 +445,8 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->height = node.attribute("height").as_int();
 	pugi::xml_node layer_data = node.child("data");
 
+	LoadProperties(node, layer->properties);
+
 	if (layer_data == NULL)
 	{
 		LOG("Error parsing map xml file: Cannot find 'layer/data' tag.");
@@ -397,4 +466,77 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	}
 
 	return ret;
+}
+
+bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)
+{
+	bool ret = true;
+
+	imagelayer->name = node.attribute("name").as_string();
+	imagelayer->width = node.child("image").attribute("width").as_int();
+	imagelayer->height = node.child("image").attribute("height").as_int();
+	imagelayer->texture = App->tex->Load(PATH(folder.GetString(), node.child("image").attribute("source").as_string()));
+	
+	LoadProperties(node, imagelayer->property_img);
+
+	if (node.attribute("offsetx").as_int() != NULL)
+	{
+		imagelayer->image_offset_x = node.attribute("offsetx").as_float();
+	}
+
+	if (node.attribute("offsety").as_int() != NULL)
+	{
+		imagelayer->image_offset_y = node.attribute("offsety").as_float();
+	}
+
+	imagelayer->speed = imagelayer->property_img.GetPropertyf("Speed", 0); //Gets the parallax speed value for every image layer
+
+	return ret;
+}
+
+bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
+{
+	bool ret = false;
+	pugi::xml_node data = node.child("properties");
+
+	if (data != NULL)
+	{
+		pugi::xml_node prop;
+
+		for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
+		{
+			Properties::Property* property_aux = new Properties::Property();
+			property_aux->name = prop.attribute("name").as_string();
+			property_aux->value = prop.attribute("value").as_int();
+			
+			properties.properties_list.add(property_aux);
+		}
+	}
+
+	return ret;
+}
+
+float Properties::GetPropertyf(const char* value, float def_value) const
+{
+	p2List_item<Property*>* item_p = properties_list.start;
+
+	while (item_p)
+	{
+		if (item_p->data->name == value)
+			return item_p->data->value;
+		item_p = item_p->next;
+	}
+	return def_value;
+}
+float Properties::GetPropertyi(const char* value, int def_value) const
+{
+	p2List_item<Property*>* item_p = properties_list.start;
+
+	while (item_p)
+	{
+		if (item_p->data->name == value)
+			return item_p->data->value;
+		item_p = item_p->next;
+	}
+	return def_value;
 }

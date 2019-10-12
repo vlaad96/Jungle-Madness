@@ -7,6 +7,50 @@
 #include "j1Module.h"
 
 // ----------------------------------------------------
+struct Properties
+{
+	struct Property
+	{
+		p2SString name;
+		float value;
+	};
+
+	~Properties()
+	{
+		p2List_item<Property*>* item_p;
+		item_p = properties_list.start;
+
+		while (item_p != NULL)
+		{
+			RELEASE(item_p->data);
+			item_p = item_p->next;
+		}
+
+		properties_list.clear();
+	}
+
+	float GetPropertyf(const char* value, float def_value) const;
+	float GetPropertyi(const char* value, int def_value) const;
+	
+	p2List<Property*> properties_list;
+
+};
+
+struct ImageLayer
+{
+	SDL_Rect GetImageRect()const;
+
+	p2SString			name;
+	int					width;
+	int					height;
+	float				image_offset_x, image_offset_y = 0.0f;
+	float				speed = 0.0f;
+	SDL_Texture*		texture;
+
+	Properties			property_img;
+};
+
+// ----------------------------------------------------
 struct MapLayer
 {
 	p2SString	name;
@@ -28,6 +72,9 @@ struct MapLayer
 		int a = width;
 		return x + y * width;
 	}
+
+	Properties	properties;
+
 };
 
 // ----------------------------------------------------
@@ -68,6 +115,7 @@ struct MapData
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
+	p2List<ImageLayer*>	images;
 };
 
 // ----------------------------------------------------
@@ -104,6 +152,8 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer);
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 public:
 
