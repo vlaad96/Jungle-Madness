@@ -53,10 +53,13 @@ bool j1Scene::Start()
 	if (firstscene == "Map_Beta.tmx")
 	{
 		//load different music samples
+		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());
 	}
 	else
 	{
-		//
+		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());
 	}
 
 	//collider test
@@ -96,12 +99,20 @@ bool j1Scene::Update(float dt)
 		LOG("volume down");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && scene1 == false)
+	{
 		SceneChange(scenes.start->data->GetString());
+		scene1 = true;
+		scene2 = false;
+	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && scene2 == false)
+	{
 		SceneChange(scenes.start->next->data->GetString());
+		scene1 = false;
+		scene2 = true;
+	}
 
 
 
@@ -177,6 +188,16 @@ bool j1Scene::SceneChange(const char* scene) {
 	bool ret = true;
 	App->map->CleanUp();
 	App->map->Load(scene);
+
+	if (firstscene == scene)
+	{
+		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+		App->audio->PlayMusic(stageMusic.GetString());
+	}
+	else {
+		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
+		App->audio->PlayMusic(stageMusic.GetString());
+	}
 
 	return ret;
 }

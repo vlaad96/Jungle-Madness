@@ -6,6 +6,7 @@
  <layer id="1" name="Capa de Patrones 1" width="50" height="15">
   <properties>
    <property name="Draw" value="1"/>
+   <property name="Music" value="Audio/music/Su Turno.ogg"/>
   </properties>
   <data>
    <tile/>

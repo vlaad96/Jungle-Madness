@@ -34,6 +34,8 @@
   <audio>
     <music>
       <folder>audio/music/</folder>
+      <song name="Surreptitious.mp3"/>
+      <song name="Su Turno.ogg"/>
       <VolumeChanger_music value="1"/>
     </music>
     <fx>

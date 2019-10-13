@@ -6103,6 +6103,7 @@
  <layer id="12" name="Ground" width="50" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
+   <property name="Music" value="Audio/music/Surreptitious.mp3"/>
   </properties>
   <data>
    <tile/>
