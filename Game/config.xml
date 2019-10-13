@@ -27,12 +27,15 @@
   </map>
 
   <scene>
-    <currentmap name="Map_Beta.tmx"></currentmap>
+    <scene_name name="Map_Beta.tmx"/>
+    <scene_name name="Map_alpha.tmx"/>
   </scene>
 
   <audio>
     <music>
       <folder>audio/music/</folder>
+      <song name="Surreptitious.mp3"/>
+      <song name="Su Turno.ogg"/>
       <VolumeChanger_music value="1"/>
     </music>
     <fx>

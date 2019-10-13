@@ -43,7 +43,7 @@ bool j1Render::Awake(pugi::xml_node& config)
 	else
 	{
 		camera_initial_pos.x = 0;
-		camera_initial_pos.y = 0;
+		camera_initial_pos.y = -760;
 
 		camera.w = App->win->screen_surface->w;
 		camera.h = App->win->screen_surface->h;
