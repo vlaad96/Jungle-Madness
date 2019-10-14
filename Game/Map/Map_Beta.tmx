@@ -9,67 +9,67 @@
  <imagelayer id="1" name="Parallax_1">
   <image source="Parallax/Forest/Layer_0010_1.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="1"/>
+   <property name="Speed" type="int" value="1"/>
   </properties>
  </imagelayer>
  <imagelayer id="2" name="Parallax_2">
   <image source="Parallax/Forest/Layer_0009_2.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="2"/>
+   <property name="Speed" type="int" value="2"/>
   </properties>
  </imagelayer>
  <imagelayer id="3" name="Parallax_3">
   <image source="Parallax/Forest/Layer_0008_3.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="3"/>
+   <property name="Speed" type="int" value="3"/>
   </properties>
  </imagelayer>
  <imagelayer id="4" name="Parallax_Lights_1">
   <image source="Parallax/Forest/Layer_0007_Lights.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="4"/>
+   <property name="Speed" type="int" value="4"/>
   </properties>
  </imagelayer>
  <imagelayer id="5" name="Parallax_4">
   <image source="Parallax/Forest/Layer_0006_4.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="5"/>
+   <property name="Speed" type="int" value="5"/>
   </properties>
  </imagelayer>
  <imagelayer id="6" name="Parallax_5">
   <image source="Parallax/Forest/Layer_0005_5.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="6"/>
+   <property name="Speed" type="int" value="6"/>
   </properties>
  </imagelayer>
  <imagelayer id="7" name="Parallax_Lights_2">
   <image source="Parallax/Forest/Layer_0004_Lights.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="7"/>
+   <property name="Speed" type="int" value="7"/>
   </properties>
  </imagelayer>
  <imagelayer id="8" name="Parallax_6">
   <image source="Parallax/Forest/Layer_0003_6.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="8"/>
+   <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
  <imagelayer id="9" name="Parallax_7">
   <image source="Parallax/Forest/Layer_0002_7.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="9"/>
+   <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
  <imagelayer id="10" name="Parallax_8">
   <image source="Parallax/Forest/Layer_0001_8.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="10"/>
+   <property name="Speed" type="int" value="9"/>
   </properties>
  </imagelayer>
  <imagelayer id="11" name="Parallax_9">
   <image source="Parallax/Forest/Layer_0000_9.png" width="928" height="793"/>
   <properties>
-   <property name="Speed" type="float" value="11"/>
+   <property name="Speed" type="int" value="10"/>
   </properties>
  </imagelayer>
  <layer id="21" name="LeafsDark" width="50" height="30">

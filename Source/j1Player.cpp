@@ -46,7 +46,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Colliding_Offset = config.child("colliding_offset").attribute("value").as_float();
 
 	//Load it from config at least wtf
-	Player_Initial_Position.x = 50;
+	Player_Initial_Position.x = 150;
 	Player_Initial_Position.y = 650;
 	Position.x = Player_Initial_Position.x;
 	Position.y = Player_Initial_Position.y;
@@ -167,7 +167,10 @@ bool j1Player::PostUpdate()
 	bool ret = true;
 
 	//Calculation for Parallax
+
 	Player_Displacement.x = Player_Initial_Position.x - Position.x;
+
+	App->map->PX = Player_Displacement.x;
 
 	//Blitting player
 	App->render->Blit(Spritesheet, Position.x, Position.y, &CurrentAnimation->GetCurrentFrame());
