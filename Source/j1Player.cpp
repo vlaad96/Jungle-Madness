@@ -25,7 +25,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	int h = config.child("collider").attribute("height").as_int();
 	Player_Collider_Rect = { x,y,w,h };
 
-
+	Idle->speed = 0.10f;
 
 	Position.x = 50;
 	Position.y = 650;
@@ -81,10 +81,10 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	if (InitialMoment)
+	/*if (InitialMoment)
 	{
 		State_Player = FALLING;
-	}
+	}*/
 
 	if (Was_Right) {}
 
