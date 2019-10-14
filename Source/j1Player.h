@@ -14,7 +14,8 @@ enum Player_State
 	RIGHT,
 	LEFT,
 	JUMPING,
-	FALLING
+	FALLING,
+	DEAD
 };
 
 class j1Player : public j1Module
@@ -75,7 +76,7 @@ public:
 	bool God_Mode = false;
 
 	fPoint Player_Displacement;
-	fPoint Initial_Position;
+	fPoint Player_Initial_Position;
 
 	Animation* CurrentAnimation;
 	Animation* Idle = nullptr;

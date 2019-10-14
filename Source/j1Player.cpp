@@ -16,25 +16,47 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	folder.create(config.child("folder").child_value());
 	texture.create(config.child("texture").child_value());
+	
 	//animations
 	Idle = LoadAnimation(folder.GetString(), "Idle_Sword_Sheathed");
+	Run = LoadAnimation(folder.GetString(), "Run_Sword_Sheathed");
+	Jump = LoadAnimation(folder.GetString(), "Jump");
+	Fall = LoadAnimation(folder.GetString(), "Fall");
+	Death = LoadAnimation(folder.GetString(), "Knockout");
+	Slide = LoadAnimation(folder.GetString(), "Slide");
+	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
 
-	int x = config.child("collider").attribute("x").as_int();
-	int y = config.child("collider").attribute("y").as_int();
-	int w = config.child("collider").attribute("width").as_int();
-	int h = config.child("collider").attribute("height").as_int();
-	Player_Collider_Rect = { x,y,w,h };
+	//Load with object group maybe? lazy p o s
+	Player_Collider_Rect =
+	{
+		config.child("collider").attribute("x").as_int(),
+		config.child("collider").attribute("y").as_int(),
+		config.child("collider").attribute("width").as_int(),
+		config.child("collider").attribute("height").as_int()
+	};
+
+	//Player config
+
+	Velocity.x = config.child("velocity").attribute("x").as_float();
+	Velocity.y = config.child("velocity").attribute("y").as_float();
+	Gravity = config.child("gravity").attribute("value").as_float();
+	Jump_Force = config.child("velocity").attribute("jump_force").as_float();
+	Initial_Velocity_x = config.child("velocity").attribute("initalVx").as_float();
+	Max_Speed_y = config.child("velocity").attribute("max_speed_y").as_float();
+	Colliding_Offset = config.child("colliding_offset").attribute("value").as_float();
+
+	//Load it from config at least wtf
+	Player_Initial_Position.x = 50;
+	Player_Initial_Position.y = 650;
+	Position.x = Player_Initial_Position.x;
+	Position.y = Player_Initial_Position.y;
 
 	Idle->speed = 0.10f;
-
-	Position.x = 50;
-	Position.y = 650;
-
-
+	Run->speed = 0.10f;
 
 	CurrentAnimation = Idle;
 
-
+	Death->loop = false;
 
 	return ret;
 }
@@ -81,12 +103,61 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	/*if (InitialMoment)
+	if (InitialMoment)
 	{
 		State_Player = FALLING;
-	}*/
+	}
 
-	if (Was_Right) {}
+	if (Was_Right == true)
+		CurrentAnimation = Idle;
+	else if (Was_Right == false)
+		CurrentAnimation = Idle;
+
+	//Horizontally
+
+	if (State_Player != DEAD)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			if (First_Move == false)
+			{
+				First_Move = true;
+			}
+
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x - Velocity.x;
+
+			Moving_Left = true;
+			Moving_Right = false;
+			CurrentAnimation = Run;
+			Was_Right = false;
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+
+		if (First_Move == false)
+		{
+			First_Move = true;
+		}
+
+		Velocity.x = Initial_Velocity_x;
+		Position.x = Position.x + Velocity.x;
+
+		Moving_Left = true;
+		Moving_Right = false;
+		CurrentAnimation = Run;
+		Was_Right = true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+
+		Velocity.x = 0.0f;
+		Moving_Left = true;
+		Moving_Right = true;
+	}
 
 	return true;
 }
@@ -94,6 +165,9 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {
 	bool ret = true;
+
+	//Calculation for Parallax
+	Player_Displacement.x = Player_Initial_Position.x - Position.x;
 
 	//Blitting player
 	App->render->Blit(Spritesheet, Position.x, Position.y, &CurrentAnimation->GetCurrentFrame());
