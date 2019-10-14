@@ -104,6 +104,7 @@ bool j1Scene::Update(float dt)
 		SceneChange(scenes.start->data->GetString());
 		scene1 = true;
 		scene2 = false;
+
 	}
 
 

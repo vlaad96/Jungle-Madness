@@ -1,4 +1,6 @@
+#include "MemLeaks.h"
 #include <stdlib.h>
+
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -25,6 +27,8 @@ j1App* App = NULL;
 
 int main(int argc, char* args[])
 {
+
+	ReportMemoryLeaks();
 	LOG("Engine starting ... %d");
 
 	MainState state = MainState::CREATE;
@@ -107,6 +111,7 @@ int main(int argc, char* args[])
 
 	LOG("... Bye! :)\n");
 
+	delete App;
 	// Dump memory leaks
 	return result;
 }
