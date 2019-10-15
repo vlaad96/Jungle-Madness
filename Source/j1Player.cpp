@@ -27,13 +27,13 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
 
 	//Load with object group maybe? lazy p o s
-	Player_Collider_Rect =
-	{
+	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
+	/*{
 		config.child("collider").attribute("x").as_int(),
 		config.child("collider").attribute("y").as_int(),
 		config.child("collider").attribute("width").as_int(),
 		config.child("collider").attribute("height").as_int()
-	};
+	};*/
 
 	//Player config
 
@@ -51,8 +51,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Position.x = Player_Initial_Position.x;
 	Position.y = Player_Initial_Position.y;
 
-	Idle->speed = 0.10f;
-	Run->speed = 0.10f;
+	Idle->speed = 0.15f;
+	Run->speed = 0.15f;
 
 	CurrentAnimation = Idle;
 
@@ -238,10 +238,64 @@ Animation* j1Player::LoadAnimation(const char* animationPath, const char* animat
 
 		}
 	}
+
 	if (anim = true)
+	{
 		return animation;
+	}
+
 	else
+	{
 		return nullptr;
+	}
+
+}
+
+SDL_Rect j1Player::LoadColliderRect(const char* colliderPath, const char* colliderName)
+{
+	SDL_Rect colliderRect;
+
+	bool rect = false;
+
+	pugi::xml_document colliderDocument;
+	pugi::xml_parse_result result = colliderDocument.load_file(colliderPath);
+
+	if (result == NULL)
+	{
+		LOG("Issue loading Collider Rect");
+	}
+	
+	pugi::xml_node objgroup;
+	for (objgroup = colliderDocument.child("map").child("objectgroup"); objgroup; objgroup = objgroup.next_sibling("objectgroup"))
+	{
+		p2SString name = objgroup.attribute("name").as_string();
+		if (name == colliderName)
+		{
+			rect = true;
+			int x, y, h, w;
+
+			for (pugi::xml_node sprite = objgroup.child("object"); sprite; sprite = sprite.next_sibling("object"))
+			{
+				x = sprite.attribute("x").as_int();
+				y = sprite.attribute("y").as_int();
+				w = sprite.attribute("width").as_int();
+				h = sprite.attribute("height").as_int();
+
+				colliderRect = { x, y, w, h };
+			}
+
+		}
+	}
+
+	if (rect = true)
+	{
+		return colliderRect;
+	}
+
+	else
+	{
+		return { 0, 0, 10, 10 };
+	}
 
 }
 

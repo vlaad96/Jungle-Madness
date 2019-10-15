@@ -49,7 +49,7 @@
     <folder>animations/player.tmx</folder>
     <texture>Sprites/Adventurer_fullx2.png</texture>
     <collider x="0" y="600" width="21" height="35"/>
-    <velocity x="2.0" y="0.0"  max_speed_y="10.0" initalVx="2.0" jump_force="7.0"/>
+    <velocity x="4.0" y="0.0"  max_speed_y="10.0" initalVx="4.0" jump_force="7.0"/>
     <gravity value="-1.0"/>
     <colliding_offset value="1" />
   </player>

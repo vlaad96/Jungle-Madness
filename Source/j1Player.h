@@ -40,7 +40,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	Animation* LoadAnimation(const char* animationPath, const char* animationName);
-
+	SDL_Rect LoadColliderRect(const char* colliderPath, const char* colliderName);
 	//void Jump();
 	//void Slide();
 	//void WallSlide();
