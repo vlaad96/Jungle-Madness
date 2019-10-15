@@ -29,6 +29,7 @@
   <scene>
     <scene_name name="Map_Beta.tmx"/>
     <scene_name name="Map_alpha.tmx"/>
+    <firstcamera x ="0" y ="-800"/>
   </scene>
 
   <audio>
