@@ -90,7 +90,7 @@ bool j1Scene::Start()
 bool j1Scene::PreUpdate()
 {
 	//working on camera X axis
-	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w / 2 + App->render->camera.w / 2);
+	App->render->camera.x = (-App->player->Position.x*App->win->GetScale()/* - App->player->Player_Collider->rect.w / 2 */+ App->render->camera.w / 2);
 
 	if (-App->render->camera.x <= App->player->Initial_Velocity_x)
 	{
