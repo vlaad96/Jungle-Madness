@@ -16925,7 +16925,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="41" name="Colliders" width="80" height="30" visible="0">
+ <layer id="41" name="Colliders" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="0"/>
   </properties>
@@ -18266,8 +18266,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="422"/>
+   <tile gid="422"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18419,9 +18419,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="422"/>
+   <tile gid="422"/>
+   <tile gid="422"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18631,12 +18631,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="421"/>
    <tile gid="421"/>
    <tile gid="421"/>
    <tile/>
@@ -18644,34 +18638,10 @@
    <tile/>
    <tile gid="421"/>
    <tile gid="421"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile gid="421"/>
-   <tile/>
-   <tile/>
-   <tile gid="421"/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="424"/>
+   <tile gid="424"/>
+   <tile gid="424"/>
    <tile gid="421"/>
    <tile gid="421"/>
    <tile/>
@@ -18695,6 +18665,36 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="421"/>
+   <tile/>
+   <tile/>
+   <tile gid="421"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="421"/>
+   <tile gid="421"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -18718,8 +18718,8 @@
    <tile/>
    <tile gid="421"/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="421"/>
+   <tile gid="421"/>
    <tile gid="421"/>
    <tile gid="421"/>
    <tile gid="421"/>
@@ -18920,7 +18920,7 @@
    <tile gid="423"/>
    <tile gid="423"/>
    <tile gid="423"/>
-   <tile/>
+   <tile gid="423"/>
    <tile/>
    <tile/>
    <tile/>
