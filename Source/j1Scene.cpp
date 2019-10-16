@@ -90,7 +90,7 @@ bool j1Scene::Start()
 bool j1Scene::PreUpdate()
 {
 	//working on camera X axis
-	App->render->camera.x = (-App->player->Position.x*App->win->GetScale()/* - App->player->Player_Collider->rect.w / 2 */+ App->render->camera.w / 2);
+	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
 
 	if (-App->render->camera.x <= App->player->Initial_Velocity_x)
 	{
@@ -100,6 +100,27 @@ bool j1Scene::PreUpdate()
 	if (-App->render->camera.x + App->render->camera.w >= App->map->data.width*App->map->data.tile_width*App->win->GetScale())
 	{
 		App->render->camera.x = -App->map->data.width*App->map->data.tile_width*App->win->GetScale() + App->render->camera.w;
+	}
+
+	// camera up y axis
+	if (App->player->Position.y*App->win->GetScale() <= -App->render->camera.y + App->render->camera.h / 6)
+	{
+		if (App->render->camera.y + (-App->player->Gravity * 8) < 0)
+			App->render->camera.y += (-App->player->Gravity * 8);
+	}
+
+	//camera down y axis
+	
+
+	if (App->player->Position.y*App->win->GetScale() > -App->render->camera.y + App->render->camera.h - App->render->camera.h / 6)
+	{
+		App->render->camera.y -= -(App->player->Gravity * 8);
+	}
+
+
+	if (-App->render->camera.y + App->render->camera.h > App->map->data.height*App->map->data.tile_height*App->win->GetScale())
+	{
+		App->render->camera.y = (-App->map->data.height*App->map->data.tile_height*App->win->GetScale() + App->render->camera.h);
 	}
 	return true;
 }

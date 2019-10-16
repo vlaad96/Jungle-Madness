@@ -9,12 +9,12 @@
 	</audio>
 	<player>
 		<Playerx value="150" />
-		<Playery value="650" />
+		<Playery value="-184" />
 	</player>
 	<collision />
 	<map />
 	<scene />
 	<renderer>
-		<camera x="-30" y="-890" />
+		<camera x="-4" y="-8" />
 	</renderer>
 </game_state>

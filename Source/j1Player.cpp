@@ -88,6 +88,7 @@ bool j1Player::Start()
 	Player_Collider = App->col->AddCollider(Player_Collider_Rect, COLLIDER_PLAYER, this);
 
 	State_Player = IDLE;
+	
 
 	if (Spritesheet == nullptr)
 	{
@@ -140,32 +141,51 @@ bool j1Player::Update(float dt)
 			CurrentAnimation = Run;
 			Was_Right = false;
 		}
-	}
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
 
-		if (First_Move == false)
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			First_Move = true;
+
+			if (First_Move == false)
+			{
+				First_Move = true;
+			}
+
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x + Velocity.x;
+
+			Moving_Left = true;
+			Moving_Right = false;
+			CurrentAnimation = Run;
+			Was_Right = true;
 		}
 
-		Velocity.x = Initial_Velocity_x;
-		Position.x = Position.x + Velocity.x;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
 
-		Moving_Left = true;
-		Moving_Right = false;
-		CurrentAnimation = Run;
-		Was_Right = true;
+			Velocity.x = 0.0f;
+			Moving_Left = true;
+			Moving_Right = true;
+		}
+		//testing camera up & down purposes
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT )
+		{
+
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y - Velocity.y;
+			
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y + Velocity.y;
+
+		}
+
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-
-		Velocity.x = 0.0f;
-		Moving_Left = true;
-		Moving_Right = true;
-	}
 
 	Player_Collider->SetPos(Position.x + 40, Position.y +5);
 	return true;
