@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Collision.h"
+#include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -38,6 +39,9 @@ bool j1Scene::Awake(pugi::xml_node& config)
 		ret = false;
 	}
 
+	CamScene1.x = config.child("firstcamera").attribute("x").as_int();
+	CamScene1.y = config.child("firstcamera").attribute("y").as_int();
+
 	return ret;
 }
 
@@ -52,6 +56,10 @@ bool j1Scene::Start()
 
 	if (firstscene == "Map_Beta.tmx")
 	{
+
+		App->render->camera.x = CamScene1.x;
+		App->render->camera.y = CamScene1.y;
+
 		//load different music samples
 		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(SceneMusic.GetString());
@@ -81,6 +89,39 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	//working on camera X axis
+	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
+
+	if (-App->render->camera.x <= App->player->Initial_Velocity_x)
+	{
+		App->render->camera.x = -App->player->Initial_Velocity_x;
+	}
+
+	if (-App->render->camera.x + App->render->camera.w >= App->map->data.width*App->map->data.tile_width*App->win->GetScale())
+	{
+		App->render->camera.x = -App->map->data.width*App->map->data.tile_width*App->win->GetScale() + App->render->camera.w;
+	}
+
+	// camera up y axis
+	if (App->player->Position.y*App->win->GetScale() <= -App->render->camera.y + App->render->camera.h / 6)
+	{
+		if (App->render->camera.y + (-App->player->Gravity * 8) < 0)
+			App->render->camera.y += (-App->player->Gravity * 8);
+	}
+
+	//camera down y axis
+	
+
+	if (App->player->Position.y*App->win->GetScale() > -App->render->camera.y + App->render->camera.h - App->render->camera.h / 6)
+	{
+		App->render->camera.y -= -(App->player->Gravity * 8);
+	}
+
+
+	if (-App->render->camera.y + App->render->camera.h > App->map->data.height*App->map->data.tile_height*App->win->GetScale())
+	{
+		App->render->camera.y = (-App->map->data.height*App->map->data.tile_height*App->win->GetScale() + App->render->camera.h);
+	}
 	return true;
 }
 
@@ -104,6 +145,7 @@ bool j1Scene::Update(float dt)
 		SceneChange(scenes.start->data->GetString());
 		scene1 = true;
 		scene2 = false;
+
 	}
 
 

@@ -46,6 +46,10 @@
     <ClInclude Include="j1Window.h" />
     <ClInclude Include="j1Scene.h" />
     <ClInclude Include="j1Collision.h" />
+    <ClInclude Include="j1Player.h" />
+    <ClInclude Include="MemLeaks.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p2Log.cpp">
@@ -64,5 +68,6 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Collision.cpp" />
+    <ClCompile Include="j1Player.cpp" />
   </ItemGroup>
 </Project>

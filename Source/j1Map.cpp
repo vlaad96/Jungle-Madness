@@ -33,15 +33,18 @@ void j1Map::Draw()
 		return;
 
 	ImageLayer* image;
+	int parallax;
 
 	for (int x = 0; x < data.images.count(); ++x)
 	{
 		image = data.images.At(x)->data;
 
+		parallax = (image->image_offset_x - PX) / image->speed;
+
 		App->render->Blit(data.images[x]->texture,
-			data.images[x]->image_offset_x,
-			data.images[x]->image_offset_y, 
-			&data.images[x]->GetImageRect());
+			parallax,
+			image->image_offset_y,
+			&image->GetImageRect());
 	}
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
@@ -489,7 +492,7 @@ bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)
 		imagelayer->image_offset_y = node.attribute("offsety").as_float();
 	}
 
-	imagelayer->speed = imagelayer->property_img.GetPropertyf("Speed", 0); //Gets the parallax speed value for every image layer
+	imagelayer->speed = imagelayer->property_img.GetPropertyi("Speed", 0); //Gets the parallax speed value for every image layer
 
 	return ret;
 }

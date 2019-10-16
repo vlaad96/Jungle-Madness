@@ -44,7 +44,7 @@ struct ImageLayer
 	int					width;
 	int					height;
 	float				image_offset_x, image_offset_y = 0.0f;
-	float				speed = 0.0f;
+	int					speed = 0;
 	SDL_Texture*		texture;
 
 	Properties			property_img;
@@ -157,7 +157,8 @@ private:
 
 public:
 
-	MapData data;
+	MapData				data;
+	int					PX = 0;
 
 private:
 
