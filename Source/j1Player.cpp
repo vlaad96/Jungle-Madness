@@ -26,14 +26,22 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Slide = LoadAnimation(folder.GetString(), "Slide");
 	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
 
-	//Load with object group maybe? lazy p o s
+	////Load with object group 
 	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
-	/*{
-		config.child("collider").attribute("x").as_int(),
-		config.child("collider").attribute("y").as_int(),
-		config.child("collider").attribute("width").as_int(),
-		config.child("collider").attribute("height").as_int()
-	};*/
+	//{
+	//	config.child("collider").attribute("x").as_int(),
+	//	config.child("collider").attribute("y").as_int(),
+	//	config.child("collider").attribute("width").as_int(),
+	//	config.child("collider").attribute("height").as_int()
+	//}
+
+	//COLLIDER
+	int x = config.child("collider").attribute("x").as_int();
+	int y = config.child("collider").attribute("y").as_int();
+	int w = config.child("collider").attribute("width").as_int();
+	int h = config.child("collider").attribute("height").as_int();
+	Player_Collider_Rect = {x, y, w, h};
+
 
 	//Player config
 
@@ -47,7 +55,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	//Load it from config at least wtf
 	Player_Initial_Position.x = 150;
-	Player_Initial_Position.y = 650;
+	Player_Initial_Position.y = 600;
 	Position.x = Player_Initial_Position.x;
 	Position.y = Player_Initial_Position.y;
 
@@ -159,6 +167,7 @@ bool j1Player::Update(float dt)
 		Moving_Right = true;
 	}
 
+	Player_Collider->SetPos(Position.x + 40, Position.y +5);
 	return true;
 }
 
