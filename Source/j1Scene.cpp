@@ -72,11 +72,14 @@ bool j1Scene::Start()
 
 	//collider test
 	
-	if (colliderfloor == nullptr)
+	/*if (colliderfloor == nullptr)
 		colliderfloor = App->col->AddCollider({ 0, 730, 1024, 40 }, COLLIDER_FLOOR, this);
 	else
-		colliderfloor->SetPos(0, 0);
+		colliderfloor->SetPos(0, 0);*/
 
+
+	//colliders from tiled
+	App->map->MapCollisions(App->map->data);
 
 	if (!ret)
 	{
@@ -182,7 +185,7 @@ bool j1Scene::Update(float dt)
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data);
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
 		App->map->data.width, App->map->data.height,
 		App->map->data.tile_width, App->map->data.tile_height,

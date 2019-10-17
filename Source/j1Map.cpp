@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Collision.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -22,7 +23,8 @@ bool j1Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
-	
+	//colliders XML
+	RedCol = config.child("collision").attribute("red").as_int();
 
 	return ret;
 }
@@ -67,7 +69,7 @@ void j1Map::Draw()
 			{
 				for (uint column = 0; column < data.width; column++)
 				{
-					iPoint pos = MapToWorld(column, row);
+					iPoint pos = MapToWorld(column, row, data);
 
 					App->render->Blit(data.tilesets[x]->texture,    //texture 
 						pos.x,                     //position.x of tile
@@ -83,7 +85,7 @@ void j1Map::Draw()
 	// TODO 10(old): Complete the draw function
 }
 
-iPoint j1Map::MapToWorld(int x, int y) const
+iPoint j1Map::MapToWorld(int x, int y, MapData& Data) const
 {
 	iPoint ret(0, 0);
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
@@ -106,7 +108,7 @@ iPoint j1Map::MapToWorld(int x, int y) const
 }
 
 
-iPoint j1Map::WorldToMap(int x, int y) const
+iPoint j1Map::WorldToMap(int x, int y, MapData& Data) const
 {
 	iPoint ret(0, 0);
 	// TODO 2: Add orthographic world to map coordinates
@@ -542,4 +544,90 @@ float Properties::GetPropertyi(const char* value, int def_value) const
 		item_p = item_p->next;
 	}
 	return def_value;
+}
+
+bool j1Map::MapCollisions(MapData& data)
+{
+	bool ret = true;
+
+	MapLayer* layer;
+
+	for (uint l = 0; l < data.layers.count(); l++)
+	{
+		layer = data.layers.At(l)->data;
+
+		if (layer->properties.GetPropertyi("Draw", 0) == 0)
+		{
+
+			for (int y = 0; y < data.height; ++y)
+			{
+				for (int x = 0; x < data.width; ++x)
+				{
+					int tile_id = layer->Get(x, y);
+
+					if (tile_id > 0)
+					{
+						TileSet* tileset = TileId(tile_id, data);
+
+						if (tile_id > tileset->firstgid)
+						{
+
+							iPoint pos = MapToWorld(x, y, data);
+
+							if (tile_id == RedCol)
+							{
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_FLOOR, this);
+							}
+
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+
+	return ret;
+}
+
+TileSet* j1Map::TileId(int id, MapData& data) const
+{
+	//method so we pick the right Tileset based on a tile id
+
+	TileSet* tileset;
+
+	int j = data.tilesets.count();
+
+	for (int i = 0; i < j; ++i)
+	{
+		tileset = data.tilesets.At(i)->data;
+
+		if (tileset == NULL)
+		{
+			LOG("Problem in tileset get");
+		}
+
+		if (id >= tileset->firstgid)
+		{
+			if (data.tilesets.At(i + 1) != NULL)
+			{
+
+				if (id <= data.tilesets.At(i + 1)->data->firstgid)
+				{
+					if (tileset == NULL)
+					{
+						LOG("Problem in tileset get");
+					}
+					return tileset;
+				}
+				else
+					continue;
+			}
+			return tileset;
+		}
+	}
+
+	LOG("No tileset matches tile_id");
 }

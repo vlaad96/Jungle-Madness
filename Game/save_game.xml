@@ -8,13 +8,13 @@
 		<VolumeChanger_fx value="1" />
 	</audio>
 	<player>
-		<Playerx value="150" />
-		<Playery value="-184" />
+		<Playerx value="1154" />
+		<Playery value="696" />
 	</player>
 	<collision />
 	<map />
 	<scene />
 	<renderer>
-		<camera x="-4" y="-8" />
+		<camera x="-1798" y="-752" />
 	</renderer>
 </game_state>

@@ -141,9 +141,9 @@ public:
 	bool Load(const char* path);
 
 	// Coordinate translation methods
-	iPoint MapToWorld(int x, int y) const;
-	iPoint WorldToMap(int x, int y) const;
-
+	iPoint MapToWorld(int x, int y, MapData& Data) const;
+	iPoint WorldToMap(int x, int y, MapData& Data) const;
+	bool MapCollisions(MapData& data);
 
 
 private:
@@ -154,6 +154,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer);
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	TileSet* TileId(int id, MapData& mapdata) const;
 
 public:
 
@@ -165,6 +166,8 @@ private:
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
+	//colliders
+	int RedCol;
 };
 
 #endif // __j1MAP_H__

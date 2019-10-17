@@ -24,6 +24,7 @@
 
   <map>
     <folder>Map/</folder>
+    <collision red="583"/>
   </map>
 
   <scene>
