@@ -5,6 +5,7 @@
 #include "j1Textures.h"
 #include "j1Map.h"
 #include "j1Collision.h"
+#include "j1Window.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -31,50 +32,58 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 void j1Map::Draw()
 {
-	if (map_loaded == false)
-		return;
 
-	ImageLayer* image;
-	int parallax;
+	 if (map_loaded == false)
+			return;
 
-	for (int x = 0; x < data.images.count(); ++x)
-	{
-		image = data.images.At(x)->data;
+		ImageLayer* image;
+		int parallax;
 
-		parallax = (image->image_offset_x - PX) / image->speedi;
-
-		App->render->Blit(data.images[x]->texture,
-			parallax,
-			image->image_offset_y,
-			&image->GetImageRect());
-	}
-
-	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	MapLayer* layer; 
-	//TileSet* tileset = data.tilesets.start->data;
-
-	for (int x = 0; x < data.tilesets.count(); x++)
-	{
-		for (uint l = 0; l < data.layers.count(); l++)
+		for (int x = 0; x < data.images.count(); ++x)
 		{
-			//Cheking if layer has to be drawn
-			layer = data.layers.At(l)->data;
+			image = data.images.At(x)->data;
 
-			if (layer->properties_lay.GetProperties("Draw").operator==("0"))
-			{
-				continue;
-			}
+			parallax = (image->image_offset_x - PX) / image->speedi;
 
-			for (uint row = 0; row < data.height; row++)
+			App->render->Blit(data.images[x]->texture,
+				parallax,
+				image->image_offset_y,
+				&image->GetImageRect());
+		}
+
+	
+	MapLayer* layer;
+
+
+	for (uint l = 0; l < data.layers.count(); l++)
+	{
+		layer = data.layers.At(l)->data;
+
+		if (layer->properties_lay.GetProperties("Draw").operator==("0"))
+			continue;
+
+		for (int y = 0; y < data.height; ++y)
+		{
+			for (int x = 0; x < data.width; ++x)
 			{
-				for (uint column = 0; column < data.width; column++)
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
 				{
-					iPoint pos = MapToWorld(column, row, data);
+					TileSet* tileset = TileId(tile_id, data);
 
-					App->render->Blit(data.tilesets[x]->texture,    //texture 
-						pos.x,										//position.x of tile
-						pos.y,										//position.y of tile
-						&data.tilesets[x]->GetTileRect(data.layers[l]->data[data.layers[l]->Get(column, row)])); //rectangle
+					if (tileset != nullptr)
+					{
+						SDL_Rect r = tileset->GetTileRect(tile_id);
+
+						iPoint pos = MapToWorld(x, y, data);
+
+
+						if ((pos.x + data.tile_width)*App->win->GetScale() >= -App->render->camera.x && pos.x <= -App->render->camera.x + App->render->camera.w
+							&& (pos.y + data.tile_height)*App->win->GetScale() >= -App->render->camera.y && pos.y <= -App->render->camera.y + App->render->camera.h)
+						{
+							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+						}
+					}
 				}
 			}
 		}

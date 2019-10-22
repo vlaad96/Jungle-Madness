@@ -7,7 +7,7 @@
   </app>
 	
   <renderer>
-    <vsync value="false"/>
+    <vsync value="true"/>
   </renderer>
 
   <window>
@@ -24,7 +24,7 @@
 
   <map>
     <folder>Map/</folder>
-    <collision red="583"/>
+    <collision red="421"/>
   </map>
 
   <scene>
