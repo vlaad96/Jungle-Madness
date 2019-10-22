@@ -41,7 +41,7 @@ void j1Map::Draw()
 	{
 		image = data.images.At(x)->data;
 
-		parallax = (image->image_offset_x - PX) / image->speed;
+		parallax = (image->image_offset_x - PX) / image->speedi;
 
 		App->render->Blit(data.images[x]->texture,
 			parallax,
@@ -60,7 +60,7 @@ void j1Map::Draw()
 			//Cheking if layer has to be drawn
 			layer = data.layers.At(l)->data;
 
-			if (layer->properties.GetPropertyi("Draw", 0) == 0)
+			if (layer->properties_lay.GetProperties("Draw").operator==("0"))
 			{
 				continue;
 			}
@@ -184,8 +184,34 @@ bool j1Map::CleanUp()
 	p2List_item<MapLayer*>* item2;
 	item2 = data.layers.start;
 
+	p2List_item<p2SString*>* item2_properties;
+	
+
 	while (item2 != NULL)
 	{
+		item2_properties = item2->data->properties_lay.name.start;
+
+		while (item2_properties != NULL)
+		{
+
+			RELEASE(item2_properties->data);
+			if (item2_properties == item2->data->properties_lay.name.end)
+				break;
+			item2_properties = item2_properties->next;
+		}
+		item2->data->properties_lay.name.clear();
+
+		item2_properties = item2->data->properties_lay.value.start;
+
+		while (item2_properties != NULL)
+		{
+			RELEASE(item2_properties->data);
+			if (item2_properties == item2->data->properties_lay.value.end)
+				break;
+			item2_properties = item2_properties->next;
+		}
+		item2->data->properties_lay.value.clear();
+
 		RELEASE(item2->data);
 		item2 = item2->next;
 	}
@@ -195,14 +221,38 @@ bool j1Map::CleanUp()
 	p2List_item<ImageLayer*>* item3;
 	item3 = data.images.start;
 
+	p2List_item<p2SString*>* item3_properties;
+	
+
 	while (item3 != NULL)
 	{
+		item3_properties = item3->data->properties_img.name.start;
+
+		while (item3_properties != NULL)
+		{
+
+			RELEASE(item3_properties->data);
+			if (item3_properties == item3->data->properties_img.name.end)
+				break;
+			item3_properties = item3_properties->next;
+		}
+		item3->data->properties_img.name.clear();
+
+		item3_properties = item3->data->properties_img.value.start;
+
+		while (item3_properties != NULL)
+		{
+			RELEASE(item3_properties->data);
+			if (item3_properties == item3->data->properties_img.value.end)
+				break;
+			item3_properties = item3_properties->next;
+		}
+		item3->data->properties_img.value.clear();
+
 		RELEASE(item3->data);
 		item3 = item3->next;
 	}
 	data.images.clear();
-	
-	//Properties::properties_list FAREM CLEAN PROPERTIES
 	// Clean up the pugui tree
 	map_file.reset();
 
@@ -449,9 +499,10 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
+	layer->properties_lay.LoadProperties(node);
+
 	pugi::xml_node layer_data = node.child("data");
 
-	LoadProperties(node, layer->properties);
 
 	if (layer_data == NULL)
 	{
@@ -482,8 +533,8 @@ bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)//parall
 	imagelayer->width = node.child("image").attribute("width").as_int();
 	imagelayer->height = node.child("image").attribute("height").as_int();
 	imagelayer->texture = App->tex->Load(PATH(folder.GetString(), node.child("image").attribute("source").as_string()));
+	imagelayer->properties_img.LoadProperties(node);
 	
-	LoadProperties(node, imagelayer->property_img);
 
 	if (node.attribute("offsetx").as_int() != NULL)
 	{
@@ -495,79 +546,10 @@ bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)//parall
 		imagelayer->image_offset_y = node.attribute("offsety").as_float();
 	}
 
-	imagelayer->speed = imagelayer->property_img.GetPropertyi("Speed", 0); //Gets the parallax speed value for every image layer
+	imagelayer->speed = imagelayer->properties_img.GetProperties("Speed"); //Gets the parallax speed value for every image layer
+	imagelayer->speedi = atoi(imagelayer->speed.GetString());
 
 	return ret;
-}
-
-bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
-{
-	bool ret = false;
-	pugi::xml_node data = node.child("properties");
-
-	if (data != NULL)
-	{
-		pugi::xml_node prop;
-
-		for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
-		{
-			Properties::Property* property_aux = new Properties::Property();
-			property_aux->name = prop.attribute("name").as_string();
-
-			if (prop.attribute("type").as_string() == "bool")
-			{
-				property_aux->type = TYPE_BOOL;
-				property_aux->value.b = prop.attribute("value").as_bool();
-			}
-
-			else if (prop.attribute("type").as_string() == "int")
-			{
-				property_aux->type = TYPE_INT;
-				property_aux->value.i = prop.attribute("value").as_int();
-			}
-
-			else if (prop.attribute("type").as_string() == "float")
-			{
-				property_aux->type = TYPE_FLOAT;
-				property_aux->value.f = prop.attribute("value").as_float();
-			}
-			
-			else if (prop.attribute("type").as_string() == "float")
-			{
-				property_aux->type = TYPE_FLOAT;
-				property_aux->value.f = prop.attribute("value").as_float();
-			}
-
-			properties.properties_list.add(property_aux);
-		}
-	}
-
-	return ret;
-}
-
-float Properties::GetPropertyf(const char* value, float def_value) const
-{
-	p2List_item<Property*>* item_p = properties_list.start;
-
-	while (item_p)
-	{
-		if (item_p->data->name == value)
-			return item_p->data->value;
-		item_p = item_p->next;
-	}
-	return def_value;
-}
-float Properties::GetPropertyi(const char* value, int def_value) const
-{
-	p2List_item<Property*>* item_p = properties_list.start;
-
-	while (item_p)
-	{
-		if (item_p->data->name == value)
-			return item_p->data->value;
-		item_p = item_p->next;
-	}
-	return def_value;
 }
 
 bool j1Map::MapCollisions(MapData& data)
@@ -580,7 +562,7 @@ bool j1Map::MapCollisions(MapData& data)
 	{
 		layer = data.layers.At(l)->data;
 
-		if (layer->properties.GetPropertyi("Draw", 0) == 0)
+		if (layer->properties_lay.GetProperties("Draw").operator==("0"))
 		{
 
 			for (int y = 0; y < data.height; ++y)
@@ -654,4 +636,55 @@ TileSet* j1Map::TileId(int id, MapData& data) const
 	}
 
 	LOG("No tileset matches tile_id");
+}
+
+bool Properties::LoadProperties(pugi::xml_node & node)
+{
+	// node has to be layer, map, tileset
+	bool ret = true;
+
+	pugi::xml_node property = node.child("properties").child("property");
+
+	while (property != NULL)
+	{
+		p2SString* tmp = new p2SString();
+		p2SString* tmp2 = new p2SString();
+
+		tmp->operator=(property.attribute("name").as_string());
+		this->name.add(tmp);
+		tmp2->operator=(property.attribute("value").as_string());
+		this->value.add(tmp2);
+
+		property = property.next_sibling();
+	}
+
+	// fill the custom properties from an xml_node
+
+	return ret;
+}
+
+p2SString Properties::GetProperties(const char * request)
+{
+	p2SString tmp;
+	bool requestfound = false;
+	pugi::xml_parse_result result;
+
+
+	for (int i = 0; i < name.count(); ++i)
+	{
+		tmp.operator= (name.At(i)->data->GetString());
+		if (tmp.operator==(request) == true)
+		{
+			requestfound = true;
+			tmp = value.At(i)->data->GetString();
+			break;
+		}
+
+	}
+
+	if (requestfound == false)
+		tmp = result.description();
+
+
+	return tmp;
 }

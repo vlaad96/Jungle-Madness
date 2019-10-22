@@ -7,50 +7,20 @@
 #include "j1Module.h"
 
 // ----------------------------------------------------
-enum proptype {
-	TYPE_BOOL,
-	TYPE_INT,
-	TYPE_FLOAT,
-	TYPE_STRING,
-	TYPE_COLOR
-};
-
-union propvalue {
-	bool b;
-	int i;
-	float f;
-	char* str;
-	char color[3];
-};
 
 struct Properties
 {
-	struct Property
-	{
-		p2SString name;
-		proptype type;
-		propvalue value;
-		
-	};
+	p2List <p2SString*> name;
+
+	p2List <p2SString*> value;
+
+	bool LoadProperties(pugi::xml_node& node);
+
+	p2SString GetProperties(const char * request);
 
 	~Properties()
 	{
-		p2List_item<Property*>* item_p;
-		item_p = properties_list.start;
-
-		while (item_p != NULL)
-		{
-			RELEASE(item_p->data);
-			item_p = item_p->next;
-		}
-
-		properties_list.clear();
 	}
-
-	float GetPropertyf(const char* value, float def_value) const;
-	float GetPropertyi(const char* value, int def_value) const;
-	
-	p2List<Property*> properties_list;
 
 };
 
@@ -62,10 +32,12 @@ struct ImageLayer
 	int					width;
 	int					height;
 	float				image_offset_x, image_offset_y = 0.0f;
-	int					speed = 0;
 	SDL_Texture*		texture;
 
-	Properties			property_img;
+	p2SString			speed;
+	int					speedi;
+
+	Properties			properties_img;
 };
 
 // ----------------------------------------------------
@@ -91,8 +63,7 @@ struct MapLayer
 		return x + y * width;
 	}
 
-	Properties	properties;
-
+	Properties	properties_lay;
 };
 
 // ----------------------------------------------------
@@ -173,7 +144,7 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+
 	TileSet* TileId(int id, MapData& mapdata) const;
 
 public:

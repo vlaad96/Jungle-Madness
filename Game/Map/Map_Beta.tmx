@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="1">
  <tileset firstgid="1" name="Jungle_terrain" tilewidth="32" tileheight="32" tilecount="420" columns="28">
   <image source="Jungle_terrain.png" width="896" height="480"/>
  </tileset>
@@ -9,73 +9,74 @@
  <tileset firstgid="425" name="objects" tilewidth="32" tileheight="32" tilecount="91" columns="13">
   <image source="objects.PNG" width="416" height="224"/>
  </tileset>
- <imagelayer name="Parallax_1">
+ <imagelayer id="1" name="Parallax_1">
   <image source="Parallax/Forest/Layer_0010_1.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="1"/>
+   <property name="asdf" type="color" value="#ffffaa00"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_2">
+ <imagelayer id="2" name="Parallax_2">
   <image source="Parallax/Forest/Layer_0009_2.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="2"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_3">
+ <imagelayer id="3" name="Parallax_3">
   <image source="Parallax/Forest/Layer_0008_3.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="3"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_Lights_1">
+ <imagelayer id="4" name="Parallax_Lights_1">
   <image source="Parallax/Forest/Layer_0007_Lights.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="4"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_4">
+ <imagelayer id="5" name="Parallax_4">
   <image source="Parallax/Forest/Layer_0006_4.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="5"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_5">
+ <imagelayer id="6" name="Parallax_5">
   <image source="Parallax/Forest/Layer_0005_5.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="6"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_Lights_2">
+ <imagelayer id="7" name="Parallax_Lights_2">
   <image source="Parallax/Forest/Layer_0004_Lights.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="7"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_6">
+ <imagelayer id="8" name="Parallax_6">
   <image source="Parallax/Forest/Layer_0003_6.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_7">
+ <imagelayer id="9" name="Parallax_7">
   <image source="Parallax/Forest/Layer_0002_7.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_8">
+ <imagelayer id="10" name="Parallax_8">
   <image source="Parallax/Forest/Layer_0001_8.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="9"/>
   </properties>
  </imagelayer>
- <imagelayer name="Parallax_9">
+ <imagelayer id="11" name="Parallax_9">
   <image source="Parallax/Forest/Layer_0000_9.png" width="928" height="793"/>
   <properties>
    <property name="Speed" type="int" value="10"/>
   </properties>
  </imagelayer>
- <layer name="LeafsDark" width="80" height="30">
+ <layer id="12" name="LeafsDark" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -2482,7 +2483,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="Leafs" width="80" height="30">
+ <layer id="13" name="Leafs" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -4889,7 +4890,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="Tree/Grass" width="80" height="30">
+ <layer id="14" name="Tree/Grass" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -7296,7 +7297,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="Ground" width="80" height="30">
+ <layer id="15" name="Ground" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
    <property name="Music" value="Audio/music/Surreptitious.mp3"/>
@@ -9704,7 +9705,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="Water/Spikes" width="80" height="30">
+ <layer id="16" name="Water/Spikes" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -12111,7 +12112,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="MidGround" width="80" height="30">
+ <layer id="17" name="MidGround" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -14518,7 +14519,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="ForeGround" width="80" height="30">
+ <layer id="18" name="ForeGround" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="0"/>
   </properties>
@@ -16925,9 +16926,9 @@
    <tile/>
   </data>
  </layer>
- <layer name="Colliders" width="80" height="30">
+ <layer id="19" name="Colliders" width="80" height="30">
   <properties>
-   <property name="Draw" type="int" value="1"/>
+   <property name="Draw" type="int" value="0"/>
   </properties>
   <data>
    <tile/>

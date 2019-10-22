@@ -8,7 +8,7 @@
 		<VolumeChanger_fx value="1" />
 	</audio>
 	<player>
-		<Playerx value="150" />
+		<Playerx value="242" />
 		<Playery value="600" />
 	</player>
 	<collision />
