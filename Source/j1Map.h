@@ -159,7 +159,7 @@ private:
 	p2SString			folder;
 	bool				map_loaded;
 	//colliders
-	int RedCol;
+	int RedCol, BlueCol, PinkCol, GreenCol;
 	
 };
 

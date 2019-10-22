@@ -26,6 +26,9 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 	//colliders XML
 	RedCol = config.child("collision").attribute("red").as_int();
+	BlueCol = config.child("collision").attribute("blue").as_int();
+	PinkCol = config.child("collision").attribute("pink").as_int();
+	GreenCol = config.child("collision").attribute("green").as_int();
 
 	return ret;
 }
@@ -597,6 +600,18 @@ bool j1Map::MapCollisions(MapData& data)
 							if (tile_id == RedCol)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_FLOOR, this);
+							}
+							if (tile_id == PinkCol)
+							{
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_PIKES, this);
+							}
+							if (tile_id == BlueCol)
+							{
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_WATER, this);
+							}
+							if (tile_id == GreenCol)
+							{
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_BRANCHES, this);
 							}
 
 
