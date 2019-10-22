@@ -167,95 +167,100 @@ SDL_Rect ImageLayer::GetImageRect() const
 // Called before quitting
 bool j1Map::CleanUp()
 {
-	LOG("Unloading map");
-
-	// Remove all tilesets
-	p2List_item<TileSet*>* item;
-	item = data.tilesets.start;
-
-	while (item != NULL)
+	MapData* MapDataItem = &data;
+	for (int i = 0; i < numberStages; ++i)
 	{
-		RELEASE(item->data);
-		item = item->next;
+		LOG("Unloading map");
+
+		// Remove all tilesets
+		p2List_item<TileSet*>* item;
+		item = MapDataItem->tilesets.start;
+
+		while (item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+		MapDataItem->tilesets.clear();
+
+		// Remove all layers
+		p2List_item<MapLayer*>* item2;
+		item2 = MapDataItem->layers.start;
+
+		p2List_item<p2SString*>* item2_properties;
+
+
+		while (item2 != NULL)
+		{
+			item2_properties = item2->data->properties_lay.name.start;
+
+			while (item2_properties != NULL)
+			{
+
+				RELEASE(item2_properties->data);
+				if (item2_properties == item2->data->properties_lay.name.end)
+					break;
+				item2_properties = item2_properties->next;
+			}
+			item2->data->properties_lay.name.clear();
+
+			item2_properties = item2->data->properties_lay.value.start;
+
+			while (item2_properties != NULL)
+			{
+				RELEASE(item2_properties->data);
+				if (item2_properties == item2->data->properties_lay.value.end)
+					break;
+				item2_properties = item2_properties->next;
+			}
+			item2->data->properties_lay.value.clear();
+
+			RELEASE(item2->data);
+			item2 = item2->next;
+		}
+		MapDataItem->layers.clear();
+
+		// Remove all image layers
+		p2List_item<ImageLayer*>* item3;
+		item3 = MapDataItem->images.start;
+
+		p2List_item<p2SString*>* item3_properties;
+
+
+		while (item3 != NULL)
+		{
+			item3_properties = item3->data->properties_img.name.start;
+
+			while (item3_properties != NULL)
+			{
+
+				RELEASE(item3_properties->data);
+				if (item3_properties == item3->data->properties_img.name.end)
+					break;
+				item3_properties = item3_properties->next;
+			}
+			item3->data->properties_img.name.clear();
+
+			item3_properties = item3->data->properties_img.value.start;
+
+			while (item3_properties != NULL)
+			{
+				RELEASE(item3_properties->data);
+				if (item3_properties == item3->data->properties_img.value.end)
+					break;
+				item3_properties = item3_properties->next;
+			}
+			item3->data->properties_img.value.clear();
+
+			RELEASE(item3->data);
+			item3 = item3->next;
+		}
+		MapDataItem->images.clear();
+		// Clean up the pugui tree
+		map_file.reset();
+
+		MapDataItem = &data2;
 	}
-	data.tilesets.clear();
-
-	// Remove all layers
-	p2List_item<MapLayer*>* item2;
-	item2 = data.layers.start;
-
-	p2List_item<p2SString*>* item2_properties;
-	
-
-	while (item2 != NULL)
-	{
-		item2_properties = item2->data->properties_lay.name.start;
-
-		while (item2_properties != NULL)
-		{
-
-			RELEASE(item2_properties->data);
-			if (item2_properties == item2->data->properties_lay.name.end)
-				break;
-			item2_properties = item2_properties->next;
-		}
-		item2->data->properties_lay.name.clear();
-
-		item2_properties = item2->data->properties_lay.value.start;
-
-		while (item2_properties != NULL)
-		{
-			RELEASE(item2_properties->data);
-			if (item2_properties == item2->data->properties_lay.value.end)
-				break;
-			item2_properties = item2_properties->next;
-		}
-		item2->data->properties_lay.value.clear();
-
-		RELEASE(item2->data);
-		item2 = item2->next;
-	}
-	data.layers.clear();
-
-	// Remove all image layers
-	p2List_item<ImageLayer*>* item3;
-	item3 = data.images.start;
-
-	p2List_item<p2SString*>* item3_properties;
-	
-
-	while (item3 != NULL)
-	{
-		item3_properties = item3->data->properties_img.name.start;
-
-		while (item3_properties != NULL)
-		{
-
-			RELEASE(item3_properties->data);
-			if (item3_properties == item3->data->properties_img.name.end)
-				break;
-			item3_properties = item3_properties->next;
-		}
-		item3->data->properties_img.name.clear();
-
-		item3_properties = item3->data->properties_img.value.start;
-
-		while (item3_properties != NULL)
-		{
-			RELEASE(item3_properties->data);
-			if (item3_properties == item3->data->properties_img.value.end)
-				break;
-			item3_properties = item3_properties->next;
-		}
-		item3->data->properties_img.value.clear();
-
-		RELEASE(item3->data);
-		item3 = item3->next;
-	}
-	data.images.clear();
-	// Clean up the pugui tree
-	map_file.reset();
-
 	return true;
 }
 

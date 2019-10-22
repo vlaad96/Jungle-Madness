@@ -32,6 +32,8 @@ bool j1Scene::Awake(pugi::xml_node& config)
 
 		SceneName->create(stage.attribute("name").as_string());
 		scenes.add(SceneName);
+
+		App->map->numberStages++;
 	}
 
 	if (scenes.start->data->GetString() == NULL)

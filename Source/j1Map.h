@@ -150,7 +150,9 @@ private:
 public:
 
 	MapData				data;
+	MapData				data2;
 	int					PX = 0;
+	int					numberStages = 0;
 
 private:
 
