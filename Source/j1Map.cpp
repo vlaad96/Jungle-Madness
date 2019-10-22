@@ -33,7 +33,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-void j1Map::Draw()
+void j1Map::Draw(MapData &data)
 {
 
 	 if (map_loaded == false)
@@ -268,16 +268,18 @@ bool j1Map::CleanUp()
 			item3 = item3->next;
 		}
 		MapDataItem->images.clear();
+
 		// Clean up the pugui tree
 		map_file.reset();
 
 		MapDataItem = &data2;
 	}
+
 	return true;
 }
 
 // Load new map
-bool j1Map::Load(const char* file_name)
+bool j1Map::Load(const char* file_name, MapData& dataRef)
 {
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
@@ -293,7 +295,7 @@ bool j1Map::Load(const char* file_name)
 	// Load general info ----------------------------------------------
 	if (ret == true)
 	{
-		ret = LoadMap();
+		ret = LoadMap(dataRef);
 	}
 
 	// Load all tilesets info ----------------------------------------------
@@ -312,7 +314,7 @@ bool j1Map::Load(const char* file_name)
 			ret = LoadTilesetImage(tileset, set);
 		}
 
-		data.tilesets.add(set);
+		dataRef.tilesets.add(set);
 	}
 
 	// Load layer info ----------------------------------------------
@@ -324,7 +326,7 @@ bool j1Map::Load(const char* file_name)
 		ret = LoadLayer(layer, lay);
 
 		if (ret == true)
-			data.layers.add(lay);
+			dataRef.layers.add(lay);
 	}
 
 	// Load Image Layer info----------------------------------------------
@@ -336,16 +338,16 @@ bool j1Map::Load(const char* file_name)
 		ret = LoadImageLayer(imagelayer, imageList);
 
 		if (ret == true)
-			data.images.add(imageList);
+			dataRef.images.add(imageList);
 	}
 
 	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
-		LOG("width: %d height: %d", data.width, data.height);
-		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
+		LOG("width: %d height: %d", dataRef.width, dataRef.height);
+		LOG("tile_width: %d tile_height: %d", dataRef.tile_width, dataRef.tile_height);
 
-		p2List_item<TileSet*>* item = data.tilesets.start;
+		p2List_item<TileSet*>* item = dataRef.tilesets.start;
 		while (item != NULL)
 		{
 			TileSet* s = item->data;
@@ -356,7 +358,7 @@ bool j1Map::Load(const char* file_name)
 			item = item->next;
 		}
 
-		p2List_item<MapLayer*>* item_layer = data.layers.start;
+		p2List_item<MapLayer*>* item_layer = dataRef.layers.start;
 		while (item_layer != NULL)
 		{
 			MapLayer* l = item_layer->data;
@@ -366,7 +368,7 @@ bool j1Map::Load(const char* file_name)
 			item_layer = item_layer->next;
 		}
 
-		p2List_item<ImageLayer*>* item_image = data.images.start;
+		p2List_item<ImageLayer*>* item_image = dataRef.images.start;
 		while (item_image != NULL)
 		{
 			ImageLayer* I = item_image->data;
@@ -383,7 +385,7 @@ bool j1Map::Load(const char* file_name)
 }
 
 // Load map general properties
-bool j1Map::LoadMap()
+bool j1Map::LoadMap(MapData& data)
 {
 	bool ret = true;
 	pugi::xml_node map = map_file.child("map");
@@ -564,7 +566,11 @@ bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)//parall
 	}
 
 	imagelayer->speed = imagelayer->properties_img.GetProperties("Speed"); //Gets the parallax speed value for every image layer
-	imagelayer->speedi = atoi(imagelayer->speed.GetString());
+	
+	if (imagelayer->speed != NULL)
+	{
+		imagelayer->speedi = atoi(imagelayer->speed.GetString());
+	}
 
 	return ret;
 }
@@ -581,7 +587,6 @@ bool j1Map::MapCollisions(MapData& data)
 
 		if (layer->properties_lay.GetProperties("Draw").operator==("0"))
 		{
-
 			for (int y = 0; y < data.height; ++y)
 			{
 				for (int x = 0; x < data.width; ++x)
@@ -601,20 +606,14 @@ bool j1Map::MapCollisions(MapData& data)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_FLOOR, this);
 							}
-							if (tile_id == PinkCol)
-							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_PIKES, this);
-							}
 							if (tile_id == BlueCol)
 							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_WATER, this);
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_DEADLY, this);
 							}
-							if (tile_id == GreenCol)
+							if (tile_id == PinkCol)
 							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_BRANCHES, this);
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_PLATFORM, this);
 							}
-
-
 						}
 					}
 				}

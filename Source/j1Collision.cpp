@@ -122,13 +122,14 @@ Collider * j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module 
 void j1Collision::DebugDraw()
 {
 
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
 	if (debug == false)
 		return;
 
 	Uint8 alpha = 80;
+
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] == nullptr)
@@ -142,19 +143,21 @@ void j1Collision::DebugDraw()
 		case COLLIDER_FLOOR: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case COLLIDER_WATER: // blue
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
-			break;
-		case COLLIDER_PIKES: // pink
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
-			break;
-		case COLLIDER_BRANCHES: // green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
-			break;
 		case COLLIDER_PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
-
+		case COLLIDER_DEADLY: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+		case COLLIDER_PLATFORM: // magenta
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+			break;
+		case COLLIDER_ROOF: // pink
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 128, alpha);
+			break;
+		case COLLIDER_CHECKPOINT: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 128, alpha);
+			break;
 		}
 	}
 }

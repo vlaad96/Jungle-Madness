@@ -35,7 +35,7 @@ struct ImageLayer
 	SDL_Texture*		texture;
 
 	p2SString			speed;
-	int					speedi;
+	int					speedi = 0;
 
 	Properties			properties_img;
 };
@@ -122,13 +122,13 @@ public:
 	bool Awake(pugi::xml_node& conf);
 
 	// Called each loop iteration
-	void Draw();
+	void Draw(MapData& data);
 
 	// Called before quitting
 	bool CleanUp();
 
 	// Load new map
-	bool Load(const char* path);
+	bool Load(const char* path, MapData& data);
 
 	// Coordinate translation methods
 	iPoint MapToWorld(int x, int y, MapData& Data) const;
@@ -138,7 +138,7 @@ public:
 
 private:
 
-	bool LoadMap();
+	bool LoadMap(MapData& data);
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);

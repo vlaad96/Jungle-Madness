@@ -112,7 +112,7 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	if (InitialMoment)
+	if (Initial_Moment)
 	{
 		State_Player = FALLING;
 	}

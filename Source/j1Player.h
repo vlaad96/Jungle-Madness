@@ -71,7 +71,7 @@ public:
 	bool Was_Right = true;
 	bool Dead = false;
 
-	bool InitialMoment = true;
+	bool Initial_Moment = true;
 	bool First_Move = false;
 	bool God_Mode = false;
 
