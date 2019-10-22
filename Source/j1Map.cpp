@@ -72,8 +72,8 @@ void j1Map::Draw()
 					iPoint pos = MapToWorld(column, row, data);
 
 					App->render->Blit(data.tilesets[x]->texture,    //texture 
-						pos.x,                     //position.x of tile
-						pos.y,                         //position.y of tile
+						pos.x,										//position.x of tile
+						pos.y,										//position.y of tile
 						&data.tilesets[x]->GetTileRect(data.layers[l]->data[data.layers[l]->Get(column, row)])); //rectangle
 				}
 			}
@@ -513,8 +513,31 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		{
 			Properties::Property* property_aux = new Properties::Property();
 			property_aux->name = prop.attribute("name").as_string();
-			property_aux->value = prop.attribute("value").as_int();
+
+			if (prop.attribute("type").as_string() == "bool")
+			{
+				property_aux->type = TYPE_BOOL;
+				property_aux->value.b = prop.attribute("value").as_bool();
+			}
+
+			else if (prop.attribute("type").as_string() == "int")
+			{
+				property_aux->type = TYPE_INT;
+				property_aux->value.i = prop.attribute("value").as_int();
+			}
+
+			else if (prop.attribute("type").as_string() == "float")
+			{
+				property_aux->type = TYPE_FLOAT;
+				property_aux->value.f = prop.attribute("value").as_float();
+			}
 			
+			else if (prop.attribute("type").as_string() == "float")
+			{
+				property_aux->type = TYPE_FLOAT;
+				property_aux->value.f = prop.attribute("value").as_float();
+			}
+
 			properties.properties_list.add(property_aux);
 		}
 	}

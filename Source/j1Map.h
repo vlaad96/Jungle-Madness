@@ -7,12 +7,30 @@
 #include "j1Module.h"
 
 // ----------------------------------------------------
+enum proptype {
+	TYPE_BOOL,
+	TYPE_INT,
+	TYPE_FLOAT,
+	TYPE_STRING,
+	TYPE_COLOR
+};
+
+union propvalue {
+	bool b;
+	int i;
+	float f;
+	char* str;
+	char color[3];
+};
+
 struct Properties
 {
 	struct Property
 	{
 		p2SString name;
-		float value;
+		proptype type;
+		propvalue value;
+		
 	};
 
 	~Properties()
