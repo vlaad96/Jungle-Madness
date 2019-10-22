@@ -201,7 +201,8 @@ bool j1Map::CleanUp()
 		item3 = item3->next;
 	}
 	data.images.clear();
-
+	
+	//Properties::properties_list FAREM CLEAN PROPERTIES
 	// Clean up the pugui tree
 	map_file.reset();
 
@@ -473,7 +474,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
-bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)
+bool j1Map::LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer)//parallax
 {
 	bool ret = true;
 

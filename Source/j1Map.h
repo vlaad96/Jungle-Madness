@@ -116,6 +116,8 @@ struct MapData
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
 	p2List<ImageLayer*>	images;
+    
+	
 };
 
 // ----------------------------------------------------
@@ -168,6 +170,7 @@ private:
 	bool				map_loaded;
 	//colliders
 	int RedCol;
+	
 };
 
 #endif // __j1MAP_H__
