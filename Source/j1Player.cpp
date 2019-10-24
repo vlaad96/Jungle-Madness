@@ -256,7 +256,7 @@ bool j1Player::Update(float dt)
 	if (Velocity.y < -Max_Speed_y)
 		Velocity.y = -Max_Speed_y;
 
-	Player_Collider->SetPos(Position.x + 40, Position.y + 5);
+	Player_Collider->SetPos(Position.x + 34, Position.y + 14);
 
 	if (Must_Fall)
 	{

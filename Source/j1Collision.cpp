@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Render.h"
+#include "j1Window.h"
 #include "p2Log.h"
 
 
@@ -99,9 +100,9 @@ bool j1Collision::Update(float dt)
 	while (c1 != NULL && c2 != NULL && c1 != c2)
 	{
 		//Checking if colliders are in camera
-		if ((c1->data->rect.x + c1->data->rect.w)*Win_Scale/*App->win->GetScale()*/ >= -App->render->camera.x
+		if ((c1->data->rect.x + c1->data->rect.w)*App->win->GetScale() >= -App->render->camera.x
 			&& c1->data->rect.x <= -App->render->camera.x + App->render->camera.w
-			&& (c2->data->rect.x + c2->data->rect.w)*Win_Scale/*App->win->GetScale()*/ >= -App->render->camera.x
+			&& (c2->data->rect.x + c2->data->rect.w)*App->win->GetScale() >= -App->render->camera.x
 			&& c2->data->rect.x <= -App->render->camera.x + App->render->camera.w)
 		{
 			skipcol = false;
@@ -112,8 +113,8 @@ bool j1Collision::Update(float dt)
 		{
 			skipcol = true;
 
-			if ((c2->data->rect.x + c2->data->rect.w)*Win_Scale/*App->win->GetScale()*/ >= -App->render->camera.x
-				&& c2->data->rect.x*Win_Scale/*App->win->GetScale()*/ <= -App->render->camera.x + App->render->camera.w)
+			if ((c2->data->rect.x + c2->data->rect.w)*App->win->GetScale() >= -App->render->camera.x
+				&& c2->data->rect.x*App->win->GetScale() <= -App->render->camera.x + App->render->camera.w)
 			{
 				skipcol = false;
 			}

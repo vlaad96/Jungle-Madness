@@ -61,8 +61,6 @@ public:
 	p2List<Collider*> colliders;
 	int Player_Touch;
 
-	uint Win_Scale = 2;
-
 private:
 
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
