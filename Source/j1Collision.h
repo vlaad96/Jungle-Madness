@@ -4,7 +4,7 @@
 #define MAX_COLLIDERS 300
 
 #include "j1Module.h"
-#include "p2DynArray.h"
+#include "p2List.h"
 #include "SDL/include/SDL_rect.h"
 
 enum COLLIDER_TYPE
@@ -51,16 +51,20 @@ public:
 	~j1Collision();
 
 	bool PreUpdate();
-	bool Update();
+	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 	void DebugDraw();
 
+	p2List<Collider*> colliders;
+	int Player_Touch;
+
+	uint Win_Scale = 2;
+
 private:
 
-	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
 };

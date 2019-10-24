@@ -85,16 +85,25 @@ bool j1Scene::Start()
 		App->render->camera.x = CamScene1.x;
 		App->render->camera.y = CamScene1.y;
 
-		//TODO
-		/*App->player->pos.x = App->map->data.initpos.x;
-		App->player->pos.y = App->map->data.initpos.y;*/
-
+		//Player position Loaded from map
+		/*App->player->Player_Initial_Position.x = App->map->data.StartPoint.x;
+		App->player->Player_Initial_Position.y = App->map->data.FinishPoint.y;
+		App->player->Player_Initial_Position.x = App->player->Position.x;
+		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+		
 		//load different music samples
 		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(SceneMusic.GetString());
 	}
 	else
 	{
+		//Player position Loaded from map
+		/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
+		App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;
+		App->player->Player_Initial_Position.x = App->player->Position.x;
+		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+
+		//load different music samples
 		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
 		App->audio->PlayMusic(SceneMusic.GetString());
 	}

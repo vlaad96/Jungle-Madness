@@ -101,6 +101,10 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
+
+	iPoint				StartPoint;
+	iPoint				FinishPoint;
+
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
 	p2List<ImageLayer*>	images;

@@ -15,7 +15,6 @@ enum Player_State
 	LEFT,
 	JUMPING,
 	FALLING,
-	DEAD
 };
 
 class j1Player : public j1Module
@@ -50,8 +49,10 @@ public:
 	SDL_Texture * Graphics = nullptr;
 	Collider* Player_Collider = nullptr;
 
+	fPoint Player_Initial_Position;
 	fPoint Position;
 	fPoint Velocity;
+	fPoint Player_Displacement;
 
 	float Gravity;
 	float Jump_Force;
@@ -60,25 +61,25 @@ public:
 	float Colliding_Offset;
 
 	Player_State State_Player;
+
 	bool Player_Colliding;
 	bool Colliding_Roof;
 
-	bool Double_Jump = false;
-	bool Must_Fall = false;
-	bool Moving_Right = false;
-	bool Moving_Left = false;
+	bool Double_Jump;
+	bool Must_Fall;
+
+	bool Moving_Right;
+	bool Moving_Left;
 
 	bool Was_Right = true;
 	bool Dead = false;
 
-	bool Initial_Moment = true;
-	bool First_Move = false;
-	bool God_Mode = false;
+	bool Initial_Moment;
+	bool First_Move;
 
-	fPoint Player_Displacement;
-	fPoint Player_Initial_Position;
+	bool God_Mode;
 
-	Animation* CurrentAnimation;
+	Animation* CurrentAnimation = nullptr;
 	Animation* Idle = nullptr;
 	Animation* Run = nullptr;
 	Animation* Jump = nullptr;

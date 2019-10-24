@@ -100,7 +100,8 @@ private:
 	p2SString			organization;
 
 	mutable bool		want_to_save;
-	bool				want_to_load;
+	mutable bool		want_to_load;
+	
 	p2SString			load_game;
 	mutable p2SString	save_game;
 };

@@ -401,6 +401,7 @@ bool j1Map::LoadMap(MapData& data)
 		data.height = map.attribute("height").as_int();
 		data.tile_width = map.attribute("tilewidth").as_int();
 		data.tile_height = map.attribute("tileheight").as_int();
+
 		p2SString bg_color(map.attribute("backgroundcolor").as_string());
 
 		data.background_color.r = 0;
@@ -444,6 +445,22 @@ bool j1Map::LoadMap(MapData& data)
 		else
 		{
 			data.type = MAPTYPE_UNKNOWN;
+		}
+
+		p2SString obj(map.child("objectgroup").attribute("name").as_string());
+		
+		if (obj == "FinishPoint")
+		{
+			data.FinishPoint.x = map.child("objectgroup").child("object").attribute("x").as_int();
+			data.FinishPoint.y = map.child("objectgroup").child("object").attribute("y").as_int() + map.child("objectgroup").child("object").attribute("height").as_int();
+		}
+
+		p2SString obj2(map.child("objectgroup").next_sibling("objectgroup").attribute("name").as_string());
+		
+		if (obj2 == "StartPoint")
+		{
+			data.StartPoint.x = map.child("objectgroup").next_sibling("objectgroup").child("object").attribute("x").as_int();
+			data.StartPoint.y = map.child("objectgroup").next_sibling("objectgroup").child("object").attribute("y").as_int();
 		}
 	}
 
@@ -606,13 +623,17 @@ bool j1Map::MapCollisions(MapData& data)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_FLOOR, this);
 							}
-							if (tile_id == BlueCol)
+							else if (tile_id == BlueCol)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_DEADLY, this);
 							}
-							if (tile_id == PinkCol)
+							else if (tile_id == PinkCol)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_PLATFORM, this);
+							}
+							else if (tile_id == GreenCol)
+							{
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_ROOF, this);
 							}
 						}
 					}
