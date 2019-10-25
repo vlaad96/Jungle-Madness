@@ -5,16 +5,16 @@
 	<textures />
 	<audio />
 	<player>
-		<Playerx value="1620" />
+		<Playerx value="368" />
 		<Playery value="640" />
 	</player>
 	<collision />
 	<map />
 	<scene>
-		<scene1 value="false" />
-		<scene2 value="true" />
+		<scene1 value="true" />
+		<scene2 value="false" />
 	</scene>
 	<renderer>
-		<camera x="-2744" y="-760" />
+		<camera x="-240" y="-760" />
 	</renderer>
 </game_state>

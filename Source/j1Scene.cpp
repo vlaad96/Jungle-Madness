@@ -92,8 +92,8 @@ bool j1Scene::Start()
 		App->player->Player_Initial_Position.y = App->player->Position.y;*/
 		
 		//load different music samples
-		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());
+		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
 	else
 	{
@@ -104,12 +104,13 @@ bool j1Scene::Start()
 		App->player->Player_Initial_Position.y = App->player->Position.y;*/
 
 		//load different music samples
-		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());
+		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
 
 	
-
+	p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+	App->audio->PlayMusic(SceneMusic.GetString());
 
 	//colliders from tiled
 	App->map->MapCollisions(App->map->data);
