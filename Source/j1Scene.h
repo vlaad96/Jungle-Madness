@@ -42,17 +42,14 @@ public:
 
 	p2List<p2SString*> scenes;
 	p2SString firstscene;
+	p2SString currentscene;
 
 	bool scene1 = true;
 	bool scene2 = false;
 	bool scene1Loaded = false;
 	bool scene2Loaded = false;
 
-	Collider* colliderfloor = nullptr;
 
-private:
-	
-	p2SString map_name;
 	
 };
 
