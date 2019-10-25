@@ -34,6 +34,8 @@ public:
 	bool CleanUp();
 
 	bool SceneChange(const char* scene);
+	bool Save(pugi::xml_node&config) const;
+	bool Load(pugi::xml_node&config);
 
 public:
 

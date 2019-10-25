@@ -3,18 +3,18 @@
 	<input />
 	<window />
 	<textures />
-	<audio>
-		<VolumeChanger_music value="1" />
-		<VolumeChanger_fx value="1" />
-	</audio>
+	<audio />
 	<player>
-		<Playerx value="597" />
-		<Playery value="646" />
+		<Playerx value="1620" />
+		<Playery value="640" />
 	</player>
 	<collision />
 	<map />
-	<scene />
+	<scene>
+		<scene1 value="false" />
+		<scene2 value="true" />
+	</scene>
 	<renderer>
-		<camera x="-620" y="-464" />
+		<camera x="-2744" y="-760" />
 	</renderer>
 </game_state>

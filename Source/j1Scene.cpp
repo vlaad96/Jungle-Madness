@@ -161,22 +161,10 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	//VOLUME------------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN) //UP
-	{
-		App->audio->ChangeVolume_music(10);
-		LOG("volume up");
-	}
 
-	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) //DOWN
-	{
-		App->audio->ChangeVolume_music(-10);
-		LOG("volume down");
-	}
+	//SCENE INTERACTION
 
-	//SCENES(MAPS/LEVELS)------------------------------------------------------
-
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && scene1 == false)//FIRST
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && scene1 == false)//FIRST
 	{
 
 		currentscene = "Map_Beta.tmx";
@@ -187,7 +175,7 @@ bool j1Scene::Update(float dt)
 
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && scene2 == false)//SECOND
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && scene2 == false)//SECOND
 	{
 		currentscene = "Map_alpha.tmx";
 		SceneChange(scenes.start->next->data->GetString());
@@ -196,8 +184,7 @@ bool j1Scene::Update(float dt)
 		
 	}
 
-
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)//BEGINING OF CURRENT STAGE
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)//BEGINING OF CURRENT SCENE
 	{
 		if (scene1)
 		{
@@ -214,15 +201,19 @@ bool j1Scene::Update(float dt)
 			scene2 = true;
 		}
 	}
+//---------------------------------------
 
+//SAVE & LOAD SCENE
 
-
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
 
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		bool result = App->LoadGame("save_game.xml");
+	}
+
+//-----------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 
@@ -338,6 +329,81 @@ bool j1Scene::SceneChange(const char* scene) {
 		App->audio->PlayMusic(stageMusic.GetString());
 
 		App->player->State_Player = FALLING;
+	}
+
+	return ret;
+}
+
+bool j1Scene::Save(pugi::xml_node &config) const
+{
+	bool ret = true;
+
+	config.append_child("scene1").append_attribute("value") = scene1;
+	config.append_child("scene2").append_attribute("value") = scene2;
+
+	return ret;
+}
+
+bool j1Scene::Load(pugi::xml_node &config)
+{
+
+	bool ret = true;
+	int x = App->player->Position.x;
+	int y = App->player->Position.y;
+
+	scene1Loaded = config.child("scene1").attribute("value").as_bool();
+	scene2Loaded= config.child("scene2").attribute("value").as_bool();
+
+	if (scene1)
+	{
+
+
+		if (scene2Loaded)
+		{
+			currentscene = "Map_alpha.tmx";
+			SceneChange(scenes.start->next->data->GetString());
+			scene2 = true;
+			scene1 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+		}
+
+		else
+		{
+			currentscene = "Map_Beta.tmx";
+			SceneChange(scenes.start->data->GetString());
+			scene1 = true;
+			scene2 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+
+		}
+
+	}
+
+	else if (scene2)
+	{
+
+		if (scene1Loaded)
+		{
+			currentscene = "Map_Beta.tmx";
+			SceneChange(scenes.start->data->GetString());
+			scene1 = true;
+			scene2 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+
+		}
+
+		else
+		{
+			currentscene = "Map_alpha.tmx";
+			SceneChange(scenes.start->next->data->GetString());
+			scene1 = false;
+			scene2 = true;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+		}
 	}
 
 	return ret;
