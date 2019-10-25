@@ -108,12 +108,7 @@ bool j1Scene::Start()
 		App->audio->PlayMusic(SceneMusic.GetString());
 	}
 
-	//collider test
 	
-	/*if (colliderfloor == nullptr)
-		colliderfloor = App->col->AddCollider({ 0, 730, 1024, 40 }, COLLIDER_FLOOR, this);
-	else
-		colliderfloor->SetPos(0, 0);*/
 
 
 	//colliders from tiled
@@ -183,17 +178,22 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && scene1 == false)//FIRST
 	{
+
+		currentscene = "Map_Beta.tmx";
 		SceneChange(scenes.start->data->GetString());
 		scene1 = true;
 		scene2 = false;
+		
 
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && scene2 == false)//SECOND
 	{
+		currentscene = "Map_alpha.tmx";
 		SceneChange(scenes.start->next->data->GetString());
 		scene1 = false;
 		scene2 = true;
+		
 	}
 
 
@@ -201,12 +201,14 @@ bool j1Scene::Update(float dt)
 	{
 		if (scene1)
 		{
+			currentscene = "Map_Beta.tmx";
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
 		}
 		else if (scene2)
 		{
+			currentscene = "Map_alpha.tmx";
 			SceneChange(scenes.start->next->data->GetString());
 			scene1 = false;
 			scene2 = true;
@@ -288,8 +290,6 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if (colliderfloor != nullptr)
-		colliderfloor = nullptr;
 
 	//cleaning scenes list
 	p2List_item<p2SString*>* item;
@@ -318,7 +318,7 @@ bool j1Scene::SceneChange(const char* scene) {
 	App->col->CleanUp();
 	App->player->Player_Collider = App->col->AddCollider(App->player->Player_Collider_Rect, COLLIDER_PLAYER, App->player);
 
-	if (firstscene == scene)
+	if (currentscene == "Map_Beta.tmx")
 	{
 		App->map->MapCollisions(App->map->data);
 
