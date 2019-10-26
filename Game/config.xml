@@ -24,7 +24,7 @@
 
   <map>
     <folder>Map/</folder>
-    <collision red="421" pink="424" blue="423" green="422"/>
+    <collision red="841" pink="844" blue="843" green="842"/>
   </map>
 
   <scene>
@@ -53,7 +53,7 @@
     <collider x="0" y="650" width="32" height="58"/>
     <velocity x="4.0" y="0.0"  max_speed_y="10.0" initalVx="4.0" jump_force="7.0"/>
     <gravity value="-1.0"/>
-    <colliding_offset value="1" />
+    <colliding_offset value="0" />
   </player>
 
 

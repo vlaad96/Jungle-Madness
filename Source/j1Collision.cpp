@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Render.h"
+#include "j1Player.h"
 #include "j1Window.h"
 #include "p2Log.h"
 
@@ -150,6 +151,11 @@ bool j1Collision::Update(float dt)
 		skipcol = true;
 		c1 = c1->next;
 		c2 = c1->next;
+	}
+
+	if (App->player->State_Player != JUMPING && App->player->State_Player != FALLING && Player_Touch == 0)
+	{
+		App->player->Must_Fall = true;
 	}
 
 	return ret;

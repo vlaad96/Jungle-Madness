@@ -89,7 +89,10 @@ bool j1Player::Start()
 
 	State_Player = IDLE;
 
-	Must_Fall = false;
+	Moving_Left = false;
+	Moving_Right = false;
+
+	Must_Fall = true;
 	Double_Jump = false;
 	Player_Colliding = false;
 	Initial_Moment = true;
@@ -112,6 +115,7 @@ bool j1Player::Update(float dt)
 		{
 			God_Mode = true;
 		}
+
 		else
 		{
 			God_Mode = false;
@@ -145,116 +149,126 @@ bool j1Player::Update(float dt)
 
 	//Horizontally
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (CurrentAnimation != Death)
 	{
-		if (First_Move == false)
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			First_Move = true;
+			if (First_Move == false)
+			{
+				First_Move = true;
+			}
+
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x - Velocity.x;
+
+			Moving_Left = true;
+			Moving_Right = false;
+			CurrentAnimation = Run;
+			Was_Right = false;
 		}
 
-		Velocity.x = Initial_Velocity_x;
-		Position.x = Position.x - Velocity.x;
-
-		Moving_Left = true;
-		Moving_Right = false;
-		CurrentAnimation = Run;
-		Was_Right = false;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-
-		if (First_Move == false)
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			First_Move = true;
+
+			if (First_Move == false)
+			{
+				First_Move = true;
+			}
+
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x + Velocity.x;
+
+			Moving_Left = false;
+			Moving_Right = true;
+			CurrentAnimation = Run;
+			Was_Right = true;
 		}
 
-		Velocity.x = Initial_Velocity_x;
-		Position.x = Position.x + Velocity.x;
-
-		Moving_Left = false;
-		Moving_Right = true;
-		CurrentAnimation = Run;
-		Was_Right = true;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-
-		Velocity.x = 0.0f;
-		Moving_Left = true;
-		Moving_Right = true;
-	}
-
-	//Vertically
-
-	if (!Must_Fall)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Player_Colliding == true)
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 
-			Velocity.y = Jump_Force;
-			State_Player = JUMPING;
-			Player_Colliding = false;
-
+			Velocity.x = 0.0f;
+			Moving_Left = true;
+			Moving_Right = true;
 		}
-	}
 
-	if (State_Player == JUMPING)
-	{
-		CurrentAnimation = Jump;
+		//Vertically
 
-		Must_Fall = false;
-
-		if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+		if (!Must_Fall)
 		{
-			Velocity.y = Jump_Force / 1.5f;
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Player_Colliding == true)
+			{
+
+				Velocity.y = Jump_Force;
+				State_Player = JUMPING;
+				Player_Colliding = false;
+
+			}
+		}
+
+		if (State_Player == JUMPING)
+		{
+			CurrentAnimation = Jump;
+
+			Must_Fall = false;
+
+			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+			{
+				Velocity.y = Jump_Force / 1.5f;
+				Position.y -= Velocity.y;
+				Double_Jump = false;
+			}
+
+			Velocity.y += Gravity / 2;
 			Position.y -= Velocity.y;
-			Double_Jump = false;
+
 		}
 
-		Velocity.y += Gravity / 2;
-		Position.y -= Velocity.y;
-
-	}
-
-	if (State_Player == FALLING && !Colliding_Roof)
-	{
-		Must_Fall = false;
-
-		CurrentAnimation = Fall;
-		
-		if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+		if (State_Player == FALLING && !Colliding_Roof)
 		{
-			Velocity.y = Jump_Force / 1.5f;
+			Must_Fall = false;
+
+			CurrentAnimation = Fall;
+
+			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+			{
+				Velocity.y = Jump_Force / 1.5f;
+				Position.y -= Velocity.y;
+				Double_Jump = false;
+			}
+
+			Velocity.y += Gravity / 2;
 			Position.y -= Velocity.y;
-			Double_Jump = false;
+
+			//testing camera up & down purposes
+			/*if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			{
+
+				Velocity.y = Initial_Velocity_x;
+				Position.y = Position.y - Velocity.y;
+
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			{
+
+				Velocity.y = Initial_Velocity_x;
+				Position.y = Position.y + Velocity.y;
+
+			}*/
+
 		}
-
-		Velocity.y += Gravity / 2;
-		Position.y -= Velocity.y;
-
-		//testing camera up & down purposes
-		/*if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		{
-
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y - Velocity.y;
-
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y + Velocity.y;
-
-		}*/
-
 	}
 
 	if (Velocity.y < -Max_Speed_y)
+	{
 		Velocity.y = -Max_Speed_y;
+	}
+
+	//Player collider adjustment to sprites
+	Player_Collider->SetPos(Position.x + 34, Position.y + 14);
+
+	App->col->Update(1.0f);
 
 	Player_Collider->SetPos(Position.x + 34, Position.y + 14);
 
@@ -337,22 +351,27 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 			if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
 			{
 				Velocity.x = 0.0f;
-				c1->rect.x = c2->rect.x - c1->rect.w - 0.1f;
+				c1->rect.x = c2->rect.x - c1->rect.w - Colliding_Offset;
 			}
 
 			if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
 			{
 				Velocity.x = 0.0f;
-				c1->rect.x = c2->rect.x + c2->rect.w + 0.1f;
+				c1->rect.x = c2->rect.x + c2->rect.w + Colliding_Offset;
 			}
 
 			if (lateralcollision == true)
 			{
 
 				if (Moving_Left)
+				{
 					c1->rect.x += Colliding_Offset;
+				}
+
 				else
+				{
 					c1->rect.x -= Colliding_Offset;
+				}
 
 				Double_Jump = false;
 				Must_Fall = true;
@@ -362,8 +381,10 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 			{
 				Double_Jump = true;
 				Must_Fall = false;
+		
 			}
 		}
+
 		else
 		{
 			if (State_Player != JUMPING && State_Player != FALLING)
@@ -376,7 +397,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 			{
 				if (Moving_Right == true && Moving_Left == true)
 				{
-					c1->rect.y = aux;
+					c1->rect.y = c2->rect.y - c1->rect.h;
 				}
 				else
 				{
@@ -512,7 +533,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 				c1->rect.y = c2->rect.y - c1->rect.h;
 				Double_Jump = true;
-				Must_Fall = false;
+				Must_Fall = true;
 			}
 		}
 	}
@@ -582,8 +603,8 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 
 
-	Position.x = c1->rect.x;
-	Position.y = c1->rect.y;
+	Position.x = c1->rect.x - 34;
+	Position.y = c1->rect.y - 14;
 
 	Player_Colliding = true;
 }
