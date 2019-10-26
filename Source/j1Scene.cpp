@@ -44,6 +44,8 @@ bool j1Scene::Awake(pugi::xml_node& config)
 
 	CamScene1.x = config.child("firstcamera").attribute("x").as_int();
 	CamScene1.y = config.child("firstcamera").attribute("y").as_int();
+	CamScene2.x = config.child("secondcamera").attribute("x").as_int();
+	CamScene2.y = config.child("secondcamera").attribute("y").as_int();
 
 	return ret;
 }
@@ -97,6 +99,9 @@ bool j1Scene::Start()
 	}
 	else
 	{
+
+		App->render->camera.x = CamScene2.x;
+		App->render->camera.y = CamScene2.y;
 		//Player position Loaded from map
 		/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
 		App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;

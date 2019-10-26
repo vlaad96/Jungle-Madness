@@ -41,6 +41,7 @@ public:
 
 	fPoint camera_displacement;
 	iPoint CamScene1;
+	iPoint CamScene2;
 
 	p2List<p2SString*> scenes;
 	p2SString firstscene;

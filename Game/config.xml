@@ -31,6 +31,7 @@
     <scene_name name="Map_Beta.tmx"/>
     <scene_name name="Map_alpha.tmx"/>
     <firstcamera x ="0" y ="-800"/>
+    <secondcamera x ="1000" y ="-800"/>
   </scene>
 
   <audio>

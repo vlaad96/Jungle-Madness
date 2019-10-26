@@ -146,6 +146,7 @@ bool j1Player::Update(float dt)
 	{
 		State_Player = FALLING;
 	}
+	
 
 	//Horizontally
 
@@ -161,6 +162,7 @@ bool j1Player::Update(float dt)
 			Velocity.x = Initial_Velocity_x;
 			Position.x = Position.x - Velocity.x;
 
+			
 			Moving_Left = true;
 			Moving_Right = false;
 			CurrentAnimation = Run;
@@ -224,7 +226,7 @@ bool j1Player::Update(float dt)
 
 		}
 
-		if (State_Player == FALLING && !Colliding_Roof)
+		if (State_Player == FALLING && !Colliding_Roof && !Player_Colliding)
 		{
 			Must_Fall = false;
 
