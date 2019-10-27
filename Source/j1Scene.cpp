@@ -133,6 +133,24 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	//TODO: Win condition
+
+	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x))
+	{
+		currentscene = scenes.start->next->data->GetString();
+		SceneChange(scenes.start->next->data->GetString());
+		scene1 = false;
+		scene2 = true;
+	}
+
+
+	else if (scene2 && (App->player->Position.x >= App->map->data2.FinishPoint.x))
+	{
+		currentscene = scenes.start->data->GetString();
+		SceneChange(scenes.start->data->GetString());
+		scene1 = true;
+		scene2 = false;
+	}
 
 	//camera X axis
 	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
@@ -180,7 +198,7 @@ bool j1Scene::Update(float dt)
 	{
 	
 
-		currentscene = "Map_Beta.tmx";
+		currentscene = scenes.start->data->GetString();
 		SceneChange(scenes.start->data->GetString());
 		scene1 = true;
 		scene2 = false;
@@ -190,7 +208,7 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && scene2 == false)//SECOND
 	{
-		currentscene = "Map_alpha.tmx";
+		currentscene = scenes.start->next->data->GetString();
 		SceneChange(scenes.start->next->data->GetString());
 		scene1 = false;
 		scene2 = true;
@@ -204,14 +222,14 @@ bool j1Scene::Update(float dt)
 
 		if (scene1)
 		{
-			currentscene = "Map_Beta.tmx";
+			currentscene = scenes.start->data->GetString();
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
 		}
 		else if (scene2)
 		{
-			currentscene = "Map_alpha.tmx";
+			currentscene = scenes.start->next->data->GetString();
 			SceneChange(scenes.start->next->data->GetString());
 			scene1 = false;
 			scene2 = true;
@@ -278,24 +296,6 @@ bool j1Scene::Update(float dt)
 		App->win->SetTitle(title.GetString());
 	}
 
-	//TODO: Win condition
-
-	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x))
-	{
-		currentscene = "Map_alpha.tmx";
-		SceneChange(scenes.start->next->data->GetString());
-		scene1 = false;
-		scene2 = true;
-	}
-
-
-	else if (scene2 && (App->player->Position.x >= App->map->data2.FinishPoint.x))
-	{
-		currentscene = "Map_Beta.tmx";
-		SceneChange(scenes.start->data->GetString());
-		scene1 = true;
-		scene2 = false;
-	}
 	
 	return true;
 }
@@ -344,7 +344,7 @@ bool j1Scene::SceneChange(const char* scene) {
 	App->col->CleanUp();
 	App->player->Player_Collider = App->col->AddCollider(App->player->Player_Collider_Rect, COLLIDER_PLAYER, App->player);
 
-	if (currentscene == "Map_Beta.tmx")
+	if (currentscene == scenes.start->data->GetString())
 	{
 		App->map->MapCollisions(App->map->data);
 
@@ -352,17 +352,24 @@ bool j1Scene::SceneChange(const char* scene) {
 		App->player->Position.x = App->map->data.StartPoint.x;
 		App->player->Position.y = App->map->data.StartPoint.y;
 
+		App->render->camera.x = CamScene1.x;
+		App->render->camera.y = CamScene1.y;
+
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
 
 		App->player->State_Player = FALLING;
 	}
-	else {
+	else if (currentscene == scenes.start->next->data->GetString()) 
+	{
 		App->map->MapCollisions(App->map->data2);
 		
 		//TODO: Initial position
 		App->player->Position.x = App->map->data2.StartPoint.x;
 		App->player->Position.y = App->map->data2.StartPoint.y;
+
+		App->render->camera.x = CamScene2.x;
+		App->render->camera.y = CamScene2.y;
 
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
@@ -399,7 +406,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 		if (scene2Loaded)
 		{
-			currentscene = "Map_alpha.tmx";
+			currentscene = scenes.start->next->data->GetString();
 			SceneChange(scenes.start->next->data->GetString());
 			scene2 = true;
 			scene1 = false;
@@ -409,7 +416,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 		else
 		{
-			currentscene = "Map_Beta.tmx";
+			currentscene = scenes.start->data->GetString();
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
@@ -425,7 +432,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 		if (scene1Loaded)
 		{
-			currentscene = "Map_Beta.tmx";
+			currentscene = scenes.start->data->GetString();
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
@@ -436,7 +443,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 		else
 		{
-			currentscene = "Map_alpha.tmx";
+			currentscene = scenes.start->next->data->GetString();
 			SceneChange(scenes.start->next->data->GetString());
 			scene1 = false;
 			scene2 = true;
