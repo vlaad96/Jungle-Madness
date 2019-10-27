@@ -55,10 +55,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Max_Speed_y = config.child("velocity").attribute("max_speed_y").as_float();
 	Colliding_Offset = config.child("colliding_offset").attribute("value").as_float();
 
-	Player_Initial_Position.x = 128;
-	Player_Initial_Position.y = 640;
-
-	Position = Player_Initial_Position;
+	
+	Position.x = 0;
+	Position.y = 0;
+	Player_Initial_Position = Position;
 	
 	Idle->speed = 0.15f;
 	Run->speed = 0.15f;

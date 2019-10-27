@@ -47,6 +47,8 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	CamScene2.x = config.child("secondcamera").attribute("x").as_int();
 	CamScene2.y = config.child("secondcamera").attribute("y").as_int();
 
+	
+
 	return ret;
 }
 
@@ -79,7 +81,7 @@ bool j1Scene::Start()
 	}
 
 	//Loading positions and music
-	firstscene = sceneListItem->data->GetString();
+	firstscene = scenes.start->data->GetString();
 
 	if (firstscene == "Map_Beta.tmx")
 	{
@@ -88,30 +90,32 @@ bool j1Scene::Start()
 		App->render->camera.y = CamScene1.y;
 
 		//Player position Loaded from map
-		/*App->player->Player_Initial_Position.x = App->map->data.StartPoint.x;
-		App->player->Player_Initial_Position.y = App->map->data.FinishPoint.y;
-		App->player->Player_Initial_Position.x = App->player->Position.x;
-		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+		App->player->Position.x = App->map->data.StartPoint.x;
+		App->player->Position.y = App->map->data.StartPoint.y;
+		
 		
 		//load different music samples
 		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
-	else
-	{
+	//else if(currentscene == "Map_alpha.tmx")
+	//{
 
-		App->render->camera.x = CamScene2.x;
-		App->render->camera.y = CamScene2.y;
-		//Player position Loaded from map
-		/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
-		App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;
-		App->player->Player_Initial_Position.x = App->player->Position.x;
-		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+	//	App->render->camera.x = CamScene2.x;
+	//	App->render->camera.y = CamScene2.y;
 
-		//load different music samples
-		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());*/
-	}
+	//	App->player->Position.x = App->map->data2.StartPoint.x;
+	//	App->player->Position.y = App->map->data2.StartPoint.y;
+	//	//Player position Loaded from map
+	//	/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
+	//	App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;
+	//	App->player->Player_Initial_Position.x = App->player->Position.x;
+	//	App->player->Player_Initial_Position.y = App->player->Position.y;*/
+
+	//	//load different music samples
+	//	/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
+	//	App->audio->PlayMusic(SceneMusic.GetString());*/
+	//}
 
 	
 	p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
@@ -199,6 +203,9 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)//BEGINING OF CURRENT SCENE
 	{
+		if (App->player->God_Mode == true)
+			App->player->God_Mode = false;
+
 		if (scene1)
 		{
 			currentscene = "Map_Beta.tmx";
@@ -327,6 +334,8 @@ bool j1Scene::SceneChange(const char* scene) {
 		App->map->MapCollisions(App->map->data);
 
 		//TODO: Initial position
+		App->player->Position.x = App->map->data.StartPoint.x;
+		App->player->Position.y = App->map->data.StartPoint.y;
 
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
@@ -337,6 +346,8 @@ bool j1Scene::SceneChange(const char* scene) {
 		App->map->MapCollisions(App->map->data2);
 		
 		//TODO: Initial position
+		App->player->Position.x = App->map->data2.StartPoint.x;
+		App->player->Position.y = App->map->data2.StartPoint.y;
 
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());

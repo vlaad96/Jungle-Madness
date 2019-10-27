@@ -19333,9 +19333,9 @@
   </data>
  </layer>
  <objectgroup id="21" name="FinishPoint">
-  <object id="2" x="1664" y="640" width="38.6667" height="95.3333"/>
+  <object id="2" x="1845" y="538" width="38.6667" height="95.3333"/>
  </objectgroup>
- <objectgroup id="20" name="StartPoint">
-  <object id="1" x="128" y="650" width="38.6667" height="85.3333"/>
+ <objectgroup id="20" name="StartPoint" offsetx="389.333" offsety="-298.667">
+  <object id="1" x="100" y="650" width="38.6667" height="85.3333"/>
  </objectgroup>
 </map>
