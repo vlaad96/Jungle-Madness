@@ -627,14 +627,6 @@ bool j1Map::MapCollisions(MapData& data)
 							{
 								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_DEADLY, this);
 							}
-							else if (tile_id == PinkCol)
-							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_PLATFORM, this);
-							}
-							else if (tile_id == GreenCol)
-							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_CHECKPOINT, this);
-							}
 						}
 					}
 				}

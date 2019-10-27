@@ -27,15 +27,6 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
 	God = LoadAnimation(folder.GetString(), "God_Mode");
 
-	////Load with object group 
-	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
-	//{
-	//	config.child("collider").attribute("x").as_int(),
-	//	config.child("collider").attribute("y").as_int(),
-	//	config.child("collider").attribute("width").as_int(),
-	//	config.child("collider").attribute("height").as_int()
-	//}
-
 	//COLLIDER
 	Player_Collider_Rect = { 
 		config.child("collider").attribute("x").as_int(), 
@@ -338,9 +329,6 @@ bool j1Player::Update(float dt)
 	//Player collider adjustment to sprites
 	Player_Collider->SetPos(Position.x + Player_Collider_Margin.x, Position.y + Player_Collider_Margin.y);
 
-	/*App->col->Update(1.0f);
-
-	Player_Collider->SetPos(Position.x + 34, Position.y + 14);*/
 
 	if (Must_Fall)
 	{
@@ -514,14 +502,6 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 			{
 				if (lateralcollision)
 				{
-					/*if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
-					{
-						Velocity.x = 0.0f;
-						if (State_Player != JUMPING)
-							c1->rect.y = aux;
-						c1->rect.x = c2->rect.x + c2->rect.w;
-					}*/
-
 					if (State_Player == JUMPING || State_Player == FALLING && Double_Jump)
 					{
 						c1->rect.x += Colliding_Offset;
@@ -561,106 +541,9 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		}
 	}
 
-	else if (c2->type == COLLIDER_PLATFORM)
-	{
-		Colliding_Roof = false;
+	
 
-		if ((Moving_Left || Moving_Right) && Must_Fall)
-		{
-			if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
-			{
-				Velocity.x = 0.0f;
-				c1->rect.x = c2->rect.x - c1->rect.w - Colliding_Offset;
-			}
-
-			if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
-			{
-				Velocity.x = 0.0f;
-				c1->rect.x = c2->rect.x + c2->rect.w + Colliding_Offset;
-			}
-
-			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-Gravity * 8)))
-			{
-				if (State_Player != JUMPING)
-				{
-					Velocity.y = 0.0f;
-					State_Player = IDLE;
-				}
-
-				c1->rect.y = c2->rect.y - c1->rect.h;
-				Double_Jump = true;
-				Must_Fall = false;
-			}
-		}
-
-		else
-		{
-			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-Gravity * 8)))
-			{
-				if (State_Player != JUMPING)
-				{
-					Velocity.y = 0.0f;
-					State_Player = IDLE;
-				}
-
-				c1->rect.y = c2->rect.y - c1->rect.h;
-				Double_Jump = true;
-				Must_Fall = true;
-			}
-		}
-	}
-
-	else if (c2->type == COLLIDER_ROOF)
-	{
-		Colliding_Roof = true;
-
-		if (c1->rect.y <= c2->rect.y + c2->rect.h && c1->rect.y >= c2->rect.y + c2->rect.h - Initial_Velocity_x + 1)
-		{
-			c1->rect.y = c2->rect.y + c2->rect.h + Colliding_Offset;
-			Velocity.y = 0.0f;
-			State_Player = FALLING;
-			Double_Jump = false;
-			Must_Fall = true;
-		}
-		else
-		{
-
-			if ((State_Player == JUMPING || State_Player == FALLING) && Moving_Right || Moving_Left)
-			{
-				Double_Jump = false;
-				Must_Fall = true;
-
-			}
-			if (Moving_Right)
-			{
-				c1->rect.x = c2->rect.x - c1->rect.w - Colliding_Offset;
-
-			}
-			else
-			{
-				c1->rect.x = c2->rect.x + c2->rect.w + Colliding_Offset;
-			}
-		}
-	}
-
-	else if (c2->type == COLLIDER_CHECKPOINT)
-	{
-		if (Moving_Right)
-		{
-			if (c1->rect.x >= c2->rect.x + c2->rect.w - Colliding_Offset)
-			{
-				App->SaveGame("save_game.xml");
-			}
-
-		}
-		else
-		{
-			if (c1->rect.x + c1->rect.w <= c2->rect.x + Colliding_Offset)
-			{
-				App->SaveGame("save_game.xml");
-			}
-		}
-	}
+	
 
 
 	if (First_Move)

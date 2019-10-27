@@ -97,29 +97,7 @@ bool j1Scene::Start()
 		scene2 = false;
 
 		currentscene = scenes.start->data->GetString();
-		//load different music samples
-		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
-	//else if(currentscene == "Map_alpha.tmx")
-	//{
-
-	//	App->render->camera.x = CamScene2.x;
-	//	App->render->camera.y = CamScene2.y;
-
-	//	App->player->Position.x = App->map->data2.StartPoint.x;
-	//	App->player->Position.y = App->map->data2.StartPoint.y;
-	//	//Player position Loaded from map
-	//	/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
-	//	App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;
-	//	App->player->Player_Initial_Position.x = App->player->Position.x;
-	//	App->player->Player_Initial_Position.y = App->player->Position.y;*/
-
-	//	//load different music samples
-	//	/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
-	//	App->audio->PlayMusic(SceneMusic.GetString());*/
-	//}
-
 	
 	p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 	App->audio->PlayMusic(SceneMusic.GetString());
@@ -331,12 +309,9 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
-bool j1Scene::SceneChange(const char* scene) {
+bool j1Scene::SceneChange(const char* scene) 
+{
 	bool ret = true;
-
-	//THIS WAS CAUSING MEMORY LEAKS LIKE A BOSS
-	//App->map->CleanUp();
-	//App->map->Load(scene);
 
 	App->player->Initial_Moment = true;
 	App->player->First_Move = false;

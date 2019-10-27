@@ -13,45 +13,16 @@ j1Collision::j1Collision()
 
 	matrix[COLLIDER_FLOOR][COLLIDER_FLOOR] = false;
 	matrix[COLLIDER_FLOOR][COLLIDER_DEADLY] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_ROOF] = false;
 	matrix[COLLIDER_FLOOR][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_CHECKPOINT] = false;
+
 
 	matrix[COLLIDER_DEADLY][COLLIDER_FLOOR] = false;
 	matrix[COLLIDER_DEADLY][COLLIDER_DEADLY] = false;
-	matrix[COLLIDER_DEADLY][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_DEADLY][COLLIDER_ROOF] = false;
 	matrix[COLLIDER_DEADLY][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_DEADLY][COLLIDER_CHECKPOINT] = false;
-
-	matrix[COLLIDER_PLATFORM][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_DEADLY] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_ROOF] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_CHECKPOINT] = false;
-
-	matrix[COLLIDER_ROOF][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_ROOF][COLLIDER_DEADLY] = false;
-	matrix[COLLIDER_ROOF][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_ROOF][COLLIDER_ROOF] = false;
-	matrix[COLLIDER_ROOF][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_ROOF][COLLIDER_CHECKPOINT] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_FLOOR] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEADLY] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_PLATFORM] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_ROOF] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_CHECKPOINT] = true;
-
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_DEADLY] = false;
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_ROOF] = false;
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_CHECKPOINT][COLLIDER_CHECKPOINT] = false;
 
 }
 
@@ -224,15 +195,6 @@ void j1Collision::DebugDraw()
 			break;
 		case COLLIDER_DEADLY: // blue
 			App->render->DrawQuad(item->data->rect, 0, 0, 255, alpha);
-			break;
-		case COLLIDER_PLATFORM: // magenta
-			App->render->DrawQuad(item->data->rect, 255, 0, 255, alpha);
-			break;
-		case COLLIDER_ROOF: // pink
-			App->render->DrawQuad(item->data->rect, 255, 0, 128, alpha);
-			break;
-		case COLLIDER_CHECKPOINT: // cyan
-			App->render->DrawQuad(item->data->rect, 0, 255, 255, alpha);
 			break;
 		}
 		item = item->next;

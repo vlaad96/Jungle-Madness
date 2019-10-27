@@ -11,8 +11,6 @@ struct Collider;
 enum Player_State
 {
 	IDLE,
-	RIGHT,
-	LEFT,
 	JUMPING,
 	FALLING,
 };
@@ -40,7 +38,8 @@ public:
 
 	Animation* LoadAnimation(const char* animationPath, const char* animationName);
 	SDL_Rect LoadColliderRect(const char* colliderPath, const char* colliderName);
-	//void Jump();
+
+	//void Attack();
 	//void Slide();
 	//void WallSlide();
 
