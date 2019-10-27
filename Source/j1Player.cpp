@@ -132,10 +132,6 @@ bool j1Player::Update(float dt)
 	if (God_Mode == true)
 	{
 
-
-
-
-
 		Velocity.y = 0;
 
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -158,16 +154,15 @@ bool j1Player::Update(float dt)
 		{
 			Velocity.x = Initial_Velocity_x;
 			Position.x = Position.x - Velocity.x;
+			Was_Right = false;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			Velocity.x = Initial_Velocity_x;
 			Position.x = Position.x + Velocity.x;
+			Was_Right = true;
 		}
-
-
-
 
 		CurrentAnimation = God;
 		Player_Collider->type = COLLIDER_NONE;
@@ -352,56 +347,7 @@ bool j1Player::Update(float dt)
 		Position.x = App->map->data.width*App->map->data.tile_width;
 	}
 
-	//GODMODE
-	if (God_Mode == true)
-	{
-
-
-
-
-
-		Velocity.y = 0;
-
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		{
-
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y - Velocity.y;
-		}
-
-
-
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y + Velocity.y;;
-		}
-
-
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			Velocity.x = Initial_Velocity_x;
-			Position.x = Position.x - Velocity.x;
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			Velocity.x = Initial_Velocity_x;
-			Position.x = Position.x + Velocity.x;
-		}
-
-
-
-
-		CurrentAnimation = God;
-		Player_Collider->type = COLLIDER_NONE;
-
-	}
-	else
-	{
-
-		Player_Collider->type = COLLIDER_PLAYER;
-	}
+	
 
 	return true;
 }
