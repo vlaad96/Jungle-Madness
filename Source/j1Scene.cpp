@@ -32,15 +32,20 @@ bool j1Scene::Awake(pugi::xml_node& config)
 
 		SceneName->create(stage.attribute("name").as_string());
 		scenes.add(SceneName);
+
+		App->map->numberStages++;
 	}
 
 	if (scenes.start->data->GetString() == NULL)
 	{
 		ret = false;
+		LOG("scenelist is null");
 	}
 
 	CamScene1.x = config.child("firstcamera").attribute("x").as_int();
 	CamScene1.y = config.child("firstcamera").attribute("y").as_int();
+	CamScene2.x = config.child("secondcamera").attribute("x").as_int();
+	CamScene2.y = config.child("secondcamera").attribute("y").as_int();
 
 	return ret;
 }
@@ -50,9 +55,31 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 
-	//Loading scenes
-	ret = App->map->Load(scenes.start->data->GetString());
-	firstscene = scenes.start->data->GetString();
+	//Loading both scenes(maps/levels)
+
+	p2List_item<p2SString*>* sceneListItem;
+	sceneListItem = scenes.start;
+	
+	ret = App->map->Load(sceneListItem->data->GetString(), App->map->data);
+	
+	if (ret == false)
+	{
+		LOG("issue loading first scene");
+		ret = false;
+	}
+
+	sceneListItem = scenes.start->next;
+
+	ret = App->map->Load(sceneListItem->data->GetString(), App->map->data2);
+
+	if (ret == false)
+	{
+		LOG("issue loading second scene");
+		ret = false;
+	}
+
+	//Loading positions and music
+	firstscene = sceneListItem->data->GetString();
 
 	if (firstscene == "Map_Beta.tmx")
 	{
@@ -60,28 +87,38 @@ bool j1Scene::Start()
 		App->render->camera.x = CamScene1.x;
 		App->render->camera.y = CamScene1.y;
 
+		//Player position Loaded from map
+		/*App->player->Player_Initial_Position.x = App->map->data.StartPoint.x;
+		App->player->Player_Initial_Position.y = App->map->data.FinishPoint.y;
+		App->player->Player_Initial_Position.x = App->player->Position.x;
+		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+		
 		//load different music samples
-		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());
+		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
 	else
 	{
-		p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
-		App->audio->PlayMusic(SceneMusic.GetString());
+
+		App->render->camera.x = CamScene2.x;
+		App->render->camera.y = CamScene2.y;
+		//Player position Loaded from map
+		/*App->player->Player_Initial_Position.x = App->map->data2.StartPoint.x;
+		App->player->Player_Initial_Position.y = App->map->data2.FinishPoint.y;
+		App->player->Player_Initial_Position.x = App->player->Position.x;
+		App->player->Player_Initial_Position.y = App->player->Position.y;*/
+
+		//load different music samples
+		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
+		App->audio->PlayMusic(SceneMusic.GetString());*/
 	}
 
-	//collider test
 	
-	if (colliderfloor == nullptr)
-		colliderfloor = App->col->AddCollider({ 0, 730, 1024, 40 }, COLLIDER_FLOOR, this);
-	else
-		colliderfloor->SetPos(0, 0);
+	p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
+	App->audio->PlayMusic(SceneMusic.GetString());
 
-
-	if (!ret)
-	{
-		ret = false;
-	}
+	//colliders from tiled
+	App->map->MapCollisions(App->map->data);
 
 	return ret;
 }
@@ -89,7 +126,9 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-	//working on camera X axis
+	//TODO: Win condition
+
+	//camera X axis
 	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
 
 	if (-App->render->camera.x <= App->player->Initial_Velocity_x)
@@ -128,42 +167,59 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
-	{
-		App->audio->ChangeVolume_music(10);
-		LOG("volume up");
-	}
 
-	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-	{
-		App->audio->ChangeVolume_music(-10);
-		LOG("volume down");
-	}
+	//SCENE INTERACTION
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && scene1 == false)
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && scene1 == false)//FIRST
 	{
+
+		currentscene = "Map_Beta.tmx";
 		SceneChange(scenes.start->data->GetString());
 		scene1 = true;
 		scene2 = false;
+		
 
 	}
 
-
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && scene2 == false)
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && scene2 == false)//SECOND
 	{
+		currentscene = "Map_alpha.tmx";
 		SceneChange(scenes.start->next->data->GetString());
 		scene1 = false;
 		scene2 = true;
+		
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)//BEGINING OF CURRENT SCENE
+	{
+		if (scene1)
+		{
+			currentscene = "Map_Beta.tmx";
+			SceneChange(scenes.start->data->GetString());
+			scene1 = true;
+			scene2 = false;
+		}
+		else if (scene2)
+		{
+			currentscene = "Map_alpha.tmx";
+			SceneChange(scenes.start->next->data->GetString());
+			scene1 = false;
+			scene2 = true;
+		}
+	}
+//---------------------------------------
 
+//SAVE & LOAD SCENE
 
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
 
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		bool result = App->LoadGame("save_game.xml");
+	}
+
+//-----------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 
@@ -175,21 +231,43 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10;
+
 	//check utility of this when doing player
 	camera_displacement.x = App->render->camera_initial_pos.x - App->render->camera.x;
 	
-	App->map->Draw();
+	App->map->Draw(App->map->data);
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-		App->map->data.width, App->map->data.height,
-		App->map->data.tile_width, App->map->data.tile_height,
-		App->map->data.tilesets.count(),
-		map_coordinates.x, map_coordinates.y);
 
-	App->win->SetTitle(title.GetString());
+	if (scene1 == true)
+	{
+		App->map->Draw(App->map->data);
+
+		iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data);
+		p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
+			App->map->data.width, App->map->data.height,
+			App->map->data.tile_width, App->map->data.tile_height,
+			App->map->data.tilesets.count(),
+			map_coordinates.x, map_coordinates.y);
+
+		App->win->SetTitle(title.GetString());
+	}
+	else
+	{
+		App->map->Draw(App->map->data2);
+
+
+		iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data2);
+		p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
+			App->map->data.width, App->map->data.height,
+			App->map->data.tile_width, App->map->data.tile_height,
+			App->map->data.tilesets.count(),
+			map_coordinates.x, map_coordinates.y);
+
+		App->win->SetTitle(title.GetString());
+	}
+	
 	return true;
 }
 
@@ -209,8 +287,6 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if (colliderfloor != nullptr)
-		colliderfloor = nullptr;
 
 	//cleaning scenes list
 	p2List_item<p2SString*>* item;
@@ -228,17 +304,112 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::SceneChange(const char* scene) {
 	bool ret = true;
-	App->map->CleanUp();
-	App->map->Load(scene);
 
-	if (firstscene == scene)
+	//THIS WAS CAUSING MEMORY LEAKS LIKE A BOSS
+	//App->map->CleanUp();
+	//App->map->Load(scene);
+
+	App->player->Initial_Moment = true;
+	App->player->First_Move = false;
+
+	App->col->CleanUp();
+	App->player->Player_Collider = App->col->AddCollider(App->player->Player_Collider_Rect, COLLIDER_PLAYER, App->player);
+
+	if (currentscene == "Map_Beta.tmx")
 	{
+		App->map->MapCollisions(App->map->data);
+
+		//TODO: Initial position
+
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
+
+		App->player->State_Player = FALLING;
 	}
 	else {
+		App->map->MapCollisions(App->map->data2);
+		
+		//TODO: Initial position
+
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
+
+		App->player->State_Player = FALLING;
+	}
+
+	return ret;
+}
+
+bool j1Scene::Save(pugi::xml_node &config) const
+{
+	bool ret = true;
+
+	config.append_child("scene1").append_attribute("value") = scene1;
+	config.append_child("scene2").append_attribute("value") = scene2;
+
+	return ret;
+}
+
+bool j1Scene::Load(pugi::xml_node &config)
+{
+
+	bool ret = true;
+	int x = App->player->Position.x;
+	int y = App->player->Position.y;
+
+	scene1Loaded = config.child("scene1").attribute("value").as_bool();
+	scene2Loaded= config.child("scene2").attribute("value").as_bool();
+
+	if (scene1)
+	{
+
+
+		if (scene2Loaded)
+		{
+			currentscene = "Map_alpha.tmx";
+			SceneChange(scenes.start->next->data->GetString());
+			scene2 = true;
+			scene1 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+		}
+
+		else
+		{
+			currentscene = "Map_Beta.tmx";
+			SceneChange(scenes.start->data->GetString());
+			scene1 = true;
+			scene2 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+
+		}
+
+	}
+
+	else if (scene2)
+	{
+
+		if (scene1Loaded)
+		{
+			currentscene = "Map_Beta.tmx";
+			SceneChange(scenes.start->data->GetString());
+			scene1 = true;
+			scene2 = false;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+
+		}
+
+		else
+		{
+			currentscene = "Map_alpha.tmx";
+			SceneChange(scenes.start->next->data->GetString());
+			scene1 = false;
+			scene2 = true;
+			App->player->Position.x = x;
+			App->player->Position.y = y;
+		}
 	}
 
 	return ret;

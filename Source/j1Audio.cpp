@@ -55,8 +55,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	musicfolder = config.child("music").child_value("folder");
 	fxfolder = config.child("fx").child_value("folder");
 
-	VolumeChanger_music = config.child("music").child("VolumeChanger_music").attribute("value").as_float();
-	VolumeChanger_fx = config.child("fx").child("VolumeChanger_fx").attribute("value").as_float();
+	
 
 	pugi::xml_node Music;
 	for (Music = config.child("music").child("song"); Music && ret; Music = Music.next_sibling("song"))
@@ -195,82 +194,13 @@ bool j1Audio::PlayFx(unsigned int id, int repeat, uint volume)
 
 	if (id > 0 && id <= fx.count())
 	{
-		Mix_VolumeChunk(fx[id - 1], volume * VolumeChanger_fx);
+		Mix_VolumeChunk(fx[id - 1], volume);
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
 
 	return ret;
 }
 
-void j1Audio::ChangeVolume_music(float value)
-{
-	// value is an int from 0 to a 100
-	value = value / 100;
-
-	VolumeChanger_music += value;
-
-	//We make sure we use a number from 0 to 1
-	if (VolumeChanger_music < 0)
-		VolumeChanger_music = 0;
-
-	if (VolumeChanger_music > 1)
-		VolumeChanger_music = 1;
-
-	Mix_VolumeMusic(128 * VolumeChanger_music);
-
-}
-
-void j1Audio::ChangeVolume_fx(float value)
-{
-	// value is an int from 0 to a 100, we need it to be from 0 to 1
-	value = value / 100;
-
-	VolumeChanger_fx += value;
-
-	//We make sure we use a number from 0 to 1
-	if (VolumeChanger_fx < 0)
-		VolumeChanger_fx = 0;
-
-	if (VolumeChanger_fx > 1)
-		VolumeChanger_fx = 1;
-
-	p2List_item <Mix_Chunk*> *chunkitem;
-
-	for (chunkitem = fx.start; chunkitem != NULL; chunkitem = chunkitem->next)
-	{
-		Mix_VolumeChunk(chunkitem->data, 128 * VolumeChanger_fx);
-	}
-
-}
-
-bool j1Audio::Save(pugi::xml_node &config) const
-{
-	bool ret = true;
-
-	config.append_child("VolumeChanger_music").append_attribute("value") = VolumeChanger_music;
-	config.append_child("VolumeChanger_fx").append_attribute("value") = VolumeChanger_fx;
 
 
-	return ret;
-}
 
-bool j1Audio::Load(pugi::xml_node &config)
-{
-	bool ret = true;
-
-	VolumeChanger_music = config.child("VolumeChanger_music").attribute("value").as_float();
-
-	VolumeChanger_fx = config.child("VolumeChanger_fx").attribute("value").as_float();
-
-
-	ret = Mix_VolumeMusic(128 * VolumeChanger_music);
-
-	p2List_item <Mix_Chunk*> *chunkitem;
-
-	for (chunkitem = fx.start; chunkitem != NULL && ret != NULL; chunkitem = chunkitem->next)
-	{
-		ret = Mix_VolumeChunk(chunkitem->data, 128 * VolumeChanger_fx);
-	}
-
-	return ret;
-}

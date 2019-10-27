@@ -7,32 +7,20 @@
 #include "j1Module.h"
 
 // ----------------------------------------------------
+
 struct Properties
 {
-	struct Property
-	{
-		p2SString name;
-		float value;
-	};
+	p2List <p2SString*> name;
+
+	p2List <p2SString*> value;
+
+	bool LoadProperties(pugi::xml_node& node);
+
+	p2SString GetProperties(const char * request);
 
 	~Properties()
 	{
-		p2List_item<Property*>* item_p;
-		item_p = properties_list.start;
-
-		while (item_p != NULL)
-		{
-			RELEASE(item_p->data);
-			item_p = item_p->next;
-		}
-
-		properties_list.clear();
 	}
-
-	float GetPropertyf(const char* value, float def_value) const;
-	float GetPropertyi(const char* value, int def_value) const;
-	
-	p2List<Property*> properties_list;
 
 };
 
@@ -44,10 +32,12 @@ struct ImageLayer
 	int					width;
 	int					height;
 	float				image_offset_x, image_offset_y = 0.0f;
-	int					speed = 0;
 	SDL_Texture*		texture;
 
-	Properties			property_img;
+	p2SString			speed;
+	int					speedi = 0;
+
+	Properties			properties_img;
 };
 
 // ----------------------------------------------------
@@ -69,12 +59,10 @@ struct MapLayer
 	// TODO 6 (old): Short function to get the value of x,y
 	inline uint Get(int x, int y) const
 	{
-		int a = width;
-		return x + y * width;
+		return data[(y*width) + x];
 	}
 
-	Properties	properties;
-
+	Properties	properties_lay;
 };
 
 // ----------------------------------------------------
@@ -113,9 +101,15 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
+
+	iPoint				StartPoint;
+	iPoint				FinishPoint;
+
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
 	p2List<ImageLayer*>	images;
+    
+	
 };
 
 // ----------------------------------------------------
@@ -132,39 +126,45 @@ public:
 	bool Awake(pugi::xml_node& conf);
 
 	// Called each loop iteration
-	void Draw();
+	void Draw(MapData& data);
 
 	// Called before quitting
 	bool CleanUp();
 
 	// Load new map
-	bool Load(const char* path);
+	bool Load(const char* path, MapData& data);
 
 	// Coordinate translation methods
-	iPoint MapToWorld(int x, int y) const;
-	iPoint WorldToMap(int x, int y) const;
-
+	iPoint MapToWorld(int x, int y, MapData& Data) const;
+	iPoint WorldToMap(int x, int y, MapData& Data) const;
+	bool MapCollisions(MapData& data);
 
 
 private:
 
-	bool LoadMap();
+	bool LoadMap(MapData& data);
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadImageLayer(pugi::xml_node& node, ImageLayer* imagelayer);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+
+	TileSet* TileId(int id, MapData& mapdata) const;
 
 public:
 
 	MapData				data;
+	MapData				data2;
 	int					PX = 0;
+	int					numberStages = 0;
 
 private:
 
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
+	//colliders
+	int RedCol, BlueCol, PinkCol, GreenCol;
+	
 };
 
 #endif // __j1MAP_H__

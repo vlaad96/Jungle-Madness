@@ -47,7 +47,7 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
-	void LoadGame(const char* file);
+	bool LoadGame(const char* file);
 	void SaveGame(const char* file) const;
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
@@ -100,7 +100,8 @@ private:
 	p2SString			organization;
 
 	mutable bool		want_to_save;
-	bool				want_to_load;
+	mutable bool		want_to_load;
+	
 	p2SString			load_game;
 	mutable p2SString	save_game;
 };

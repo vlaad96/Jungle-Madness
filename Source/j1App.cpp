@@ -281,11 +281,12 @@ const char* j1App::GetOrganization() const
 }
 
 // Load / Save
-void j1App::LoadGame(const char* file)
+bool j1App::LoadGame(const char* file)
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
 	want_to_load = true;
+	return true;
 }
 
 // ---------------------------------------
@@ -367,12 +368,6 @@ bool j1App::SavegameNow() const
 
 	if (ret == true)
 	{
-		//std::stringstream stream;
-		//data.save(stream);
-
-		//// we are done, so write data to disk
-  //	    Save(save_game.GetString(), stream.str().c_str(), stream.str().length());
-
 		data.save_file(save_game.GetString());
 		LOG("... finished saving", save_game.GetString());
 	}

@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="42" nextobjectid="1">
- <tileset firstgid="1" name="Jungle_terrain" tilewidth="32" tileheight="32" tilecount="420" columns="28">
-  <image source="Jungle_terrain.png" width="896" height="480"/>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="3">
+ <tileset firstgid="1" name="Jungle_terrain" tilewidth="32" tileheight="32" tilecount="840" columns="28">
+  <image source="Jungle_terrain.png" width="896" height="960"/>
  </tileset>
- <tileset firstgid="421" name="Colliders" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+ <tileset firstgid="841" name="Colliders" tilewidth="32" tileheight="32" tilecount="4" columns="2">
   <image source="Colliders.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="425" name="objects" tilewidth="32" tileheight="32" tilecount="91" columns="13">
+ <tileset firstgid="845" name="objects" tilewidth="32" tileheight="32" tilecount="91" columns="13">
   <image source="objects.PNG" width="416" height="224"/>
  </tileset>
- <imagelayer id="1" name="Parallax_1">
-  <image source="Parallax/Forest/Layer_0010_1.png" width="928" height="793"/>
+ <imagelayer id="1" name="Parallax_1" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0010_1b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="1"/>
   </properties>
  </imagelayer>
- <imagelayer id="2" name="Parallax_2">
-  <image source="Parallax/Forest/Layer_0009_2.png" width="928" height="793"/>
+ <imagelayer id="2" name="Parallax_2" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0009_2b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="2"/>
   </properties>
  </imagelayer>
- <imagelayer id="3" name="Parallax_3">
-  <image source="Parallax/Forest/Layer_0008_3.png" width="928" height="793"/>
+ <imagelayer id="3" name="Parallax_3" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0008_3b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="3"/>
   </properties>
  </imagelayer>
- <imagelayer id="4" name="Parallax_Lights_1">
-  <image source="Parallax/Forest/Layer_0007_Lights.png" width="928" height="793"/>
+ <imagelayer id="4" name="Parallax_Lights_1" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0007_Lightsb.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="4"/>
   </properties>
  </imagelayer>
- <imagelayer id="5" name="Parallax_4">
-  <image source="Parallax/Forest/Layer_0006_4.png" width="928" height="793"/>
+ <imagelayer id="5" name="Parallax_4" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0006_4b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="5"/>
   </properties>
  </imagelayer>
- <imagelayer id="6" name="Parallax_5">
-  <image source="Parallax/Forest/Layer_0005_5.png" width="928" height="793"/>
+ <imagelayer id="6" name="Parallax_5" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0005_5b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="6"/>
   </properties>
  </imagelayer>
- <imagelayer id="7" name="Parallax_Lights_2">
-  <image source="Parallax/Forest/Layer_0004_Lights.png" width="928" height="793"/>
+ <imagelayer id="7" name="Parallax_Lights_2" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0004_Lightsb.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="7"/>
   </properties>
  </imagelayer>
- <imagelayer id="8" name="Parallax_6">
-  <image source="Parallax/Forest/Layer_0003_6.png" width="928" height="793"/>
+ <imagelayer id="8" name="Parallax_6" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0003_6b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
- <imagelayer id="9" name="Parallax_7">
-  <image source="Parallax/Forest/Layer_0002_7.png" width="928" height="793"/>
+ <imagelayer id="9" name="Parallax_7" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0002_7b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="8"/>
   </properties>
  </imagelayer>
- <imagelayer id="10" name="Parallax_8">
-  <image source="Parallax/Forest/Layer_0001_8.png" width="928" height="793"/>
+ <imagelayer id="10" name="Parallax_8" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0001_8b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="9"/>
   </properties>
  </imagelayer>
- <imagelayer id="11" name="Parallax_9">
-  <image source="Parallax/Forest/Layer_0000_9.png" width="928" height="793"/>
+ <imagelayer id="11" name="Parallax_9" offsetx="-400" offsety="0">
+  <image source="Parallax/Forest/Layer_0000_9b.png" width="2784" height="793"/>
   <properties>
    <property name="Speed" type="int" value="10"/>
   </properties>
  </imagelayer>
- <layer id="34" name="LeafsDark" width="80" height="30">
+ <layer id="12" name="LeafsDark" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -2482,7 +2482,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="35" name="Leafs" width="80" height="30">
+ <layer id="13" name="Leafs" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -4889,7 +4889,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="36" name="Tree/Grass" width="80" height="30">
+ <layer id="14" name="Tree/Grass" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -6515,8 +6515,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="348"/>
-   <tile gid="349"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -6591,6 +6591,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="381"/>
+   <tile gid="382"/>
    <tile/>
    <tile/>
    <tile/>
@@ -6608,10 +6610,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="350"/>
-   <tile gid="351"/>
+   <tile gid="383"/>
+   <tile gid="388"/>
    <tile gid="355"/>
    <tile/>
    <tile/>
@@ -6657,23 +6657,19 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="350"/>
-   <tile gid="351"/>
-   <tile gid="352"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="348"/>
-   <tile gid="349"/>
-   <tile/>
-   <tile gid="350"/>
-   <tile gid="351"/>
-   <tile gid="355"/>
+   <tile gid="383"/>
+   <tile gid="384"/>
+   <tile gid="388"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile gid="383"/>
+   <tile gid="384"/>
+   <tile gid="385"/>
+   <tile gid="386"/>
    <tile/>
    <tile/>
    <tile/>
@@ -6702,9 +6698,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="348"/>
-   <tile gid="349"/>
-   <tile gid="351"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="357"/>
    <tile gid="358"/>
    <tile gid="359"/>
@@ -7296,7 +7296,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="37" name="Ground" width="80" height="30">
+ <layer id="15" name="Ground" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
    <property name="Music" value="Audio/music/Surreptitious.mp3"/>
@@ -9704,7 +9704,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="38" name="Water/Spikes" width="80" height="30">
+ <layer id="16" name="Water/Spikes" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -12111,7 +12111,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="39" name="MidGround" width="80" height="30">
+ <layer id="17" name="MidGround" width="80" height="30">
   <properties>
    <property name="Draw" type="int" value="1"/>
   </properties>
@@ -13838,12 +13838,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="337"/>
-   <tile gid="338"/>
-   <tile gid="339"/>
-   <tile gid="340"/>
-   <tile gid="341"/>
-   <tile gid="342"/>
+   <tile gid="716"/>
+   <tile gid="717"/>
+   <tile gid="718"/>
+   <tile gid="719"/>
+   <tile gid="720"/>
+   <tile gid="721"/>
    <tile/>
    <tile/>
    <tile/>
@@ -13918,12 +13918,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="365"/>
-   <tile gid="366"/>
-   <tile gid="367"/>
-   <tile gid="368"/>
-   <tile gid="369"/>
-   <tile gid="370"/>
+   <tile gid="744"/>
+   <tile gid="745"/>
+   <tile gid="746"/>
+   <tile gid="747"/>
+   <tile gid="748"/>
+   <tile gid="749"/>
    <tile/>
    <tile/>
    <tile/>
@@ -13998,12 +13998,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="393"/>
-   <tile gid="394"/>
-   <tile gid="395"/>
-   <tile gid="396"/>
-   <tile gid="397"/>
-   <tile gid="398"/>
+   <tile gid="772"/>
+   <tile gid="773"/>
+   <tile gid="774"/>
+   <tile gid="775"/>
+   <tile gid="776"/>
+   <tile gid="777"/>
    <tile/>
    <tile/>
    <tile/>
@@ -14518,7 +14518,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="40" name="ForeGround" width="80" height="30">
+ <layer id="18" name="ForeGround" width="80" height="30" visible="0">
   <properties>
    <property name="Draw" type="int" value="0"/>
   </properties>
@@ -16245,12 +16245,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="343"/>
-   <tile gid="344"/>
-   <tile gid="345"/>
-   <tile gid="345"/>
-   <tile gid="346"/>
-   <tile gid="347"/>
+   <tile gid="723"/>
+   <tile gid="724"/>
+   <tile gid="725"/>
+   <tile gid="725"/>
+   <tile gid="726"/>
+   <tile gid="727"/>
    <tile/>
    <tile/>
    <tile/>
@@ -16325,12 +16325,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="371"/>
-   <tile gid="372"/>
-   <tile gid="373"/>
-   <tile gid="373"/>
-   <tile gid="374"/>
-   <tile gid="375"/>
+   <tile gid="751"/>
+   <tile gid="752"/>
+   <tile gid="753"/>
+   <tile gid="753"/>
+   <tile gid="754"/>
+   <tile gid="755"/>
    <tile/>
    <tile/>
    <tile/>
@@ -16405,12 +16405,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="399"/>
-   <tile gid="400"/>
-   <tile gid="401"/>
-   <tile gid="401"/>
-   <tile gid="402"/>
-   <tile gid="403"/>
+   <tile gid="779"/>
+   <tile gid="780"/>
+   <tile gid="781"/>
+   <tile gid="781"/>
+   <tile gid="782"/>
+   <tile gid="783"/>
    <tile/>
    <tile/>
    <tile/>
@@ -16925,7 +16925,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="41" name="Colliders" width="80" height="30">
+ <layer id="19" name="Collisions" width="80" height="30" visible="0">
   <properties>
    <property name="Draw" type="int" value="0"/>
   </properties>
@@ -18192,8 +18192,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18266,14 +18266,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="422"/>
-   <tile gid="422"/>
+   <tile gid="844"/>
+   <tile gid="844"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18352,8 +18352,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18419,9 +18419,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="422"/>
-   <tile gid="422"/>
-   <tile gid="422"/>
+   <tile gid="844"/>
+   <tile gid="844"/>
+   <tile gid="844"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18432,8 +18432,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18512,8 +18512,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18585,15 +18585,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18631,19 +18631,19 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="424"/>
-   <tile gid="424"/>
-   <tile gid="424"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18665,15 +18665,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18706,29 +18706,29 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18745,15 +18745,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18772,71 +18772,72 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18849,10 +18850,10 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18867,26 +18868,26 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="421"/>
-   <tile gid="421"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18907,20 +18908,20 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
+   <tile gid="843"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
-   <tile gid="423"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18931,8 +18932,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18947,26 +18948,26 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18987,16 +18988,16 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19011,8 +19012,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19027,26 +19028,26 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19067,16 +19068,16 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19091,8 +19092,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19107,26 +19108,26 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19147,16 +19148,15 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
+   <tile gid="841"/>
    <tile/>
-   <tile gid="421"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile gid="421"/>
+   <tile gid="841"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19332,4 +19332,10 @@
    <tile/>
   </data>
  </layer>
+ <objectgroup id="21" name="FinishPoint">
+  <object id="2" x="1664" y="640" width="38.6667" height="95.3333"/>
+ </objectgroup>
+ <objectgroup id="20" name="StartPoint">
+  <object id="1" x="128" y="650" width="38.6667" height="85.3333"/>
+ </objectgroup>
 </map>

@@ -34,20 +34,26 @@ public:
 	bool CleanUp();
 
 	bool SceneChange(const char* scene);
+	bool Save(pugi::xml_node&config) const;
+	bool Load(pugi::xml_node&config);
 
 public:
 
 	fPoint camera_displacement;
 	iPoint CamScene1;
-private:
+	iPoint CamScene2;
+
 	p2List<p2SString*> scenes;
 	p2SString firstscene;
+	p2SString currentscene;
+
 	bool scene1 = true;
 	bool scene2 = false;
 	bool scene1Loaded = false;
 	bool scene2Loaded = false;
-	p2SString map_name;
-	Collider* colliderfloor = nullptr;
+
+
+	
 };
 
 #endif // __j1SCENE_H__
