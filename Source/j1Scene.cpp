@@ -128,6 +128,13 @@ bool j1Scene::PreUpdate()
 {
 	//TODO: Win condition
 
+	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x) && (App->player->Position.y <= App->map->data.FinishPoint.y))
+	{
+		SceneChange(scenes.start->next->data->GetString());
+		scene1 = false;
+		scene2 = true;
+	}
+
 	//camera X axis
 	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
 
