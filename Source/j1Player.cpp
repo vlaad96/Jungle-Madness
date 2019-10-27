@@ -114,6 +114,22 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
+	if (Dead)
+	{
+		if (App->scene->scene1 == true)
+		{
+			App->scene->SceneChange(App->scene->scenes.start->data->GetString());
+			App->scene->scene1 = true;
+			App->scene->scene2 = false;
+		}
+		else
+		{
+			App->scene->SceneChange(App->scene->scenes.start->next->data->GetString());
+			App->scene->scene1 = false;
+			App->scene->scene2 = true;
+		}
+		Dead = false;
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -141,14 +157,11 @@ bool j1Player::Update(float dt)
 			Position.y = Position.y - Velocity.y;
 		}
 
-
-
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			Velocity.y = Initial_Velocity_x;
 			Position.y = Position.y + Velocity.y;;
 		}
-
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
@@ -543,7 +556,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 			if (CurrentAnimation->Finished())
 			{
-				App->LoadGame("save_game.xml");
+				Dead = true;
 			}
 		}
 	}
