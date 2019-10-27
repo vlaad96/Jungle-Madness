@@ -52,6 +52,8 @@ public:
 	fPoint Player_Initial_Position;
 	fPoint Position;
 	fPoint Velocity;
+
+	fPoint Player_Collider_Margin = { 34, 14 };
 	fPoint Player_Displacement;
 
 	float Gravity;

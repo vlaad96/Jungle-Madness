@@ -226,11 +226,11 @@ bool j1Player::Update(float dt)
 
 		}
 
-		if (State_Player == FALLING && !Colliding_Roof && !Player_Colliding)
+		if (State_Player == FALLING && !Colliding_Roof)
 		{
 			Must_Fall = false;
 
-			CurrentAnimation = Fall;
+			//CurrentAnimation = Fall;
 
 			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
 			{
@@ -260,6 +260,23 @@ bool j1Player::Update(float dt)
 			}*/
 
 		}
+
+		if (State_Player == FALLING && !Player_Colliding)
+		{
+			Must_Fall = false;
+
+			CurrentAnimation = Fall;
+
+			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+			{
+				Velocity.y = Jump_Force / 1.5f;
+				Position.y -= Velocity.y;
+				Double_Jump = false;
+			}
+
+			Velocity.y += Gravity / 2;
+			Position.y -= Velocity.y;
+		}
 	}
 
 	if (Velocity.y < -Max_Speed_y)
@@ -268,11 +285,11 @@ bool j1Player::Update(float dt)
 	}
 
 	//Player collider adjustment to sprites
-	Player_Collider->SetPos(Position.x + 34, Position.y + 14);
+	Player_Collider->SetPos(Position.x + Player_Collider_Margin.x, Position.y + Player_Collider_Margin.y);
 
-	App->col->Update(1.0f);
+	/*App->col->Update(1.0f);
 
-	Player_Collider->SetPos(Position.x + 34, Position.y + 14);
+	Player_Collider->SetPos(Position.x + 34, Position.y + 14);*/
 
 	if (Must_Fall)
 	{
@@ -338,7 +355,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 	if (c1->rect.y + c1->rect.h == c2->rect.y)
 	{
-		lateralcollision = false;
+		lateralcollision = false; +c1;
 	}
 
 
@@ -444,13 +461,13 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 			{
 				if (lateralcollision)
 				{
-					if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
+					/*if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
 					{
 						Velocity.x = 0.0f;
 						if (State_Player != JUMPING)
 							c1->rect.y = aux;
 						c1->rect.x = c2->rect.x + c2->rect.w;
-					}
+					}*/
 
 					if (State_Player == JUMPING || State_Player == FALLING && Double_Jump)
 					{
@@ -605,8 +622,8 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 
 
-	Position.x = c1->rect.x - 34;
-	Position.y = c1->rect.y - 14;
+	Position.x = c1->rect.x - Player_Collider_Margin.x;
+	Position.y = c1->rect.y - Player_Collider_Margin.y;
 
 	Player_Colliding = true;
 }
