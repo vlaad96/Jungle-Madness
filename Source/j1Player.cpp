@@ -25,6 +25,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Death = LoadAnimation(folder.GetString(), "Knockout");
 	Slide = LoadAnimation(folder.GetString(), "Slide");
 	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
+	God = LoadAnimation(folder.GetString(), "God_Mode");
 
 	////Load with object group 
 	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
@@ -61,6 +62,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	
 	Idle->speed = 0.15f;
 	Run->speed = 0.15f;
+	God->speed = 0.15f;
 
 	CurrentAnimation = Idle;
 
@@ -242,22 +244,6 @@ bool j1Player::Update(float dt)
 			Velocity.y += Gravity / 2;
 			Position.y -= Velocity.y;
 
-			//testing camera up & down purposes
-			/*if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			{
-
-				Velocity.y = Initial_Velocity_x;
-				Position.y = Position.y - Velocity.y;
-
-			}
-
-			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			{
-
-				Velocity.y = Initial_Velocity_x;
-				Position.y = Position.y + Velocity.y;
-
-			}*/
 
 		}
 
@@ -307,6 +293,57 @@ bool j1Player::Update(float dt)
 	else if (Position.x > App->map->data.width*App->map->data.tile_width)
 	{
 		Position.x = App->map->data.width*App->map->data.tile_width;
+	}
+
+	//GODMODE
+	if (God_Mode == true)
+	{
+
+
+
+
+
+		Velocity.y = 0;
+
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y - Velocity.y;
+		}
+
+
+
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y + Velocity.y;;
+		}
+
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x - Velocity.x;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x + Velocity.x;
+		}
+
+
+
+
+		CurrentAnimation = God;
+		Player_Collider->type = COLLIDER_NONE;
+
+	}
+	else
+	{
+
+		Player_Collider->type = COLLIDER_PLAYER;
 	}
 
 	return true;

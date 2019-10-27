@@ -79,7 +79,7 @@ public:
 	bool Initial_Moment;
 	bool First_Move;
 
-	bool God_Mode;
+	bool God_Mode = false;
 
 	Animation* CurrentAnimation = nullptr;
 	Animation* Idle = nullptr;
@@ -89,6 +89,7 @@ public:
 	Animation* Slide = nullptr;
 	Animation* Wall_Slide = nullptr;
 	Animation* Death = nullptr;
+	Animation* God = nullptr;
 
 	SDL_Texture* Spritesheet = nullptr;
 
