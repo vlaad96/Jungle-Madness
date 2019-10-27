@@ -93,7 +93,10 @@ bool j1Scene::Start()
 		App->player->Position.x = App->map->data.StartPoint.x;
 		App->player->Position.y = App->map->data.StartPoint.y;
 		
-		
+		scene1 = true;
+		scene2 = false;
+
+		currentscene = scenes.start->data->GetString();
 		//load different music samples
 		/*p2SString SceneMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(SceneMusic.GetString());*/
@@ -130,14 +133,6 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-	//TODO: Win condition
-
-	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x) && (App->player->Position.y <= App->map->data.FinishPoint.y))
-	{
-		SceneChange(scenes.start->next->data->GetString());
-		scene1 = false;
-		scene2 = true;
-	}
 
 	//camera X axis
 	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
@@ -250,7 +245,7 @@ bool j1Scene::Update(float dt)
 	//check utility of this when doing player
 	camera_displacement.x = App->render->camera_initial_pos.x - App->render->camera.x;
 	
-	App->map->Draw(App->map->data);
+	//App->map->Draw(App->map->data);
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
@@ -281,6 +276,25 @@ bool j1Scene::Update(float dt)
 			map_coordinates.x, map_coordinates.y);
 
 		App->win->SetTitle(title.GetString());
+	}
+
+	//TODO: Win condition
+
+	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x))
+	{
+		currentscene = "Map_alpha.tmx";
+		SceneChange(scenes.start->next->data->GetString());
+		scene1 = false;
+		scene2 = true;
+	}
+
+
+	else if (scene2 && (App->player->Position.x >= App->map->data2.FinishPoint.x))
+	{
+		currentscene = "Map_Beta.tmx";
+		SceneChange(scenes.start->data->GetString());
+		scene1 = true;
+		scene2 = false;
 	}
 	
 	return true;
