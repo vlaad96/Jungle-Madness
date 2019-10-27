@@ -111,157 +111,209 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	//GODMODE
+	if (God_Mode == true)
 	{
-		if (God_Mode == false)
+
+
+
+
+
+		Velocity.y = 0;
+
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			God_Mode = true;
+
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y - Velocity.y;
 		}
 
-		else
+
+
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			God_Mode = false;
+			Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y + Velocity.y;;
 		}
-	}
 
-	if (Initial_Moment)
-	{
-		State_Player = FALLING;
-	}
 
-	if (Was_Right == true)
-	{
-		CurrentAnimation = Idle;
-	}
-
-	else if (Was_Right == false)
-	{
-		CurrentAnimation = Idle;
-	}
-
-	if (Velocity.y < 0 && State_Player == JUMPING)
-	{
-		State_Player = FALLING;
-	}
-
-	if (Player_Colliding == false && State_Player == IDLE)
-	{
-		State_Player = FALLING;
-	}
-	
-
-	//Horizontally
-
-	if (CurrentAnimation != Death)
-	{
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			if (First_Move == false)
-			{
-				First_Move = true;
-			}
-
 			Velocity.x = Initial_Velocity_x;
 			Position.x = Position.x - Velocity.x;
-
-			
-			Moving_Left = true;
-			Moving_Right = false;
-			CurrentAnimation = Run;
-			Was_Right = false;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-
-			if (First_Move == false)
-			{
-				First_Move = true;
-			}
-
 			Velocity.x = Initial_Velocity_x;
 			Position.x = Position.x + Velocity.x;
-
-			Moving_Left = false;
-			Moving_Right = true;
-			CurrentAnimation = Run;
-			Was_Right = true;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+
+
+
+		CurrentAnimation = God;
+		Player_Collider->type = COLLIDER_NONE;
+
+	}
+	//NOT GOD MODE
+	else
+	{
+
+		Player_Collider->type = COLLIDER_PLAYER;
+
+		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		{
-
-			Velocity.x = 0.0f;
-			Moving_Left = true;
-			Moving_Right = true;
-		}
-
-		//Vertically
-
-		if (!Must_Fall)
-		{
-			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Player_Colliding == true)
+			if (God_Mode == false)
 			{
+				God_Mode = true;
+			}
 
-				Velocity.y = Jump_Force;
-				State_Player = JUMPING;
-				Player_Colliding = false;
-
+			else
+			{
+				God_Mode = false;
 			}
 		}
 
-		if (State_Player == JUMPING)
+		if (Initial_Moment)
 		{
-			CurrentAnimation = Jump;
+			State_Player = FALLING;
+		}
 
-			Must_Fall = false;
+		if (Was_Right == true)
+		{
+			CurrentAnimation = Idle;
+		}
 
-			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+		else if (Was_Right == false)
+		{
+			CurrentAnimation = Idle;
+		}
+
+		if (Velocity.y < 0 && State_Player == JUMPING)
+		{
+			State_Player = FALLING;
+		}
+
+		if (Player_Colliding == false && State_Player == IDLE)
+		{
+			State_Player = FALLING;
+		}
+
+
+		//Horizontally
+
+		if (CurrentAnimation != Death)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				Velocity.y = Jump_Force / 1.5f;
+				if (First_Move == false)
+				{
+					First_Move = true;
+				}
+
+				Velocity.x = Initial_Velocity_x;
+				Position.x = Position.x - Velocity.x;
+
+
+				Moving_Left = true;
+				Moving_Right = false;
+				CurrentAnimation = Run;
+				Was_Right = false;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			{
+
+				if (First_Move == false)
+				{
+					First_Move = true;
+				}
+
+				Velocity.x = Initial_Velocity_x;
+				Position.x = Position.x + Velocity.x;
+
+				Moving_Left = false;
+				Moving_Right = true;
+				CurrentAnimation = Run;
+				Was_Right = true;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			{
+
+				Velocity.x = 0.0f;
+				Moving_Left = true;
+				Moving_Right = true;
+			}
+
+			//Vertically
+
+			if (!Must_Fall)
+			{
+				if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Player_Colliding == true)
+				{
+
+					Velocity.y = Jump_Force;
+					State_Player = JUMPING;
+					Player_Colliding = false;
+
+				}
+			}
+
+			if (State_Player == JUMPING)
+			{
+				CurrentAnimation = Jump;
+
+				Must_Fall = false;
+
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				{
+					Velocity.y = Jump_Force / 1.5f;
+					Position.y -= Velocity.y;
+					Double_Jump = false;
+				}
+
+				Velocity.y += Gravity / 2;
 				Position.y -= Velocity.y;
-				Double_Jump = false;
+
 			}
 
-			Velocity.y += Gravity / 2;
-			Position.y -= Velocity.y;
-
-		}
-
-		if (State_Player == FALLING && !Colliding_Roof)
-		{
-			Must_Fall = false;
-
-			//CurrentAnimation = Fall;
-
-			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+			if (State_Player == FALLING && !Colliding_Roof)
 			{
-				Velocity.y = Jump_Force / 1.5f;
+				Must_Fall = false;
+
+				//CurrentAnimation = Fall;
+
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				{
+					Velocity.y = Jump_Force / 1.5f;
+					Position.y -= Velocity.y;
+					Double_Jump = false;
+				}
+
+				Velocity.y += Gravity / 2;
 				Position.y -= Velocity.y;
-				Double_Jump = false;
+
+
 			}
 
-			Velocity.y += Gravity / 2;
-			Position.y -= Velocity.y;
-
-
-		}
-
-		if (State_Player == FALLING && !Player_Colliding)
-		{
-			Must_Fall = false;
-
-			CurrentAnimation = Fall;
-
-			if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+			if (State_Player == FALLING && !Player_Colliding)
 			{
-				Velocity.y = Jump_Force / 1.5f;
-				Position.y -= Velocity.y;
-				Double_Jump = false;
-			}
+				Must_Fall = false;
 
-			Velocity.y += Gravity / 2;
-			Position.y -= Velocity.y;
+				CurrentAnimation = Fall;
+
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				{
+					Velocity.y = Jump_Force / 1.5f;
+					Position.y -= Velocity.y;
+					Double_Jump = false;
+				}
+
+				Velocity.y += Gravity / 2;
+				Position.y -= Velocity.y;
+			}
 		}
 	}
 
