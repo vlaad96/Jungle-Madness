@@ -63,6 +63,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Idle->speed = 0.15f;
 	Run->speed = 0.15f;
 	God->speed = 0.15f;
+	Jump->speed = 0.60f;
+	Fall->speed = 0.15f;
+	Death->speed = 0.15f;
 
 	CurrentAnimation = Idle;
 
