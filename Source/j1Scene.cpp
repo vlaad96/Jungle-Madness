@@ -273,7 +273,7 @@ bool j1Scene::Update(float dt)
 		App->map->Draw(App->map->data);
 
 		iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data);
-		p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
+		p2SString title("Jungle Madness Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
 			App->map->data.width, App->map->data.height,
 			App->map->data.tile_width, App->map->data.tile_height,
 			App->map->data.tilesets.count(),
@@ -287,10 +287,10 @@ bool j1Scene::Update(float dt)
 
 
 		iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data2);
-		p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-			App->map->data.width, App->map->data.height,
-			App->map->data.tile_width, App->map->data.tile_height,
-			App->map->data.tilesets.count(),
+		p2SString title("Jungle Madness Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
+			App->map->data2.width, App->map->data2.height,
+			App->map->data2.tile_width, App->map->data2.tile_height,
+			App->map->data2.tilesets.count(),
 			map_coordinates.x, map_coordinates.y);
 
 		App->win->SetTitle(title.GetString());
