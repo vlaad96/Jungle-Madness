@@ -153,7 +153,7 @@ bool j1Scene::PreUpdate()
 
 	if (App->player->Position.y*App->win->GetScale() > -App->render->camera.y + App->render->camera.h - App->render->camera.h / 6)
 	{
-		App->render->camera.y -= -(App->player->Gravity * 8);
+		App->render->camera.y -= -(App->player->Gravity * 8) + 150;
 	}
 
 
