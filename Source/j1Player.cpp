@@ -111,6 +111,20 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
+
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (God_Mode == false)
+		{
+			God_Mode = true;
+		}
+
+		else
+		{
+			God_Mode = false;
+		}
+	}
+
 	//GODMODE
 	if (God_Mode == true)
 	{
@@ -162,18 +176,6 @@ bool j1Player::Update(float dt)
 
 		Player_Collider->type = COLLIDER_PLAYER;
 
-		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-		{
-			if (God_Mode == false)
-			{
-				God_Mode = true;
-			}
-
-			else
-			{
-				God_Mode = false;
-			}
-		}
 
 		if (Initial_Moment)
 		{

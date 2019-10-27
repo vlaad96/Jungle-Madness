@@ -183,6 +183,7 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && scene1 == false)//FIRST
 	{
+	
 
 		currentscene = "Map_Beta.tmx";
 		SceneChange(scenes.start->data->GetString());
