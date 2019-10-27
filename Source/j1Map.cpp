@@ -633,7 +633,7 @@ bool j1Map::MapCollisions(MapData& data)
 							}
 							else if (tile_id == GreenCol)
 							{
-								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_ROOF, this);
+								App->col->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_CHECKPOINT, this);
 							}
 						}
 					}
