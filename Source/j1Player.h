@@ -4,32 +4,53 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include "Animation.h"
+#include "j1Entity.h"
 
 struct SDL_Texture;
 struct Collider;
 
-enum Player_State
-{
-	IDLE,
-	RIGHT,
-	LEFT,
-	JUMPING,
-	FALLING,
+struct PlayerData {
+
+	float Jump_Force = 0;
+	float Initial_Velocity_x = 0;
+	float Max_Speed_y = 0;
+
+	Animation* CurrentAnimation = nullptr;
+	Animation* Idle = nullptr;
+	Animation* Run = nullptr;
+	Animation* Jump = nullptr;
+	Animation* Fall = nullptr;
+	Animation* Slide = nullptr;
+	Animation* Wall_Slide = nullptr;
+	Animation* Death = nullptr;
+	Animation* God = nullptr;
+
+	p2SString folder = nullptr;
+	p2SString Texture = nullptr;
+
+	SDL_Rect Player_Collider_Rect = { 0,0,0,0 };
+
+	fPoint          Velocity = { 0,0 };
+	float           Gravity = 0;
+	float  Colliding_Offset = 0;
 };
 
-class j1Player : public j1Module
+class j1Player : public j1Entity
 {
 public:
 	j1Player();
 	~j1Player();
 
-	bool Awake(pugi::xml_node &config);
 
 	bool Start();
 
 	bool Update(float dt);
 
-	bool PostUpdate();
+	bool PostUpdate(float dt);
+
+	void FixedUpdate(float dt);
+
+	void LogicUpdate(float dt);
 
 	bool CleanUp();
 
@@ -46,23 +67,16 @@ public:
 
 public:
 
-	SDL_Texture * Graphics = nullptr;
-	Collider* Player_Collider = nullptr;
+
 
 	fPoint Player_Initial_Position;
-	fPoint Position;
-	fPoint Velocity;
 
 	fPoint Player_Collider_Margin = { 34, 14 };
 	fPoint Player_Displacement;
 
-	float Gravity;
-	float Jump_Force;
-	float Initial_Velocity_x;
-	float Max_Speed_y;
-	float Colliding_Offset;
+	
 
-	Player_State State_Player;
+	
 
 	bool Player_Colliding;
 	bool Colliding_Roof;
@@ -81,23 +95,7 @@ public:
 
 	bool God_Mode = false;
 
-	Animation* CurrentAnimation = nullptr;
-	Animation* Idle = nullptr;
-	Animation* Run = nullptr;
-	Animation* Jump = nullptr;
-	Animation* Fall = nullptr;
-	Animation* Slide = nullptr;
-	Animation* Wall_Slide = nullptr;
-	Animation* Death = nullptr;
-	Animation* God = nullptr;
-
-	SDL_Texture* Spritesheet = nullptr;
-
-	SDL_Rect Player_Collider_Rect;
-
-private:
-	p2SString folder;
-	p2SString texture;
+	PlayerData playerinfo;
 };
 
 #endif // __j1Player_H__

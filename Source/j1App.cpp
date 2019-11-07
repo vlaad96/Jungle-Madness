@@ -13,7 +13,6 @@
 #include "j1Map.h"
 #include "j1Collision.h"
 #include "j1App.h"
-#include "j1Player.h"//HASTOBEDELETED
 #include "j1Pathfinding.h"
 #include "j1EntityManager.h"
 
@@ -31,7 +30,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	col = new j1Collision();
-	player = new j1Player(); //HASTOBEDELETED
 	entities = new j1EntityManager();
 	pathfinding = new j1PathFinding();
 
@@ -41,7 +39,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(player);//HASTOBEDELETED
 	AddModule(entities);
 	AddModule(col);
 	AddModule(map);
@@ -237,7 +234,7 @@ bool j1App::PostUpdate()
 			continue;
 		}
 
-		ret = item->data->PostUpdate();
+		ret = item->data->PostUpdate(dt);
 	}
 
 	return ret;

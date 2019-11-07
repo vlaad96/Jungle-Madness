@@ -3,8 +3,9 @@
 
 #include "p2List.h"
 #include "j1Module.h"
-#include "j1Entity.h"
 #include "j1Player.h"
+
+#define DEFAULT_LPS 10//(LOGIC PER SEC)
 
 class j1Entity;
 
@@ -18,27 +19,38 @@ public:
 	virtual ~j1EntityManager();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&); // spritesheets and animations
+	bool Awake(pugi::xml_node&); 
 
 	// Called before the first frame
-	bool Start(); // textures
+	bool Start(); 
 
 	// Called each loop iteration
 	bool PreUpdate();
 	bool Update(float dt);
-
 	bool PostUpdate(float dt);
-
+	void EntityUpdate(float dt);
+	void KillEntity(j1Entity* entity);
+	void OnCollision(Collider* c1, Collider* c2);
+	j1Entity * const EntityCreation(const char* entname, entity_type entitytype);
+	Animation* LoadAnimation(const char* animationPath, const char* animationName);
+	PlayerData& GetPlayerData() { return playerinfo; }//player info
 	// Called before quitting
 	bool CleanUp();
 
-	// --- Save & Load ---
-	bool Load(pugi::xml_node&);
 
+	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
-private:
+public:
 
+	p2List <j1Entity*>	entities;
+	bool				logic;
+	int					logic_updates_per_second;
+	float				update_ms_cycle;
+	float				accumulated_time;
+
+private:
+	PlayerData playerinfo;
 };
 
 #endif // __J1ENTITYMANAGER_H__

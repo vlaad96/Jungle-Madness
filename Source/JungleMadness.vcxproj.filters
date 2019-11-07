@@ -7,6 +7,9 @@
     <Filter Include="Pugi">
       <UniqueIdentifier>{757f3c79-ea16-4acc-a5f3-689b4dae6aa7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{183d96f7-c926-4a4e-a3d6-478dfa2bdb1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -46,12 +49,19 @@
     <ClInclude Include="j1Window.h" />
     <ClInclude Include="j1Scene.h" />
     <ClInclude Include="j1Collision.h" />
-    <ClInclude Include="j1Player.h" />
     <ClInclude Include="MemLeaks.h">
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="j1Pathfinding.h" />
-    <ClInclude Include="j1EntityManager.h" />
+    <ClInclude Include="j1EntityManager.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p2Log.cpp">
@@ -70,8 +80,12 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Collision.cpp" />
-    <ClCompile Include="j1Player.cpp" />
     <ClCompile Include="j1Pathfinding.cpp" />
-    <ClCompile Include="j1EntityManager.cpp" />
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

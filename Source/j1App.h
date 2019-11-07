@@ -14,7 +14,6 @@ class j1Audio;
 class j1Scene;
 class j1Map;
 class j1Collision;
-class j1Player;//HASTOBEDELETED
 class j1PathFinding;
 class j1EntityManager;
 
@@ -88,7 +87,6 @@ public:
 	j1Scene*			scene;
 	j1Map*				map;
 	j1Collision*		col;
-	j1Player*			player;//HASTOBEDELETED
 	j1PathFinding*		pathfinding;
 	j1EntityManager*    entities;
 

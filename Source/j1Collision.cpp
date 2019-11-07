@@ -156,7 +156,7 @@ bool j1Collision::Update(float dt)
 	return ret;
 }
 
-bool j1Collision::PostUpdate()
+bool j1Collision::PostUpdate(float dt)
 {
 	DebugDraw();
 
