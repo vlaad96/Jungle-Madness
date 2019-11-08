@@ -33,7 +33,7 @@ bool j1Player::Start()
 
 
 	Entity_State = IDLE;
-
+	CurrentAnimation = playerinfo.Idle;
 	Moving_Left = false;
 	Moving_Right = false;
 

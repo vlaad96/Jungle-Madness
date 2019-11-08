@@ -78,7 +78,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.Fall->speed = 0.15f;
 	playerinfo.Death->speed = 0.15f;
 
-	playerinfo.CurrentAnimation = playerinfo.Idle;
+	
 
 	playerinfo.Death->loop = false;
 

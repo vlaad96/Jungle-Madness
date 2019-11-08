@@ -15,7 +15,7 @@ struct PlayerData {
 	float Initial_Velocity_x = 0;
 	float Max_Speed_y = 0;
 
-	Animation* CurrentAnimation = nullptr;
+	
 	Animation* Idle = nullptr;
 	Animation* Run = nullptr;
 	Animation* Jump = nullptr;
