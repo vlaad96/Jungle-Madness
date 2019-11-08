@@ -33,6 +33,11 @@ struct PlayerData {
 	fPoint          Velocity = { 0,0 };
 	float           Gravity = 0;
 	float  Colliding_Offset = 0;
+
+	/*fPoint Player_Initial_Position;
+
+	fPoint Player_Collider_Margin = { 34, 14 };
+	fPoint Player_Displacement;*/
 };
 
 class j1Player : public j1Entity

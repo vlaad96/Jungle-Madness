@@ -5,6 +5,7 @@
 
 struct SDL_Texture;
 class Collider;
+class j1Player;
 
 class j1Scene : public j1Module
 {
@@ -52,6 +53,7 @@ public:
 	bool scene1Loaded = false;
 	bool scene2Loaded = false;
 
+	j1Player*           player = nullptr;
 
 	
 };

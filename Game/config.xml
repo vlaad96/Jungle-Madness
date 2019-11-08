@@ -46,16 +46,19 @@
       <VolumeChanger_fx value="1"/>
     </fx>
   </audio>
-  
-  <player>
-    <atributes>speed="2" jump_force="6"  </atributes>
-    <folder>animations/player.tmx</folder>
-    <texture>Sprites/Adventurer_fullx2.png</texture>
-    <collider x="0" y="0" width="32" height="58"/>
-    <velocity x="4.0" y="0.0"  max_speed_y="10.0" initalVx="4.0" jump_force="10.0"/>
-    <gravity value="-1.0"/>
-    <colliding_offset value="0" />
-  </player>
 
+  <entities>
+
+    <player>
+      <atributes>speed="2" jump_force="6"  </atributes>
+      <folder>animations/player.tmx</folder>
+      <texture>Sprites/Adventurer_fullx2.png</texture>
+      <collider x="0" y="0" width="32" height="58"/>
+      <velocity x="4.0" y="0.0"  max_speed_y="10.0" initalVx="4.0" jump_force="10.0"/>
+      <gravity value="-1.0"/>
+      <colliding_offset value="0" />
+    </player>
+
+  </entities>
 
 </config>

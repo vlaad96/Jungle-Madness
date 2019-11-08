@@ -19,7 +19,7 @@ public:
 	virtual ~j1EntityManager();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&); 
+	bool Awake(pugi::xml_node& config); 
 
 	// Called before the first frame
 	bool Start(); 

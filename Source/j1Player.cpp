@@ -49,6 +49,10 @@ bool j1Player::Start()
 		spritesheet = App->tex->Load(playerinfo.Texture.GetString());
 	}
 
+	Position.x = 0;
+	Position.y = 0;
+	Player_Initial_Position = Position;
+
 	return true;
 }
 
@@ -743,4 +747,21 @@ bool j1Player::CleanUp()
 	App->tex->UnLoad(spritesheet);
 
 	return ret;
+}
+
+void j1Player::FixedUpdate(float dt)
+{
+	PostUpdate(dt);
+}
+
+void j1Player::LogicUpdate(float dt)
+{
+	Update(dt);
+
+	// --- Set player pos, prevent surpassing colliders ---
+	Entity_Collider->SetPos(Position.x, Position.y);
+
+	App->col->Update(1.0f);
+
+	Entity_Collider->SetPos(Position.x, Position.y);
 }
