@@ -5,7 +5,7 @@
 #include "j1Module.h"
 #include "j1Player.h"
 
-#define DEFAULT_LPS 10//(LOGIC PER SEC)
+#define DEFAULT_LPS 60//(LOGIC PER SEC)
 
 class j1Entity;
 

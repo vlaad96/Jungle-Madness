@@ -38,15 +38,6 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.Wall_Slide = LoadAnimation(playerinfo.folder.GetString(), "Wall_Slide");
 	playerinfo.God = LoadAnimation(playerinfo.folder.GetString(), "God_Mode");
 
-	////Load with object group 
-	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
-	//{
-	//	config.child("collider").attribute("x").as_int(),
-	//	config.child("collider").attribute("y").as_int(),
-	//	config.child("collider").attribute("width").as_int(),
-	//	config.child("collider").attribute("height").as_int()
-	//}
-
 	//COLLIDER PLAYER
 	
 	int x = playernode.child("collider").attribute("x").as_int();
@@ -66,9 +57,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.Colliding_Offset = playernode.child("colliding_offset").attribute("value").as_float();
 
 
-	/*Position.x = 0;
-	Position.y = 0;
-	Player_Initial_Position = Position;*/
+	
 
 	playerinfo.Idle->speed = 0.15f;
 	playerinfo.Run->speed = 0.15f;
@@ -170,6 +159,7 @@ bool j1EntityManager::CleanUp()
 
 	while (entity != NULL)
 	{
+		entity->data->CleanUp();
 		RELEASE(entity->data);
 		entity = entity->next;
 	}
