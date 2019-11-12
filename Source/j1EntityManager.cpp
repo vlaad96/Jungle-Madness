@@ -25,8 +25,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	LOG("Loading Player Parser");
 	pugi::xml_node playernode = config.child("player");
 
-	playerinfo.folder.create(config.child("folder").child_value());
-	playerinfo.Texture.create(config.child("texture").child_value());
+	playerinfo.folder.create(playernode.child("folder").child_value());
+	playerinfo.Texture.create(playernode.child("texture").child_value());
 
 	//animations
 	playerinfo.Idle = LoadAnimation(playerinfo.folder.GetString(), "Idle_Sword_Sheathed");
@@ -47,24 +47,23 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	//	config.child("collider").attribute("height").as_int()
 	//}
 
-	//COLLIDER
-	playerinfo.Player_Collider_Rect = {
-		config.child("collider").attribute("x").as_int(),
-		config.child("collider").attribute("y").as_int(),
-		config.child("collider").attribute("width").as_int(),
-		config.child("collider").attribute("height").as_int()
-	};
-
+	//COLLIDER PLAYER
+	
+	int x = playernode.child("collider").attribute("x").as_int();
+	int y = playernode.child("collider").attribute("y").as_int();
+	int w = playernode.child("collider").attribute("width").as_int();
+	int h = playernode.child("collider").attribute("height").as_int();
+	playerinfo.Player_Collider_Rect = { x,y,w,h};
 
 	//Player config
 
-	playerinfo.Velocity.x = config.child("velocity").attribute("x").as_float();
-	playerinfo.Velocity.y = config.child("velocity").attribute("y").as_float();
-	playerinfo.Gravity = config.child("gravity").attribute("value").as_float();
-	playerinfo.Jump_Force = config.child("velocity").attribute("jump_force").as_float();
-	playerinfo.Initial_Velocity_x = config.child("velocity").attribute("initalVx").as_float();
-	playerinfo.Max_Speed_y = config.child("velocity").attribute("max_speed_y").as_float();
-	playerinfo.Colliding_Offset = config.child("colliding_offset").attribute("value").as_float();
+	playerinfo.Velocity.x = playernode.child("velocity").attribute("x").as_float();
+	playerinfo.Velocity.y = playernode.child("velocity").attribute("y").as_float();
+	playerinfo.Gravity = playernode.child("gravity").attribute("value").as_float();
+	playerinfo.Jump_Force = playernode.child("velocity").attribute("jump_force").as_float();
+	playerinfo.Initial_Velocity_x = playernode.child("velocity").attribute("initalVx").as_float();
+	playerinfo.Max_Speed_y = playernode.child("velocity").attribute("max_speed_y").as_float();
+	playerinfo.Colliding_Offset = playernode.child("colliding_offset").attribute("value").as_float();
 
 
 	/*Position.x = 0;
@@ -125,6 +124,17 @@ void j1EntityManager::EntityUpdate(float dt)
 
 	while (entity != NULL)
 	{
+
+		/*if (do_logic == true)
+		{*/
+		entity->data->LogicUpdate(dt);
+		//}
+
+		entity = entity->next;
+	}
+
+	/*while (entity != NULL)
+	{
 		entity->data->FixedUpdate(dt);
 
 		if (logic == true)
@@ -133,11 +143,21 @@ void j1EntityManager::EntityUpdate(float dt)
 		}
 
 		entity = entity->next;
-	}
+	}*/
 }
 
 bool j1EntityManager::PostUpdate(float dt)
 {
+	p2List_item <j1Entity*> *entity = entities.start;
+
+	while (entity != NULL)
+	{
+		entity->data->FixedUpdate(dt);
+
+		entity = entity->next;
+	}
+
+
 	return true;
 }
 

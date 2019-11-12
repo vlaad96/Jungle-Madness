@@ -12,7 +12,7 @@
 
 j1Player::j1Player() : j1Entity("player", entity_type::PLAYER)
 {
-	/*name.create("player");*/
+	
 
 }
 
@@ -27,6 +27,7 @@ bool j1Player::Start()
 	LOG("Loading player");
 
 	playerinfo = manager->GetPlayerData();
+
 	Entity_Collider_Rect = playerinfo.Player_Collider_Rect;
 
 	Entity_Collider = App->col->AddCollider(Entity_Collider_Rect, COLLIDER_PLAYER, (j1Module*)manager);
