@@ -31,7 +31,9 @@ bool j1Player::Start()
 	Entity_Collider_Rect = playerinfo.Player_Collider_Rect;
 
 	Entity_Collider = App->col->AddCollider(Entity_Collider_Rect, COLLIDER_PLAYER, (j1Module*)manager);
-
+	Velocity = playerinfo.Velocity;
+	gravity = playerinfo.Gravity;
+	colliding_offset = playerinfo.Colliding_Offset;
 
 	Entity_State = IDLE;
 	CurrentAnimation = playerinfo.Idle;
