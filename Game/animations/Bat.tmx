@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="58" nextobjectid="344">
+ <objectgroup color="#ffffff" id="54" name="Death">
+  <object id="339" x="64" y="96" width="32" height="48"/>
+  <object id="340" x="96" y="96" width="32" height="48"/>
+  <object id="341" x="0" y="144" width="32" height="48"/>
+  <object id="342" x="32" y="144" width="32" height="48"/>
+  <object id="343" x="64" y="144" width="32" height="48"/>
+ </objectgroup>
+ <objectgroup id="56" name="Hit"/>
+ <objectgroup color="#aa5500" id="7" name="Attack"/>
+ <objectgroup color="#005500" id="5" name="Idle">
+  <object id="332" x="32" y="48" width="32" height="48"/>
+  <object id="333" x="64" y="48" width="32" height="48"/>
+  <object id="334" x="96" y="48" width="32" height="48"/>
+  <object id="335" x="0" y="96" width="32" height="48"/>
+  <object id="336" x="32" y="96" width="32" height="48"/>
+ </objectgroup>
+ <objectgroup color="#000000" id="2" name="Move">
+  <object id="1" x="0" y="0" width="32" height="48"/>
+  <object id="325" x="32" y="0" width="32" height="48"/>
+  <object id="326" x="64" y="0" width="32" height="48"/>
+  <object id="327" x="96" y="0" width="32" height="48"/>
+  <object id="331" x="0" y="48" width="32" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" id="55" name="Collider_Bat">
+  <object id="283" x="10" y="10" width="11.9091" height="11.8615"/>
+ </objectgroup>
+ <imagelayer id="3" name="Sprites">
+  <image source="../Sprites/Bat_Sprite_Sheet2x.png" width="128" height="192"/>
+ </imagelayer>
+</map>
