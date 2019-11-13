@@ -283,7 +283,7 @@ bool j1Player::Update(float dt)
 	}
 
 	//Player collider adjustment to sprites
-	Entity_Collider->SetPos(Position.x + Player_Collider_Margin.x, Position.y + Player_Collider_Margin.y);
+	Entity_Collider->SetPos(Position.x/* + Player_Collider_Margin.x*/, Position.y /*+ Player_Collider_Margin.y*/);
 
 	/*App->col->Update(1.0f);
 
@@ -622,8 +622,8 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 
 
-	Position.x = c1->rect.x - Player_Collider_Margin.x;
-	Position.y = c1->rect.y - Player_Collider_Margin.y;
+	Position.x = c1->rect.x /*- Player_Collider_Margin.x*/;
+	Position.y = c1->rect.y /*- Player_Collider_Margin.y*/;
 
 	Player_Colliding = true;
 }
