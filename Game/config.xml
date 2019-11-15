@@ -1,7 +1,7 @@
 <!-- Config file for the game -->
 
 <config>
-  <app>
+  <app framerate_cap="30">
     <title>JungleMadness</title>
     <organization>UPC</organization>
   </app>
@@ -35,19 +35,23 @@
   </scene>
 
   <audio>
+    
     <music>
       <folder>audio/music/</folder>
       <song name="Surreptitious.mp3"/>
       <song name="Su Turno.ogg"/>
       <VolumeChanger_music value="1"/>
     </music>
+    
     <fx>
       <folder>audio/fx/</folder>
       <VolumeChanger_fx value="1"/>
     </fx>
+    
   </audio>
 
   <entities>
+    
     <player>
       <atributes>speed="2" jump_force="6"  </atributes>
       <folder>animations/player.tmx</folder>
@@ -57,6 +61,13 @@
       <gravity value="-1.0"/>
       <colliding_offset value="0" />
     </player>
+
+    <snek>
+    </snek>
+
+    <bat>
+    </bat>
+    
   </entities>
 
 </config>

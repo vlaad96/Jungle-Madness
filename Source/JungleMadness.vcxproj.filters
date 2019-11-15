@@ -62,6 +62,8 @@
     <ClInclude Include="j1Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="j1Timer.h" />
+    <ClInclude Include="j1PerfTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p2Log.cpp">
@@ -87,5 +89,7 @@
     <ClCompile Include="j1Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="j1Timer.cpp" />
+    <ClCompile Include="j1PerfTimer.cpp" />
   </ItemGroup>
 </Project>
