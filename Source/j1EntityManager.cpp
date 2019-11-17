@@ -178,6 +178,7 @@ j1Entity* const j1EntityManager::EntityCreation(const char* entname, entity_type
 		entity = new j1Player();
 		break;
 	}
+
 	entity->Init(this);
 	entity->Start();
 	entities.add(entity);

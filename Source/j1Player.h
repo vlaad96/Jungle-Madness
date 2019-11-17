@@ -43,21 +43,20 @@ struct PlayerData {
 class j1Player : public j1Entity
 {
 public:
+
 	j1Player();
 	~j1Player();
 
-
 	bool Start();
-
 	bool Update(float dt);
-
 	bool PostUpdate(float dt);
+	bool CleanUp();
 
+	// Called each loop iteration
 	void FixedUpdate(float dt);
 
+	// Called each logic iteration
 	void LogicUpdate(float dt);
-
-	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
 

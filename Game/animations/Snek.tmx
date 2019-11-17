@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="1200" height="2000" tilewidth="1" tileheight="1" infinite="0" nextlayerid="57" nextobjectid="325">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="384" height="384" tilewidth="1" tileheight="1" infinite="0" nextlayerid="57" nextobjectid="325">
  <objectgroup color="#ffffff" id="54" name="Death">
   <object id="317" x="128" y="256" width="64" height="64"/>
   <object id="319" x="192" y="256" width="64" height="64"/>

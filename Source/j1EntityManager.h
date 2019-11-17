@@ -3,7 +3,10 @@
 
 #include "p2List.h"
 #include "j1Module.h"
+#include "j1Entity.h"
 #include "j1Player.h"
+#include "j1Bat.h"
+#include "j1Snake.h"
 
 #define DEFAULT_LPS 60//(LOGIC PER SEC)
 
@@ -28,14 +31,21 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool PostUpdate(float dt);
-	void EntityUpdate(float dt);
-	void KillEntity(j1Entity* entity);
-	void OnCollision(Collider* c1, Collider* c2);
-	j1Entity * const EntityCreation(const char* entname, entity_type entitytype);
-	Animation* LoadAnimation(const char* animationPath, const char* animationName);
-	PlayerData& GetPlayerData() { return playerinfo; }//player info
+
 	// Called before quitting
 	bool CleanUp();
+
+	j1Entity * const EntityCreation(const char* entname, entity_type entitytype);
+	void EntityUpdate(float dt);
+	void KillEntity(j1Entity* entity);
+
+	void OnCollision(Collider* c1, Collider* c2);
+	
+	Animation* LoadAnimation(const char* animationPath, const char* animationName);
+	
+	PlayerData& GetPlayerData() { return playerinfo; }//player info
+	BatData& GetBatData() { return batinfo; }
+	SnakeData& GetSlimeData() { return snakeinfo; }
 
 
 	bool Load(pugi::xml_node&);
@@ -49,8 +59,12 @@ public:
 	float				update_ms_cycle;
 	float				accumulated_time;
 
+	int					entityID = 0;
+
 private:
 	PlayerData playerinfo;
+	BatData batinfo;
+	SnakeData snakeinfo;
 };
 
 #endif // __J1ENTITYMANAGER_H__
