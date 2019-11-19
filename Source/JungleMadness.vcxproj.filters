@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{e3d90559-7fd6-4be6-bfcd-8c723e0b8a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pugi">
+      <UniqueIdentifier>{757f3c79-ea16-4acc-a5f3-689b4dae6aa7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Defs.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2DynArray.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2List.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Log.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2SString.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp">
+      <Filter>Pugi</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugixml.hpp">
+      <Filter>Pugi</Filter>
+    </ClInclude>
+    <ClInclude Include="j1App.h" />
+    <ClInclude Include="j1Audio.h" />
+    <ClInclude Include="j1Input.h" />
+    <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1Module.h" />
+    <ClInclude Include="j1Render.h" />
+    <ClInclude Include="j1Textures.h" />
+    <ClInclude Include="j1Window.h" />
+    <ClInclude Include="j1Scene.h" />
+    <ClInclude Include="j1Collision.h" />
+    <ClInclude Include="j1Player.h" />
+    <ClInclude Include="MemLeaks.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="p2Log.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PugiXml\src\pugixml.cpp">
+      <Filter>Pugi</Filter>
+    </ClCompile>
+    <ClCompile Include="j1App.cpp" />
+    <ClCompile Include="j1Audio.cpp" />
+    <ClCompile Include="j1Input.cpp" />
+    <ClCompile Include="j1Main.cpp" />
+    <ClCompile Include="j1Map.cpp" />
+    <ClCompile Include="j1Render.cpp" />
+    <ClCompile Include="j1Textures.cpp" />
+    <ClCompile Include="j1Window.cpp" />
+    <ClCompile Include="j1Scene.cpp" />
+    <ClCompile Include="j1Collision.cpp" />
+    <ClCompile Include="j1Player.cpp" />
+  </ItemGroup>
+</Project>
