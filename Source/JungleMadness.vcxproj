@@ -141,6 +141,7 @@
     <ClInclude Include="p2List.h" />
     <ClInclude Include="p2Log.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="p2PQueue.h" />
     <ClInclude Include="p2SString.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />

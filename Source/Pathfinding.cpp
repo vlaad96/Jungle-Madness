@@ -9,3 +9,43 @@ Pathfinding::Pathfinding() : j1Module()
 {
 	name.create("pathfinding");
 }
+
+Pathfinding::~Pathfinding()
+{
+	
+}
+
+void Pathfinding::CreatePath(iPoint origin, iPoint dest)
+{
+
+}
+
+void Pathfinding::PathBacktracking(iPoint goal)
+{
+
+}
+
+void Pathfinding::SetMap()
+{
+
+}
+
+bool Pathfinding::CleanUp()
+{
+	return true;
+}
+
+p2DynArray<iPoint>* Pathfinding::GetLastPath()
+{
+
+}
+
+bool Pathfinding::IsWalkable(const iPoint& pos)const
+{
+
+}
+
+void Pathfinding::DebugDraw()
+{
+
+}
