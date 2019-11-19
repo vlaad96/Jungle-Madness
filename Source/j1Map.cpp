@@ -92,15 +92,12 @@ void j1Map::Draw(MapData &data)
 		}
 	}
 
-
-
-	// TODO 10(old): Complete the draw function
 }
 
 iPoint j1Map::MapToWorld(int x, int y, MapData& Data) const
 {
 	iPoint ret(0, 0);
-	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
+
 
 	if (data.type == MapTypes::MAPTYPE_ORTHOGONAL)
 	{
@@ -114,8 +111,6 @@ iPoint j1Map::MapToWorld(int x, int y, MapData& Data) const
 		ret.y = (x + y) * (data.tile_height / 2);
 	}
 
-
-	// TODO 1: Add isometric map to world coordinates
 	return ret;
 }
 
@@ -123,7 +118,6 @@ iPoint j1Map::MapToWorld(int x, int y, MapData& Data) const
 iPoint j1Map::WorldToMap(int x, int y, MapData& Data) const
 {
 	iPoint ret(0, 0);
-	// TODO 2: Add orthographic world to map coordinates
 
 	if (data.type == MapTypes::MAPTYPE_ORTHOGONAL)
 	{
@@ -141,7 +135,6 @@ iPoint j1Map::WorldToMap(int x, int y, MapData& Data) const
 	}
 
 
-	// TODO 3: Add the case for isometric maps to WorldToMap
 	return ret;
 }
 
@@ -150,8 +143,6 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	int relative_id = id - firstgid;
 
 	SDL_Rect rect = { 0, 0, 0, 0 };
-
-	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
 
 	rect.w = tile_width;
 	rect.h = tile_height;
@@ -649,7 +640,6 @@ bool j1Map::MapCollisions(MapData& data)
 
 TileSet* j1Map::TileId(int id, MapData& data) const
 {
-	//method so we pick the right Tileset based on a tile id
 
 	TileSet* tileset;
 

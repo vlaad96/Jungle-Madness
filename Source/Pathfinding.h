@@ -32,14 +32,16 @@ public:
 
 private:
 
-	uint width;
-	uint height;
+	uint				width;
+	uint				height;
 
-	uint* walkability = nullptr;
+	uint*				walkability = nullptr;
 
-	p2PQueue<iPoint> frontier;
-	p2List<iPoint> visited;
-	p2List<iPoint> breadcrumbs;
+	p2DynArray<iPoint>	lastPath;
+
+	p2PQueue<iPoint>	frontier;
+	p2List<iPoint>		visited;
+	p2List<iPoint>		breadcrumbs;
 
 
 };
