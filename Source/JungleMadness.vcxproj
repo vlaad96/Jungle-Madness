@@ -122,6 +122,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="j1Entity.h" />
+    <ClInclude Include="j1EntityManager.h" />
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="j1App.h" />
     <ClInclude Include="j1Audio.h" />
@@ -140,6 +142,7 @@
     <ClInclude Include="p2Log.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="p2SString.h" />
+    <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
   </ItemGroup>
@@ -147,6 +150,7 @@
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="j1Collision.cpp" />
+    <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1Map.cpp" />
@@ -156,6 +160,7 @@
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="p2Log.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

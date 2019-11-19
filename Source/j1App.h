@@ -14,7 +14,7 @@ class j1Audio;
 class j1Scene;
 class j1Map;
 class j1Collision;
-class j1Player;//HASTOBEDELETED
+class j1Player;
 class j1PathFinding;
 class j1EntityManager;
 
@@ -80,17 +80,17 @@ private:
 public:
 
 	// Modules
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
-	j1Textures*			tex;
-	j1Audio*			audio;
-	j1Scene*			scene;
-	j1Map*				map;
-	j1Collision*		col;
-	j1Player*			player;//HASTOBEDELETED
-	j1PathFinding*		pathfinding;
-	j1EntityManager*    entities;
+	j1Window*			win = nullptr;
+	j1Input*			input = nullptr;
+	j1Render*			render = nullptr;
+	j1Textures*			tex = nullptr;
+	j1Audio*			audio = nullptr;
+	j1Scene*			scene = nullptr;
+	j1Map*				map = nullptr;
+	j1Collision*		col = nullptr;
+	j1Player*			player = nullptr;
+	j1PathFinding*		pathfinding = nullptr;
+	j1EntityManager*    entities = nullptr;
 
 private:
 
@@ -103,13 +103,13 @@ private:
 	p2SString			title;
 	p2SString			organization;
 
-	mutable bool		want_to_save;
-	mutable bool		want_to_load;
+	mutable bool		want_to_save = false;
+	mutable bool		want_to_load = false;
 	
 	p2SString			load_game;
 	mutable p2SString	save_game;
 };
 
-extern j1App* App; // No student is asking me about that ... odd :-S
+extern j1App* App;
 
 #endif

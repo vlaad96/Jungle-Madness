@@ -14,6 +14,7 @@
 #include "j1Collision.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "Pathfinding.h"
 #include "j1EntityManager.h"
 
 // Constructor
@@ -40,8 +41,10 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(player);
+	AddModule(entities);
 	AddModule(col);
 	AddModule(map);
+	AddModule(pathfinding);
 	AddModule(scene);
 	
 
