@@ -3,7 +3,6 @@
 
 #include "p2List.h"
 #include "j1Module.h"
-#include "j1Entity.h"
 #include "j1Player.h"
 
 class j1Entity;
