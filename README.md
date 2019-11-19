@@ -1,10 +1,10 @@
-#Jungle Madness
+#RunInTheForest
 
-Jungle Madness is a platfomer game made by Pol Bosch and Oscar Larios, students of Video Game Design and Development degree in UPC Barcelona, Spain.
+Run In The Forest is a platfomer forked from the first iteration of the game 
+"Jungle Madness", made by Pol Bosch and Oscar Larios, students of Video Game Design and Development degree in UPC Barcelona, Spain.
 The game has been made using C++, using SDL and pugi libraries. 
 The maps have been made using Tiled portable V0.17. 
 The animations of the player have been modified using Piskel v0.14.0.
-The game includes two levels and basic mechanics.
 
 
 ## Controls
@@ -27,16 +27,10 @@ The game includes two levels and basic mechanics.
 - F9: DebugDraw
 - F10: God Mode
 
-## Authors
- - Pol Bosch
-github: https://github.com/OhCaXulu
-
-- Oscar Larios
-github: https://github.com/Megaoski
 
 ## Project Github
 
-https://github.com/Megaoski/Jungle-Madness
+https://github.com/vlaad96/Jungle-Madness
 
 ### Important
 
