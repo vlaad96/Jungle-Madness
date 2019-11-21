@@ -4,7 +4,9 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+struct SDL_Rect;
 class Collider;
+class Player;
 
 class j1Scene : public j1Module
 {
@@ -51,6 +53,9 @@ public:
 	bool scene2 = false;
 	bool scene1Loaded = false;
 	bool scene2Loaded = false;
+
+	//Entities
+	Player* player = nullptr;
 
 
 	

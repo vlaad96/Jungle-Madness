@@ -1,4 +1,4 @@
-#include "j1Player.h"
+#include "Player.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Textures.h"
@@ -14,18 +14,18 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Parser");
 	bool ret = true;
 
-	folder.create(config.child("folder").child_value());
-	texture.create(config.child("texture").child_value());
+	playerData.folder.create(config.child("folder").child_value());
+	playerData.texture.create(config.child("texture").child_value());
 	
 	//animations
-	Idle = LoadAnimation(folder.GetString(), "Idle_Sword_Sheathed");
-	Run = LoadAnimation(folder.GetString(), "Run_Sword_Sheathed");
-	Jump = LoadAnimation(folder.GetString(), "Jump");
-	Fall = LoadAnimation(folder.GetString(), "Fall");
-	Death = LoadAnimation(folder.GetString(), "Knockout");
-	Slide = LoadAnimation(folder.GetString(), "Slide");
-	Wall_Slide = LoadAnimation(folder.GetString(), "Wall_Slide");
-	God = LoadAnimation(folder.GetString(), "God_Mode");
+	playerData.Idle = LoadAnimation(playerData.folder.GetString(), "Idle_Sword_Sheathed");
+	playerData.Run = LoadAnimation(playerData.folder.GetString(), "Run_Sword_Sheathed");
+	playerData.Jump = LoadAnimation(playerData.folder.GetString(), "Jump");
+	playerData.Fall = LoadAnimation(playerData.folder.GetString(), "Fall");
+	playerData.Death = LoadAnimation(playerData.folder.GetString(), "Knockout");
+	playerData.Slide = LoadAnimation(playerData.folder.GetString(), "Slide");
+	playerData.Wall_Slide = LoadAnimation(playerData.folder.GetString(), "Wall_Slide");
+	playerData.God = LoadAnimation(playerData.folder.GetString(), "God_Mode");
 
 	////Load with object group 
 	//Player_Collider_Rect = LoadColliderRect(folder.GetString(), "Collider_Player_Idle");
@@ -37,7 +37,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	//}
 
 	//COLLIDER
-	Player_Collider_Rect = { 
+	playerData.Player_Collider_Rect = {
 		config.child("collider").attribute("x").as_int(), 
 		config.child("collider").attribute("y").as_int(),
 		config.child("collider").attribute("width").as_int(),
@@ -47,10 +47,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	//Player config
 
-	Velocity.x = config.child("velocity").attribute("x").as_float();
-	Velocity.y = config.child("velocity").attribute("y").as_float();
-	Gravity = config.child("gravity").attribute("value").as_float();
-	Jump_Force = config.child("velocity").attribute("jump_force").as_float();
+	playerData.Velocity.x = config.child("velocity").attribute("x").as_float();
+	playerData.Velocity.y = config.child("velocity").attribute("y").as_float();
+	playerData.Gravity = config.child("gravity").attribute("value").as_float();
+	playerData.Jump_Force = config.child("velocity").attribute("jump_force").as_float();
 	Initial_Velocity_x = config.child("velocity").attribute("initalVx").as_float();
 	Max_Speed_y = config.child("velocity").attribute("max_speed_y").as_float();
 	Colliding_Offset = config.child("colliding_offset").attribute("value").as_float();
@@ -60,16 +60,16 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	Position.y = 0;
 	Player_Initial_Position = Position;
 	
-	Idle->speed = 0.15f;
-	Run->speed = 0.15f;
-	God->speed = 0.15f;
-	Jump->speed = 0.60f;
-	Fall->speed = 0.15f;
-	Death->speed = 0.15f;
+	playerData.Idle->speed = 0.15f;
+	playerData.Run->speed = 0.15f;
+	playerData.God->speed = 0.15f;
+	playerData.Jump->speed = 0.60f;
+	playerData.Fall->speed = 0.15f;
+	playerData.Death->speed = 0.15f;
 
-	CurrentAnimation = Idle;
+	playerData.CurrentAnimation = playerData.Idle;
 
-	Death->loop = false;
+	playerData.Death->loop = false;
 
 	return ret;
 }
@@ -90,7 +90,7 @@ bool j1Player::Start()
 
 	LOG("Loading player");
 
-	Player_Collider = App->col->AddCollider(Player_Collider_Rect, COLLIDER_PLAYER, this);
+	Player_Collider = App->col->AddCollider(playerData.Player_Collider_Rect, COLLIDER_PLAYER, this);
 
 	State_Player = IDLE;
 
@@ -104,9 +104,9 @@ bool j1Player::Start()
 	First_Move = false;
 	God_Mode = false;
 
-	if (Spritesheet == nullptr)
+	if (playerData.Spritesheet == nullptr)
 	{
-		Spritesheet = App->tex->Load(texture.GetString());
+		playerData.Spritesheet = App->tex->Load(playerData.texture.GetString());
 	}
 
 	return true;
@@ -148,36 +148,36 @@ bool j1Player::Update(float dt)
 	if (God_Mode == true)
 	{
 
-		Velocity.y = 0;
+		playerData.Velocity.y = 0;
 
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
 
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y - Velocity.y;
+			playerData.Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y - playerData.Velocity.y;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			Velocity.y = Initial_Velocity_x;
-			Position.y = Position.y + Velocity.y;;
+			playerData.Velocity.y = Initial_Velocity_x;
+			Position.y = Position.y + playerData.Velocity.y;;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			Velocity.x = Initial_Velocity_x;
-			Position.x = Position.x - Velocity.x;
+			playerData.Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x - playerData.Velocity.x;
 			Was_Right = false;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			Velocity.x = Initial_Velocity_x;
-			Position.x = Position.x + Velocity.x;
+			playerData.Velocity.x = Initial_Velocity_x;
+			Position.x = Position.x + playerData.Velocity.x;
 			Was_Right = true;
 		}
 
-		CurrentAnimation = God;
+		playerData.CurrentAnimation = playerData.God;
 		Player_Collider->type = COLLIDER_NONE;
 
 	}
@@ -195,15 +195,15 @@ bool j1Player::Update(float dt)
 
 		if (Was_Right == true)
 		{
-			CurrentAnimation = Idle;
+			playerData.CurrentAnimation = playerData.Idle;
 		}
 
 		else if (Was_Right == false)
 		{
-			CurrentAnimation = Idle;
+			playerData.CurrentAnimation = playerData.Idle;
 		}
 
-		if (Velocity.y < 0 && State_Player == JUMPING)
+		if (playerData.Velocity.y < 0 && State_Player == JUMPING)
 		{
 			State_Player = FALLING;
 		}
@@ -216,7 +216,7 @@ bool j1Player::Update(float dt)
 
 		//Horizontally
 
-		if (CurrentAnimation != Death)
+		if (playerData.CurrentAnimation != playerData.Death)
 		{
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
@@ -225,13 +225,13 @@ bool j1Player::Update(float dt)
 					First_Move = true;
 				}
 
-				Velocity.x = Initial_Velocity_x;
-				Position.x = Position.x - Velocity.x;
+				playerData.Velocity.x = Initial_Velocity_x;
+				Position.x = Position.x - playerData.Velocity.x;
 
 
 				Moving_Left = true;
 				Moving_Right = false;
-				CurrentAnimation = Run;
+				playerData.CurrentAnimation = playerData.Run;
 				Was_Right = false;
 			}
 
@@ -243,19 +243,19 @@ bool j1Player::Update(float dt)
 					First_Move = true;
 				}
 
-				Velocity.x = Initial_Velocity_x;
-				Position.x = Position.x + Velocity.x;
+				playerData.Velocity.x = Initial_Velocity_x;
+				Position.x = Position.x + playerData.Velocity.x;
 
 				Moving_Left = false;
 				Moving_Right = true;
-				CurrentAnimation = Run;
+				playerData.CurrentAnimation = playerData.Run;
 				Was_Right = true;
 			}
 
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
 
-				Velocity.x = 0.0f;
+				playerData.Velocity.x = 0.0f;
 				Moving_Left = true;
 				Moving_Right = true;
 			}
@@ -267,7 +267,7 @@ bool j1Player::Update(float dt)
 				if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Player_Colliding == true)
 				{
 
-					Velocity.y = Jump_Force;
+					playerData.Velocity.y = playerData.Jump_Force;
 					State_Player = JUMPING;
 					Player_Colliding = false;
 
@@ -276,19 +276,19 @@ bool j1Player::Update(float dt)
 
 			if (State_Player == JUMPING)
 			{
-				CurrentAnimation = Jump;
+				playerData.CurrentAnimation = playerData.Jump;
 
 				Must_Fall = false;
 
-				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && playerData.Velocity.y != playerData.Jump_Force)
 				{
-					Velocity.y = Jump_Force / 1.5f;
-					Position.y -= Velocity.y;
+					playerData.Velocity.y = playerData.Jump_Force / 1.5f;
+					Position.y -= playerData.Velocity.y;
 					Double_Jump = false;
 				}
 
-				Velocity.y += Gravity / 2;
-				Position.y -= Velocity.y;
+				playerData.Velocity.y += playerData.Gravity / 2;
+				Position.y -= playerData.Velocity.y;
 
 			}
 
@@ -298,15 +298,15 @@ bool j1Player::Update(float dt)
 
 				//CurrentAnimation = Fall;
 
-				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && playerData.Velocity.y != playerData.Jump_Force)
 				{
-					Velocity.y = Jump_Force / 1.5f;
-					Position.y -= Velocity.y;
+					playerData.Velocity.y = playerData.Jump_Force / 1.5f;
+					Position.y -= playerData.Velocity.y;
 					Double_Jump = false;
 				}
 
-				Velocity.y += Gravity / 2;
-				Position.y -= Velocity.y;
+				playerData.Velocity.y += playerData.Gravity / 2;
+				Position.y -= playerData.Velocity.y;
 
 
 			}
@@ -315,24 +315,24 @@ bool j1Player::Update(float dt)
 			{
 				Must_Fall = false;
 
-				CurrentAnimation = Fall;
+				playerData.CurrentAnimation = playerData.Fall;
 
-				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Velocity.y != Jump_Force)
+				if (Double_Jump == true && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && playerData.Velocity.y != playerData.Jump_Force)
 				{
-					Velocity.y = Jump_Force / 1.5f;
-					Position.y -= Velocity.y;
+					playerData.Velocity.y = playerData.Jump_Force / 1.5f;
+					Position.y -= playerData.Velocity.y;
 					Double_Jump = false;
 				}
 
-				Velocity.y += Gravity / 2;
-				Position.y -= Velocity.y;
+				playerData.Velocity.y += playerData.Gravity / 2;
+				Position.y -= playerData.Velocity.y;
 			}
 		}
 	}
 
-	if (Velocity.y < -Max_Speed_y)
+	if (playerData.Velocity.y < -Max_Speed_y)
 	{
-		Velocity.y = -Max_Speed_y;
+		playerData.Velocity.y = -Max_Speed_y;
 	}
 
 	//Player collider adjustment to sprites
@@ -344,9 +344,9 @@ bool j1Player::Update(float dt)
 
 	if (Must_Fall)
 	{
-		Position.y -= Gravity * 4.0f;
+		Position.y -= playerData.Gravity * 4.0f;
 		
-		CurrentAnimation = Fall;
+		playerData.CurrentAnimation = playerData.Fall;
 	}
 
 	if (Position.x < 0)
@@ -390,12 +390,12 @@ bool j1Player::PostUpdate()
 	//Blitting player
 	if (Was_Right == true)
 	{
-		App->render->Blit(Spritesheet, Position.x, Position.y, &CurrentAnimation->GetCurrentFrame());
+		App->render->Blit(playerData.Spritesheet, Position.x, Position.y, &playerData.CurrentAnimation->GetCurrentFrame());
 	}
 	
 	else
 	{
-		App->render->Blit(Spritesheet, Position.x, Position.y, &CurrentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		App->render->Blit(playerData.Spritesheet, Position.x, Position.y, &playerData.CurrentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
 
 
@@ -422,13 +422,13 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		{
 			if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
 			{
-				Velocity.x = 0.0f;
+				playerData.Velocity.x = 0.0f;
 				c1->rect.x = c2->rect.x - c1->rect.w - Colliding_Offset;
 			}
 
 			if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
 			{
-				Velocity.x = 0.0f;
+				playerData.Velocity.x = 0.0f;
 				c1->rect.x = c2->rect.x + c2->rect.w + Colliding_Offset;
 			}
 
@@ -461,7 +461,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		{
 			if (State_Player != JUMPING && State_Player != FALLING)
 			{
-				Velocity.y = 0.0f;
+				playerData.Velocity.y = 0.0f;
 				State_Player = IDLE;
 			}
 
@@ -486,7 +486,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 					if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
 					{
-						Velocity.x = 0.0f;
+						playerData.Velocity.x = 0.0f;
 						if (State_Player != JUMPING)
 							c1->rect.y = aux;
 						c1->rect.x = c2->rect.x - c1->rect.w;
@@ -552,9 +552,9 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 		if (!God_Mode)
 		{
-			CurrentAnimation = Death;
+			playerData.CurrentAnimation = playerData.Death;
 
-			if (CurrentAnimation->Finished())
+			if (playerData.CurrentAnimation->Finished())
 			{
 				Dead = true;
 			}
@@ -569,21 +569,21 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		{
 			if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
 			{
-				Velocity.x = 0.0f;
+				playerData.Velocity.x = 0.0f;
 				c1->rect.x = c2->rect.x - c1->rect.w - Colliding_Offset;
 			}
 
 			if (c1->rect.x >= c2->rect.x + c2->rect.w - Initial_Velocity_x && c1->rect.x <= c2->rect.x + c2->rect.w)
 			{
-				Velocity.x = 0.0f;
+				playerData.Velocity.x = 0.0f;
 				c1->rect.x = c2->rect.x + c2->rect.w + Colliding_Offset;
 			}
 
-			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-Gravity * 8)))
+			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-playerData.Gravity * 8)))
 			{
 				if (State_Player != JUMPING)
 				{
-					Velocity.y = 0.0f;
+					playerData.Velocity.y = 0.0f;
 					State_Player = IDLE;
 				}
 
@@ -595,11 +595,11 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 		else
 		{
-			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-Gravity * 8)))
+			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-playerData.Gravity * 8)))
 			{
 				if (State_Player != JUMPING)
 				{
-					Velocity.y = 0.0f;
+					playerData.Velocity.y = 0.0f;
 					State_Player = IDLE;
 				}
 
@@ -617,7 +617,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		if (c1->rect.y <= c2->rect.y + c2->rect.h && c1->rect.y >= c2->rect.y + c2->rect.h - Initial_Velocity_x + 1)
 		{
 			c1->rect.y = c2->rect.y + c2->rect.h + Colliding_Offset;
-			Velocity.y = 0.0f;
+			playerData.Velocity.y = 0.0f;
 			State_Player = FALLING;
 			Double_Jump = false;
 			Must_Fall = true;
@@ -670,7 +670,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 	if (Initial_Moment && !First_Move)
 	{
-		CurrentAnimation = Idle;
+		playerData.CurrentAnimation = playerData.Idle;
 	}
 
 
@@ -800,7 +800,7 @@ SDL_Rect j1Player::LoadColliderRect(const char* colliderPath, const char* collid
 bool j1Player::CleanUp()
 {
 	bool ret = true;
-	App->tex->UnLoad(Spritesheet);
+	App->tex->UnLoad(playerData.Spritesheet);
 
 	return ret;
 }

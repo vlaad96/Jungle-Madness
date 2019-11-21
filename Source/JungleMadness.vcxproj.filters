@@ -46,7 +46,6 @@
     <ClInclude Include="j1Window.h" />
     <ClInclude Include="j1Scene.h" />
     <ClInclude Include="j1Collision.h" />
-    <ClInclude Include="j1Player.h" />
     <ClInclude Include="MemLeaks.h">
       <Filter>Tools</Filter>
     </ClInclude>
@@ -54,10 +53,11 @@
     <ClInclude Include="Pathfinding.h">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="j1Entity.h" />
     <ClInclude Include="p2PQueue.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p2Log.cpp">
@@ -76,10 +76,10 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Collision.cpp" />
-    <ClCompile Include="j1Player.cpp" />
     <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="Pathfinding.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
 </Project>

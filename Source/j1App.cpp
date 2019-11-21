@@ -13,7 +13,6 @@
 #include "j1Map.h"
 #include "j1Collision.h"
 #include "j1App.h"
-#include "j1Player.h"
 #include "Pathfinding.h"
 #include "j1EntityManager.h"
 
@@ -31,7 +30,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	col = new j1Collision();
-	player = new j1Player(); //HASTOBEDELETED
+	entities = new j1EntityManager();
+	pathfinding = new Pathfinding();
+	
 
 
 	// Ordered for awake / Start / Update
@@ -40,7 +41,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(player);
 	AddModule(entities);
 	AddModule(col);
 	AddModule(map);

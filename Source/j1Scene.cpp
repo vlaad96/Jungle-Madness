@@ -9,7 +9,9 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Collision.h"
-#include "j1Player.h"
+#include "j1EntityManager.h"
+#include "Player.h"
+
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -57,6 +59,9 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 
+	//Create entities
+	player = (Player*)App->entities->CreateEntity("player", entityTypes::PLAYER);
+
 	//Loading both scenes(maps/levels)
 
 	p2List_item<p2SString*>* sceneListItem;
@@ -90,8 +95,9 @@ bool j1Scene::Start()
 		App->render->camera.y = CamScene1.y;
 
 		//Player position Loaded from map
-		App->player->Position.x = App->map->data.StartPoint.x;
-		App->player->Position.y = App->map->data.StartPoint.y;
+		
+		player->Position.x = App->map->data.StartPoint.x;
+		player->Position.y = App->map->data.StartPoint.y;
 		
 		scene1 = true;
 		scene2 = false;

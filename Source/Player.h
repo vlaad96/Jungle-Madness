@@ -8,6 +8,33 @@
 struct SDL_Texture;
 struct Collider;
 
+struct PlayerInfo
+{
+	//Animations
+	Animation* CurrentAnimation = nullptr;
+	Animation* Idle = nullptr;
+	Animation* Run = nullptr;
+	Animation* Jump = nullptr;
+	Animation* Fall = nullptr;
+	Animation* Slide = nullptr;
+	Animation* Wall_Slide = nullptr;
+	Animation* Death = nullptr;
+	Animation* God = nullptr;
+
+	SDL_Texture* Spritesheet = nullptr;
+
+	p2SString folder;
+	p2SString texture;
+
+	//Movement and collision
+	SDL_Rect Player_Collider_Rect;
+	fPoint Velocity = { 0.0f,0.0f };
+
+	float Gravity;
+	float Jump_Force;
+
+};
+
 enum Player_State
 {
 	IDLE,
@@ -17,7 +44,7 @@ enum Player_State
 	FALLING,
 };
 
-class j1Player : public j1Module
+class j1Player : public Entity
 {
 public:
 	j1Player();
@@ -46,18 +73,19 @@ public:
 
 public:
 
+	//struct
+	PlayerInfo playerData;
+
 	SDL_Texture * Graphics = nullptr;
 	Collider* Player_Collider = nullptr;
 
 	fPoint Player_Initial_Position;
 	fPoint Position;
-	fPoint Velocity;
 
 	fPoint Player_Collider_Margin = { 34, 14 };
 	fPoint Player_Displacement;
 
-	float Gravity;
-	float Jump_Force;
+	
 	float Initial_Velocity_x;
 	float Max_Speed_y;
 	float Colliding_Offset;
@@ -81,23 +109,9 @@ public:
 
 	bool God_Mode = false;
 
-	Animation* CurrentAnimation = nullptr;
-	Animation* Idle = nullptr;
-	Animation* Run = nullptr;
-	Animation* Jump = nullptr;
-	Animation* Fall = nullptr;
-	Animation* Slide = nullptr;
-	Animation* Wall_Slide = nullptr;
-	Animation* Death = nullptr;
-	Animation* God = nullptr;
-
-	SDL_Texture* Spritesheet = nullptr;
-
-	SDL_Rect Player_Collider_Rect;
 
 private:
-	p2SString folder;
-	p2SString texture;
+	
 };
 
 #endif // __j1Player_H__
