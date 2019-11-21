@@ -141,7 +141,7 @@ bool j1Scene::PreUpdate()
 {
 	//TODO: Win condition
 
-	if (scene1 && (App->player->Position.x >= App->map->data.FinishPoint.x))
+	if (scene1 && (player->Position.x >= App->map->data.FinishPoint.x))
 	{
 		currentscene = scenes.start->next->data->GetString();
 		SceneChange(scenes.start->next->data->GetString());
@@ -150,7 +150,7 @@ bool j1Scene::PreUpdate()
 	}
 
 
-	else if (scene2 && (App->player->Position.x >= App->map->data2.FinishPoint.x))
+	else if (scene2 && (player->Position.x >= App->map->data2.FinishPoint.x))
 	{
 		currentscene = scenes.start->data->GetString();
 		SceneChange(scenes.start->data->GetString());
@@ -159,11 +159,11 @@ bool j1Scene::PreUpdate()
 	}
 
 	//camera X axis
-	App->render->camera.x = (-App->player->Position.x*App->win->GetScale() - App->player->Player_Collider->rect.w/2  + App->render->camera.w /2);
+	App->render->camera.x = (-player->Position.x*App->win->GetScale() - player->Player_Collider->rect.w/2  + App->render->camera.w /2);
 
-	if (-App->render->camera.x <= App->player->Initial_Velocity_x)
+	if (-App->render->camera.x <= player->Initial_Velocity_x)
 	{
-		App->render->camera.x = -App->player->Initial_Velocity_x;
+		App->render->camera.x = -player->Initial_Velocity_x;
 	}
 
 	if (-App->render->camera.x + App->render->camera.w >= App->map->data.width*App->map->data.tile_width*App->win->GetScale())
@@ -172,18 +172,18 @@ bool j1Scene::PreUpdate()
 	}
 
 	// camera up y axis
-	if (App->player->Position.y*App->win->GetScale() <= -App->render->camera.y + App->render->camera.h / 6)
+	if (player->Position.y*App->win->GetScale() <= -App->render->camera.y + App->render->camera.h / 6)
 	{
-		if (App->render->camera.y + (-App->player->Gravity * 8) < 0)
-			App->render->camera.y += (-App->player->Gravity * 8);
+		if (App->render->camera.y + (-player->playerData.Gravity * 8) < 0)
+			App->render->camera.y += (-player->playerData.Gravity * 8);
 	}
 
 	//camera down y axis
 	
 
-	if (App->player->Position.y*App->win->GetScale() > -App->render->camera.y + App->render->camera.h - App->render->camera.h / 6)
+	if (player->Position.y*App->win->GetScale() > -App->render->camera.y + App->render->camera.h - App->render->camera.h / 6)
 	{
-		App->render->camera.y -= -(App->player->Gravity * 8) + 150;
+		App->render->camera.y -= -(player->playerData.Gravity * 8) + 150;
 	}
 
 
@@ -223,8 +223,8 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)//BEGINING OF CURRENT SCENE
 	{
-		if (App->player->God_Mode == true)
-			App->player->God_Mode = false;
+		if (player->God_Mode == true)
+			player->God_Mode = false;
 
 		if (scene1)
 		{
@@ -344,19 +344,19 @@ bool j1Scene::SceneChange(const char* scene) {
 	//App->map->CleanUp();
 	//App->map->Load(scene);
 
-	App->player->Initial_Moment = true;
-	App->player->First_Move = false;
+	player->Initial_Moment = true;
+	player->First_Move = false;
 
 	App->col->CleanUp();
-	App->player->Player_Collider = App->col->AddCollider(App->player->Player_Collider_Rect, COLLIDER_PLAYER, App->player);
+	player->Player_Collider = App->col->AddCollider(player->playerData.Player_Collider_Rect, COLLIDER_PLAYER);
 
 	if (currentscene == scenes.start->data->GetString())
 	{
 		App->map->MapCollisions(App->map->data);
 
 		//TODO: Initial position
-		App->player->Position.x = App->map->data.StartPoint.x;
-		App->player->Position.y = App->map->data.StartPoint.y;
+		player->Position.x = App->map->data.StartPoint.x;
+		player->Position.y = App->map->data.StartPoint.y;
 
 		App->render->camera.x = CamScene1.x;
 		App->render->camera.y = CamScene1.y;
@@ -364,15 +364,15 @@ bool j1Scene::SceneChange(const char* scene) {
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
 
-		App->player->State_Player = FALLING;
+		player->entState = FALLING;
 	}
 	else if (currentscene == scenes.start->next->data->GetString()) 
 	{
 		App->map->MapCollisions(App->map->data2);
 		
 		//TODO: Initial position
-		App->player->Position.x = App->map->data2.StartPoint.x;
-		App->player->Position.y = App->map->data2.StartPoint.y;
+		player->Position.x = App->map->data2.StartPoint.x;
+		player->Position.y = App->map->data2.StartPoint.y;
 
 		App->render->camera.x = CamScene2.x;
 		App->render->camera.y = CamScene2.y;
@@ -380,7 +380,7 @@ bool j1Scene::SceneChange(const char* scene) {
 		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->songs.start->next->data->GetString());
 		App->audio->PlayMusic(stageMusic.GetString());
 
-		App->player->State_Player = FALLING;
+		player->entState = FALLING;
 	}
 
 	return ret;
@@ -400,8 +400,8 @@ bool j1Scene::Load(pugi::xml_node &config)
 {
 
 	bool ret = true;
-	int x = App->player->Position.x;
-	int y = App->player->Position.y;
+	int x = player->Position.x;
+	int y = player->Position.y;
 
 	scene1Loaded = config.child("scene1").attribute("value").as_bool();
 	scene2Loaded= config.child("scene2").attribute("value").as_bool();
@@ -416,8 +416,8 @@ bool j1Scene::Load(pugi::xml_node &config)
 			SceneChange(scenes.start->next->data->GetString());
 			scene2 = true;
 			scene1 = false;
-			App->player->Position.x = x;
-			App->player->Position.y = y;
+			player->Position.x = x;
+			player->Position.y = y;
 		}
 
 		else
@@ -426,8 +426,8 @@ bool j1Scene::Load(pugi::xml_node &config)
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
-			App->player->Position.x = x;
-			App->player->Position.y = y;
+			player->Position.x = x;
+			player->Position.y = y;
 
 		}
 
@@ -442,8 +442,8 @@ bool j1Scene::Load(pugi::xml_node &config)
 			SceneChange(scenes.start->data->GetString());
 			scene1 = true;
 			scene2 = false;
-			App->player->Position.x = x;
-			App->player->Position.y = y;
+			player->Position.x = x;
+			player->Position.y = y;
 
 		}
 
@@ -453,8 +453,8 @@ bool j1Scene::Load(pugi::xml_node &config)
 			SceneChange(scenes.start->next->data->GetString());
 			scene1 = false;
 			scene2 = true;
-			App->player->Position.x = x;
-			App->player->Position.y = y;
+			player->Position.x = x;
+			player->Position.y = y;
 		}
 	}
 

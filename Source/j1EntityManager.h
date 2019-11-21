@@ -24,7 +24,7 @@ class j1EntityManager :public j1Module
 public:
 
 	j1EntityManager();
-	~j1EntityManager();
+	virtual ~j1EntityManager();
 
 	// --- Called before render is available ---
 	bool Awake(pugi::xml_node&);

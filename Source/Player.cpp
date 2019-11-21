@@ -9,7 +9,7 @@
 #include "j1Scene.h"
 #include "j1Window.h"
 
-bool j1Player::Awake(pugi::xml_node& config) {
+bool Player::Awake(pugi::xml_node& config) {
 
 	LOG("Loading Player Parser");
 	bool ret = true;
@@ -74,25 +74,24 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	return ret;
 }
 
-j1Player::j1Player()
-{
-	name.create("player");
-
-}
-
-j1Player::~j1Player()
+Player::Player() : Entity("player", entityTypes::PLAYER)
 {
 
 }
 
-bool j1Player::Start()
+Player::~Player()
+{
+
+}
+
+bool Player::Start()
 {
 
 	LOG("Loading player");
 
-	Player_Collider = App->col->AddCollider(playerData.Player_Collider_Rect, COLLIDER_PLAYER, this);
+	Player_Collider = App->col->AddCollider(playerData.Player_Collider_Rect, COLLIDER_PLAYER);
 
-	State_Player = IDLE;
+	entState = IDLE;
 
 	Moving_Left = false;
 	Moving_Right = false;
@@ -112,7 +111,7 @@ bool j1Player::Start()
 	return true;
 }
 
-bool j1Player::Update(float dt)
+bool Player::Update(float dt)
 {
 	if (Dead)
 	{
@@ -190,7 +189,7 @@ bool j1Player::Update(float dt)
 
 		if (Initial_Moment)
 		{
-			State_Player = FALLING;
+			entState = FALLING;
 		}
 
 		if (Was_Right == true)
@@ -203,14 +202,14 @@ bool j1Player::Update(float dt)
 			playerData.CurrentAnimation = playerData.Idle;
 		}
 
-		if (playerData.Velocity.y < 0 && State_Player == JUMPING)
+		if (playerData.Velocity.y < 0 && entState == JUMPING)
 		{
-			State_Player = FALLING;
+			entState = FALLING;
 		}
 
-		if (Player_Colliding == false && State_Player == IDLE)
+		if (Player_Colliding == false && entState == IDLE)
 		{
-			State_Player = FALLING;
+			entState = FALLING;
 		}
 
 
@@ -268,13 +267,13 @@ bool j1Player::Update(float dt)
 				{
 
 					playerData.Velocity.y = playerData.Jump_Force;
-					State_Player = JUMPING;
+					entState = JUMPING;
 					Player_Colliding = false;
 
 				}
 			}
 
-			if (State_Player == JUMPING)
+			if (entState == JUMPING)
 			{
 				playerData.CurrentAnimation = playerData.Jump;
 
@@ -292,7 +291,7 @@ bool j1Player::Update(float dt)
 
 			}
 
-			if (State_Player == FALLING && !Colliding_Roof)
+			if (entState == FALLING && !Colliding_Roof)
 			{
 				Must_Fall = false;
 
@@ -311,7 +310,7 @@ bool j1Player::Update(float dt)
 
 			}
 
-			if (State_Player == FALLING && !Player_Colliding)
+			if (entState == FALLING && !Player_Colliding)
 			{
 				Must_Fall = false;
 
@@ -365,7 +364,7 @@ bool j1Player::Update(float dt)
 	return true;
 }
 
-bool j1Player::PostUpdate()
+bool Player::PostUpdate()
 {
 	bool ret = true;
 
@@ -402,7 +401,7 @@ bool j1Player::PostUpdate()
 	return ret;
 }
 
-void j1Player::OnCollision(Collider * c1, Collider * c2)
+void Player::OnCollision(Collider * c1, Collider * c2)
 {
 	bool lateralcollision = true;
 
@@ -459,13 +458,13 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 		else
 		{
-			if (State_Player != JUMPING && State_Player != FALLING)
+			if (entState != JUMPING && entState != FALLING)
 			{
 				playerData.Velocity.y = 0.0f;
-				State_Player = IDLE;
+				entState = IDLE;
 			}
 
-			if (State_Player != JUMPING)
+			if (entState != JUMPING)
 			{
 				if (Moving_Right == true && Moving_Left == true)
 				{
@@ -487,12 +486,12 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 					if (c1->rect.x + c1->rect.w >= c2->rect.x && c1->rect.x + c1->rect.w <= c2->rect.x + Initial_Velocity_x)
 					{
 						playerData.Velocity.x = 0.0f;
-						if (State_Player != JUMPING)
+						if (entState != JUMPING)
 							c1->rect.y = aux;
 						c1->rect.x = c2->rect.x - c1->rect.w;
 					}
 
-					if (State_Player == JUMPING || State_Player == FALLING && Double_Jump)
+					if (entState == JUMPING || entState == FALLING && Double_Jump)
 					{
 						c1->rect.x -= Colliding_Offset;
 					}
@@ -500,7 +499,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 				else if (!lateralcollision && Must_Fall == false)
 				{
-					State_Player = IDLE;
+					entState = IDLE;
 				}
 
 				if ((Moving_Left || Moving_Right) && Must_Fall)
@@ -522,14 +521,14 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 						c1->rect.x = c2->rect.x + c2->rect.w;
 					}*/
 
-					if (State_Player == JUMPING || State_Player == FALLING && Double_Jump)
+					if (entState == JUMPING || entState == FALLING && Double_Jump)
 					{
 						c1->rect.x += Colliding_Offset;
 					}
 				}
 				else if (!lateralcollision && Must_Fall == false)
 				{
-					State_Player = IDLE;
+					entState = IDLE;
 				}
 
 				if ((Moving_Left || Moving_Right) && Must_Fall)
@@ -581,10 +580,10 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 
 			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-playerData.Gravity * 8)))
 			{
-				if (State_Player != JUMPING)
+				if (entState != JUMPING)
 				{
 					playerData.Velocity.y = 0.0f;
-					State_Player = IDLE;
+					entState = IDLE;
 				}
 
 				c1->rect.y = c2->rect.y - c1->rect.h;
@@ -597,10 +596,10 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		{
 			if ((c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + (-playerData.Gravity * 8)))
 			{
-				if (State_Player != JUMPING)
+				if (entState != JUMPING)
 				{
 					playerData.Velocity.y = 0.0f;
-					State_Player = IDLE;
+					entState = IDLE;
 				}
 
 				c1->rect.y = c2->rect.y - c1->rect.h;
@@ -618,14 +617,14 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 		{
 			c1->rect.y = c2->rect.y + c2->rect.h + Colliding_Offset;
 			playerData.Velocity.y = 0.0f;
-			State_Player = FALLING;
+			entState = FALLING;
 			Double_Jump = false;
 			Must_Fall = true;
 		}
 		else
 		{
 
-			if ((State_Player == JUMPING || State_Player == FALLING) && Moving_Right || Moving_Left)
+			if ((entState == JUMPING || entState == FALLING) && Moving_Right || Moving_Left)
 			{
 				Double_Jump = false;
 				Must_Fall = true;
@@ -681,7 +680,7 @@ void j1Player::OnCollision(Collider * c1, Collider * c2)
 	Player_Colliding = true;
 }
 
-bool j1Player::Load(pugi::xml_node &config)
+bool Player::Load(pugi::xml_node &config)
 {
 
 	bool ret = true;
@@ -692,7 +691,7 @@ bool j1Player::Load(pugi::xml_node &config)
 	return ret;
 }
 
-bool j1Player::Save(pugi::xml_node &config) const
+bool Player::Save(pugi::xml_node &config) const
 {
 	config.append_child("Playerx").append_attribute("value") = Position.x;
 	config.append_child("Playery").append_attribute("value") = Position.y;
@@ -700,7 +699,7 @@ bool j1Player::Save(pugi::xml_node &config) const
 	return true;
 }
 
-Animation* j1Player::LoadAnimation(const char* animationPath, const char* animationName) {
+Animation* Player::LoadAnimation(const char* animationPath, const char* animationName) {
 
 	Animation* animation = new Animation();
 
@@ -749,7 +748,7 @@ Animation* j1Player::LoadAnimation(const char* animationPath, const char* animat
 
 }
 
-SDL_Rect j1Player::LoadColliderRect(const char* colliderPath, const char* colliderName)
+SDL_Rect Player::LoadColliderRect(const char* colliderPath, const char* colliderName)
 {
 	SDL_Rect colliderRect;
 
@@ -797,7 +796,7 @@ SDL_Rect j1Player::LoadColliderRect(const char* colliderPath, const char* collid
 
 }
 
-bool j1Player::CleanUp()
+bool Player::CleanUp()
 {
 	bool ret = true;
 	App->tex->UnLoad(playerData.Spritesheet);

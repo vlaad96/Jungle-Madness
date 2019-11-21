@@ -1,9 +1,9 @@
 #ifndef __j1Player_H__
 #define __j1Player_H__
 
-#include "j1Module.h"
 #include "p2Point.h"
 #include "Animation.h"
+#include "Entity.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -35,20 +35,12 @@ struct PlayerInfo
 
 };
 
-enum Player_State
-{
-	IDLE,
-	RIGHT,
-	LEFT,
-	JUMPING,
-	FALLING,
-};
 
-class j1Player : public Entity
+class Player : public Entity
 {
 public:
-	j1Player();
-	~j1Player();
+	Player();
+	~Player();
 
 	bool Awake(pugi::xml_node &config);
 
@@ -89,8 +81,6 @@ public:
 	float Initial_Velocity_x;
 	float Max_Speed_y;
 	float Colliding_Offset;
-
-	Player_State State_Player;
 
 	bool Player_Colliding;
 	bool Colliding_Roof;

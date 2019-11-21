@@ -2,7 +2,8 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Render.h"
-#include "j1Player.h"
+#include "Player.h"
+#include "j1EntityManager.h"
 #include "j1Window.h"
 #include "p2Log.h"
 

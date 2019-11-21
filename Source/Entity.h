@@ -20,7 +20,6 @@ enum entityStates
 	JUMPING,
 	FALLING,
 	FLYING,
-	NONE = -1
 };
 
 enum entityTypes
