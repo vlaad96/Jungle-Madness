@@ -9,8 +9,14 @@ struct PathfindingInfo;
 
 struct TrollInfo {
 		
-	Animation*	flyRight = nullptr;
-	Animation*	flyLeft = nullptr;
+	Animation*	idleRight = nullptr;
+	Animation*	idleLeft = nullptr;
+	Animation*	walkRight = nullptr;
+	Animation*	walkLeft = nullptr;
+	Animation*	attackRight = nullptr;
+	Animation*	attackLeft = nullptr;
+	Animation*	deathRight = nullptr;
+	Animation*	deathLeft = nullptr;
 
 	p2SString	folder = nullptr;
 	p2SString	texture = nullptr;

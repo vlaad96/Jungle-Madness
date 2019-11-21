@@ -60,7 +60,7 @@ public:
 
 	p2List <Entity*> entities;
 	
-	int entityID = 0;
+	int entityId = 0;
 
 private:
 

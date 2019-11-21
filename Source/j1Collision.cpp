@@ -265,6 +265,12 @@ void j1Collision::DebugDraw()
 		case COLLIDER_CHECKPOINT: // cyan
 			App->render->DrawQuad(item->data->rect, 0, 255, 255, alpha);
 			break;
+		case COLLIDER_TROLL: // brown
+			App->render->DrawQuad(item->data->rect, 123, 82, 44, alpha);
+			break;
+		case COLLIDER_FLY: // dark red
+			App->render->DrawQuad(item->data->rect, 129, 18, 18, alpha);
+			break;
 		}
 		item = item->next;
 	}
