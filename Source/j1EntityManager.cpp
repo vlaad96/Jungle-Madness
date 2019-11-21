@@ -170,14 +170,14 @@ Entity* const j1EntityManager::CreateEntity(const char* name, entityTypes type)
 	case PLAYER:
 		entity = new Player();
 		break;
-	/*case GROUND_ENEMY:
+	case TROLL:
 		break;
-	case FLYING_ENEMY:
+	case FLY:
 		break;
 	case ENDGAME:
 		break;
 	default:
-		break;*/
+		break;
 	}
 
 	entityID++;

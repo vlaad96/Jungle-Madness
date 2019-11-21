@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Fly.h" />
     <ClInclude Include="j1EntityManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="j1App.h" />
@@ -146,8 +147,10 @@
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Troll.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Fly.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="j1Collision.cpp" />
@@ -163,6 +166,7 @@
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="Troll.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

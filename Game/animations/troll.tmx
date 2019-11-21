@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="700" height="800" tilewidth="1" tileheight="1" infinite="0" nextlayerid="12" nextobjectid="58">
+ <imagelayer id="2" name="spritesheet" locked="1">
+  <image source="../Sprites/Troll.png" width="700" height="1000"/>
+ </imagelayer>
+ <objectgroup id="3" name="Collider" locked="1">
+  <object id="1" x="1" y="33" width="60" height="66"/>
+ </objectgroup>
+ <objectgroup id="4" name="idleRight" locked="1">
+  <object id="2" x="0" y="0" width="100" height="100"/>
+  <object id="3" x="100" y="0" width="100" height="100"/>
+  <object id="4" x="200" y="0" width="100" height="100"/>
+  <object id="5" x="300" y="0" width="100" height="100"/>
+  <object id="6" x="400" y="0" width="100" height="100"/>
+  <object id="7" x="500" y="0" width="100" height="100"/>
+  <object id="8" x="600" y="0" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="5" name="idleLeft" locked="1">
+  <object id="9" x="0" y="100" width="100" height="100"/>
+  <object id="10" x="100" y="100" width="100" height="100"/>
+  <object id="11" x="200" y="100" width="100" height="100"/>
+  <object id="12" x="300" y="100" width="100" height="100"/>
+  <object id="13" x="400" y="100" width="100" height="100"/>
+  <object id="14" x="500" y="100" width="100" height="100"/>
+  <object id="15" x="600" y="100" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="6" name="walkRight" locked="1">
+  <object id="16" x="0" y="200" width="100" height="100"/>
+  <object id="17" x="100" y="200" width="100" height="100"/>
+  <object id="18" x="200" y="200" width="100" height="100"/>
+  <object id="19" x="300" y="200" width="100" height="100"/>
+  <object id="20" x="400" y="200" width="100" height="100"/>
+  <object id="21" x="500" y="200" width="100" height="100"/>
+  <object id="22" x="600" y="200" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="7" name="walkLeft" locked="1">
+  <object id="23" x="0" y="300" width="100" height="100"/>
+  <object id="24" x="100" y="300" width="100" height="100"/>
+  <object id="25" x="200" y="300" width="100" height="100"/>
+  <object id="26" x="300" y="300" width="100" height="100"/>
+  <object id="27" x="400" y="300" width="100" height="100"/>
+  <object id="28" x="500" y="300" width="100" height="100"/>
+  <object id="29" x="600" y="300" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="8" name="aggroRight" locked="1">
+  <object id="30" x="0" y="400" width="100" height="100"/>
+  <object id="31" x="100" y="400" width="100" height="100"/>
+  <object id="32" x="200" y="400" width="100" height="100"/>
+  <object id="33" x="300" y="400" width="100" height="100"/>
+  <object id="34" x="400" y="400" width="100" height="100"/>
+  <object id="35" x="500" y="400" width="100" height="100"/>
+  <object id="36" x="600" y="400" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="9" name="aggroLeft" locked="1">
+  <object id="37" x="0" y="500" width="100" height="100"/>
+  <object id="38" x="100" y="500" width="100" height="100"/>
+  <object id="39" x="200" y="500" width="100" height="100"/>
+  <object id="40" x="300" y="500" width="100" height="100"/>
+  <object id="41" x="400" y="500" width="100" height="100"/>
+  <object id="42" x="500" y="500" width="100" height="100"/>
+  <object id="43" x="600" y="500" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="10" name="deathLeft" locked="1">
+  <object id="44" x="0" y="700" width="100" height="100"/>
+  <object id="45" x="100" y="700" width="100" height="100"/>
+  <object id="46" x="200" y="700" width="100" height="100"/>
+  <object id="47" x="300" y="700" width="100" height="100"/>
+  <object id="48" x="400" y="700" width="100" height="100"/>
+  <object id="49" x="500" y="700" width="100" height="100"/>
+  <object id="50" x="600" y="700" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="11" name="deathRight">
+  <object id="51" x="0" y="600" width="100" height="100"/>
+  <object id="52" x="100" y="600" width="100" height="100"/>
+  <object id="53" x="200" y="600" width="100" height="100"/>
+  <object id="54" x="300" y="600" width="100" height="100"/>
+  <object id="55" x="400" y="600" width="100" height="100"/>
+  <object id="56" x="500" y="600" width="100" height="100"/>
+  <object id="57" x="600" y="600" width="100" height="100"/>
+ </objectgroup>
+</map>

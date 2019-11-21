@@ -7,6 +7,15 @@
     <Filter Include="Tools">
       <UniqueIdentifier>{e3d90559-7fd6-4be6-bfcd-8c723e0b8a39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{fe6fbba6-ce3f-4435-95f0-876628d9a485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{0c97977a-aa7f-49a0-8209-ffcb76f01b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Core">
+      <UniqueIdentifier>{abe0de95-8ad0-4e3a-bb5b-ed79f9d69a0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -36,28 +45,60 @@
     <ClInclude Include="PugiXml\src\pugixml.hpp">
       <Filter>Pugi</Filter>
     </ClInclude>
-    <ClInclude Include="j1App.h" />
-    <ClInclude Include="j1Audio.h" />
-    <ClInclude Include="j1Input.h" />
-    <ClInclude Include="j1Map.h" />
-    <ClInclude Include="j1Module.h" />
-    <ClInclude Include="j1Render.h" />
-    <ClInclude Include="j1Textures.h" />
-    <ClInclude Include="j1Window.h" />
-    <ClInclude Include="j1Scene.h" />
-    <ClInclude Include="j1Collision.h" />
     <ClInclude Include="MemLeaks.h">
-      <Filter>Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="j1EntityManager.h" />
-    <ClInclude Include="Pathfinding.h">
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="p2PQueue.h">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1App.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Input.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Module.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Render.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Textures.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Window.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Audio.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Collision.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Map.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Scene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Troll.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Fly.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="p2Log.cpp">
@@ -66,20 +107,50 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp">
       <Filter>Pugi</Filter>
     </ClCompile>
-    <ClCompile Include="j1App.cpp" />
-    <ClCompile Include="j1Audio.cpp" />
-    <ClCompile Include="j1Input.cpp" />
-    <ClCompile Include="j1Main.cpp" />
-    <ClCompile Include="j1Map.cpp" />
-    <ClCompile Include="j1Render.cpp" />
-    <ClCompile Include="j1Textures.cpp" />
-    <ClCompile Include="j1Window.cpp" />
-    <ClCompile Include="j1Scene.cpp" />
-    <ClCompile Include="j1Collision.cpp" />
-    <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="Pathfinding.cpp">
-      <Filter>Tools</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1App.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Input.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Main.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Render.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Textures.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Window.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Audio.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Collision.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Map.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Scene.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Troll.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Fly.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

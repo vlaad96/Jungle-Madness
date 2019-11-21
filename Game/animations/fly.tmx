@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="192" height="96" tilewidth="1" tileheight="1" infinite="0" nextlayerid="5" nextobjectid="9">
+ <imagelayer id="2" name="spritesheet">
+  <image source="../Sprites/Fly.png" width="192" height="96"/>
+ </imagelayer>
+ <objectgroup id="3" name="Right" locked="1">
+  <object id="1" x="3" y="0" width="40" height="41"/>
+  <object id="2" x="43" y="0" width="40" height="41"/>
+  <object id="3" x="83" y="0" width="40" height="41"/>
+  <object id="4" x="123" y="0" width="40" height="41"/>
+ </objectgroup>
+ <objectgroup id="4" name="Left">
+  <object id="5" x="1" y="41" width="40" height="41"/>
+  <object id="6" x="41" y="41" width="40" height="41"/>
+  <object id="7" x="81" y="41" width="40" height="41"/>
+  <object id="8" x="121" y="41" width="40" height="41"/>
+ </objectgroup>
+</map>

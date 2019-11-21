@@ -47,6 +47,11 @@ public:
 	void OnCollision(Collider* col1, Collider* col2);
 	Animation* LoadAnimation(const char* animPath, const char* animName);
 
+	//Entities info
+	PlayerInfo& GetPlayer() { return playerData; }
+	TrollInfo& GetTroll() { return trollData; }
+	//FlyInfo& GetFly() { return playerData; }
+
 	//Save and Load
 	bool Save(pugi::xml_node&)const;
 	bool Load(pugi::xml_node&);
@@ -60,7 +65,9 @@ public:
 private:
 
 	//Info for every entity
-	PlayerInfo playerData;
+	PlayerInfo	playerData;
+	TrollInfo	trollData;
+	//FlyInfo		flyData;
 	
 };
 

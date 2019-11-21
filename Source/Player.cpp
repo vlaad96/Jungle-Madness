@@ -8,6 +8,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Window.h"
+#include "j1EntityManager.h"
 
 bool Player::Awake(pugi::xml_node& config) {
 
@@ -88,6 +89,8 @@ bool Player::Start()
 {
 
 	LOG("Loading player");
+
+	playerData = manager->GetPlayer();
 
 	Player_Collider = App->col->AddCollider(playerData.Player_Collider_Rect, COLLIDER_PLAYER);
 

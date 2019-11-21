@@ -25,8 +25,8 @@ enum entityStates
 enum entityTypes
 {
 	PLAYER,
-	GROUND_ENEMY,
-	FLYING_ENEMY,
+	TROLL,
+	FLY,
 	ENDGAME
 };
 
@@ -93,6 +93,7 @@ public:
 	//Colliders
 	Collider* entCol = nullptr;
 	SDL_Rect entColliderRect{ 0,0,0,0 };
+	float colliderOffset;
 
 	//Gravity
 	float gravity = 0;
