@@ -54,3 +54,69 @@ bool Troll::Start()
 	return true;
 }
 
+bool Troll::Update(float dt)
+{
+	willFall = true;
+	entState = FALLING;
+
+	return true;
+}
+
+bool Troll::PostUpdate(float dt)
+{
+	
+	return true;
+}
+
+void Troll::OnCollision(Collider* col1, Collider* col2)
+{
+	
+}
+
+bool Troll::ResetVars()
+{
+	pathfindSize = 0;
+
+	return true;
+}
+
+bool Troll::CreatePath(const iPoint dest)
+{
+	return true;
+}
+
+bool Troll::Pathfind(float dt)
+{
+	return true;
+}
+
+void Troll::UpdateMov(float dt)
+{
+
+}
+
+bool Troll::Load(pugi::xml_node &config)
+{
+	if (entId == trollData.id.x)
+	{
+		pos.x = config.child("Entity4").child("Troll").attribute("value").as_float();
+		pos.y = config.child("Entity4").child("Troll").attribute("value").as_float();
+		isActive = config.child("Entity4").child("active").attribute("value").as_bool();
+	}
+	else if (entId == trollData.id.y)
+	{
+		pos.x = config.child("Entity5").child("Troll").attribute("value").as_float();
+		pos.y = config.child("Entity5").child("Troll").attribute("value").as_float();
+		isActive = config.child("Entity5").child("active").attribute("value").as_bool();
+	}
+}
+
+bool Troll::Save(pugi::xml_node &config)const
+{
+	if (entId == trollData.id.x)
+	{
+		config.append_child("Entity4").append_child("Troll").append_attribute("value") = pos.x;
+		config.append_child("Entity4").append_child("Troll").append_attribute("value") = pos.x;
+		config.append_child("Entity4").append_child("Troll").append_attribute("value") = pos.x;
+	}
+}

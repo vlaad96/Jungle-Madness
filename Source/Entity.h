@@ -85,7 +85,7 @@ public:
 	p2SString		entName = nullptr;
 	entityTypes		entType;
 	entityStates	entState;
-	int				id = 0;
+	int				entId = 0;
 
 	//Position and speed of entities
 	fPoint pos = { 0,0 };
